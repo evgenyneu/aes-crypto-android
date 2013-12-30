@@ -3,6 +3,7 @@
 
     <string name="app_name">AES Crypto</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="password_hint">Password</string>
+    <string name="message_hint">Message</string>
 
 </resources>
