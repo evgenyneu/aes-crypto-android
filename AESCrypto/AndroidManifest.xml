@@ -22,14 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.evgenii.aescrypto.NextActivity"
-            android:label="@string/title_activity_next"
-            android:parentActivityName="com.evgenii.aescrypto.MainAvtivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.evgenii.aescrypto.MainAvtivity" />
-        </activity>
     </application>
 
 </manifest>

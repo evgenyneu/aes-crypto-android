@@ -1,11 +1,8 @@
 package com.evgenii.aescrypto;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -20,17 +17,5 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
-	}
-
-	/** Called when the user clicks the Send button */
-	public void clickMeClicked(View view) {
-		TextView infoTextView = (TextView) findViewById(R.id.info_text_view);
-		infoTextView.setVisibility(View.VISIBLE);
-	}
-
-	public void clickLaunchNextActivity(View view) {
-		Intent intent = new Intent(this, NextActivity.class);
-		intent.putExtra(NextActivity.EXTRAS_PAYLOAD_KEY, "Hello!");
-		startActivity(intent);
 	}
 }

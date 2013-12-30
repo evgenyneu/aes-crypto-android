@@ -11,35 +11,6 @@
     <TextView android:id="@+id/my_first_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-    <Button
-        android:id="@+id/click_me_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/my_first_text_view"
-        android:layout_below="@+id/my_first_text_view"
-        android:text="@string/click_me_button_text"
-        android:onClick="clickMeClicked" />
-
-    <TextView
-        android:id="@+id/info_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/click_me_button"
-        android:layout_below="@+id/click_me_button"
-        android:layout_marginTop="22dp"
-        android:text="@string/info_text"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/launch_next_activity_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/click_me_button"
-        android:layout_below="@+id/click_me_button"
-        android:layout_marginTop="47dp"
-        android:text="@string/launch_next_activity_button_text"
-        android:onClick="clickLaunchNextActivity" />
+        android:text="@string/hello_world" />    
 
 </RelativeLayout>
