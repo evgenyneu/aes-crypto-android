@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="click_me_button_text">Click Me!</string>
     <string name="info_text">Yes. Yes!</string>
+    <string name="launch_next_activity_button_text">Launch Activity</string>
+    <string name="title_activity_next">NextActivity</string>
 
 </resources>

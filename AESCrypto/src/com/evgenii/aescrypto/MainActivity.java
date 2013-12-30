@@ -1,6 +1,7 @@
 package com.evgenii.aescrypto;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -25,5 +26,11 @@ public class MainActivity extends Activity {
 	public void clickMeClicked(View view) {
 		TextView infoTextView = (TextView) findViewById(R.id.info_text_view);
 		infoTextView.setVisibility(View.VISIBLE);
+	}
+
+	public void clickLaunchNextActivity(View view) {
+		Intent intent = new Intent(this, NextActivity.class);
+		intent.putExtra(NextActivity.EXTRAS_PAYLOAD_KEY, "Hello!");
+		startActivity(intent);
 	}
 }
