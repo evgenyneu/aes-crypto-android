@@ -1,54 +1,47 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:fillViewport="true"
+    android:layout_marginTop="0dp">
 
-    <ScrollView
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:fillViewport="true"
-	    android:layout_marginTop="0dp">
-	    
-        <LinearLayout
-            android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-    		android:orientation="vertical">
-			
-		    <EditText
-		        android:layout_width="fill_parent"
-    			android:layout_height="wrap_content"
-		        android:id="@+id/password"
-		        android:ems="10"
-		        android:hint="@string/password_hint"
-		        android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
-		        android:singleLine="true" >
+    <LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
 		
-		        <requestFocus />
-		    </EditText>
-		    
-		    <EditText
-		        android:layout_width="fill_parent"
-    			android:layout_height="0dp"
-        		android:layout_weight="1"
-		        android:id="@+id/message"
-		        android:ems="10"
-		        android:hint="@string/message_hint"
-		        android:inputType="textMultiLine"
-		        android:gravity="top" />
-		    
-		    <Button
-		        android:layout_width="100dp"
-		        android:layout_height="wrap_content"
-		        android:layout_gravity="right"
-		        android:text="Send" />
-	    
-	    </LinearLayout>
+	    <EditText
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/password"
+			android:ems="10"
+			android:hint="@string/password_hint"
+			android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
+			android:singleLine="true" >
 
-	</ScrollView>
-	  
-</RelativeLayout>
+	        <requestFocus />
+	    </EditText>
+	    
+	    <EditText
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:id="@+id/message"
+			android:ems="10"
+			android:hint="@string/message_hint"
+			android:inputType="textMultiLine"
+			android:gravity="top" />
+
+	    <Button
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="right"
+	        android:text="Send" />
+
+    </LinearLayout>
+</ScrollView>
