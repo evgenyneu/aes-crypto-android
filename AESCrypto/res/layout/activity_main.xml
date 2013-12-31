@@ -17,7 +17,9 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
         android:ems="10"
-        android:hint="@string/password_hint">
+        android:hint="@string/password_hint"
+        android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
+        android:singleLine="true" >
 
         <requestFocus />
     </EditText>
@@ -28,7 +30,7 @@
         android:layout_height="fill_parent"
         android:layout_alignLeft="@+id/password"
         android:layout_below="@+id/password"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/message_hint"
         android:inputType="textMultiLine"
