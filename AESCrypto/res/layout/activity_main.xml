@@ -22,7 +22,8 @@
 			android:ems="10"
 			android:hint="@string/password_hint"
 			android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
-			android:singleLine="true" >
+			android:singleLine="true"
+			android:imeOptions="actionDone">
 
 	        <requestFocus />
 	    </EditText>
