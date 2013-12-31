@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
         android:id="@+id/action_decrypt"
-        android:title="↓ Decrypt"
+        android:title="@string/menu_decrypt_title"
         android:orderInCategory="100"
         android:showAsAction="ifRoom" />
 
