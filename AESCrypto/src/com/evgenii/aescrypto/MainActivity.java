@@ -12,6 +12,7 @@ public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
 	public WebView myWebView;
+	public JavaScriptInterface myJSInterface;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,8 @@ public class MainActivity extends Activity {
 
 		WebSettings webSettings = myWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
-		myWebView.addJavascriptInterface(new JavaScriptInterface(), "Android");
+		myJSInterface = new JavaScriptInterface();
+		myWebView.addJavascriptInterface(myJSInterface, "Android");
 	}
 
 	@Override
@@ -49,6 +51,13 @@ public class MainActivity extends Activity {
 	public void onSendClicked(View view) {
 		myWebView.loadUrl("javascript: Android.sendResult(wow());");
 		myWebView.loadUrl("javascript: Android.sendResult(oh());");
+		myWebView
+				.loadUrl("javascript: Android.sendResult(Android.getString());");
+
+		myJSInterface.myData = "Updated String!";
+
+		myWebView
+				.loadUrl("javascript: Android.sendResult(Android.getString());");
 
 		currentDecryptMenuTitle = "Hey :)";
 		invalidateOptionsMenu();
