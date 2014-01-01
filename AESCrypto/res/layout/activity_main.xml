@@ -45,5 +45,10 @@
 	        android:text="Send"
 	        android:onClick="onSendClicked" />
 
+	    <WebView
+	        android:id="@+id/myWebview"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" />
+
     </LinearLayout>
 </ScrollView>
