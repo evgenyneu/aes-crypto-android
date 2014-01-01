@@ -11,6 +11,7 @@ import android.webkit.WebView;
 public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
+	public WebView myWebView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class MainActivity extends Activity {
 				R.string.menu_decrypt_title);
 		setContentView(R.layout.activity_main);
 
-		WebView myWebView = (WebView) findViewById(R.id.myWebview);
+		myWebView = new WebView(this);
 
 		myWebView.loadData("", "text/html", null);
 		myWebView.loadUrl("javascript: function wow(){return 'cuul!';}");
@@ -46,7 +47,6 @@ public class MainActivity extends Activity {
 	}
 
 	public void onSendClicked(View view) {
-		WebView myWebView = (WebView) findViewById(R.id.myWebview);
 		myWebView.loadUrl("javascript: Android.sendResult(wow());");
 		myWebView.loadUrl("javascript: Android.sendResult(oh());");
 
