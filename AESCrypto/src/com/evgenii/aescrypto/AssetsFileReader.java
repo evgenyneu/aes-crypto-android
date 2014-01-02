@@ -7,10 +7,10 @@ import java.util.Scanner;
 import android.content.Context;
 import android.content.res.AssetManager;
 
-public class JSLoader {
+public class AssetsFileReader {
 	private final Context mContext;
 
-	public JSLoader(Context context) {
+	public AssetsFileReader(Context context) {
 		mContext = context;
 	}
 
