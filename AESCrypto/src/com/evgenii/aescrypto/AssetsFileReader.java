@@ -7,6 +7,7 @@ import java.util.Scanner;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+/** Reads text file to string from assets/ directory */
 public class AssetsFileReader {
 	private final Context mContext;
 
