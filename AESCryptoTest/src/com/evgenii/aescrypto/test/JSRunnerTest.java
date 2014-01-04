@@ -26,9 +26,8 @@ public class JsRunnerTest extends AndroidTestCase {
 	public void testAddInitialJs() throws InitialJsHasAlreadyBeenRun {
 		mJsRunner.addInitialJs("function first(){};");
 		mJsRunner.addInitialJs("function second(){};");
-		assertEquals(2, mJsRunner.getInitialJs().size());
-		assertEquals("function first(){};", mJsRunner.getInitialJs().get(0));
-		assertEquals("function second(){};", mJsRunner.getInitialJs().get(1));
+		assertEquals(" function first(){}; function second(){};",
+				mJsRunner.getInitialJSConcatenated());
 	}
 
 	public void testAddInitialJs_canNotAddAfterRunning() {
