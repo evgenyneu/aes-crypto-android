@@ -7,6 +7,7 @@ import android.test.AndroidTestCase;
 import com.evgenii.aescrypto.JsFunctionCall;
 
 public class JsFunctionCallTest extends AndroidTestCase {
+
 	public void testInit_shouldSetNameAndParams() {
 		final ArrayList<Object> params = new ArrayList<Object>();
 		params.add("milk");
@@ -21,5 +22,31 @@ public class JsFunctionCallTest extends AndroidTestCase {
 		assertEquals(2, jsParams.size());
 		assertEquals("milk", jsParams.get(0));
 		assertEquals(2, jsParams.get(1));
+	}
+
+	public void testToString() {
+		final ArrayList<Object> params = new ArrayList<Object>();
+		params.add("Evgenii's milk");
+		params.add(2);
+
+		final JsFunctionCall jsFunctionCall = new JsFunctionCall("drink",
+				params);
+
+		// assertEquals("drink('Evgenii\'s milk', 2);",
+		// jsFunctionCall.toString());
+
+	}
+
+	public void testParamToString_string() {
+		assertEquals("'Boy\'s bike'",
+				JsFunctionCall.paramToString("Boy's bike"));
+	}
+
+	public void testParamToString_integer() {
+		assertEquals("123", JsFunctionCall.paramToString(123));
+	}
+
+	public void testParamToString_float() {
+		assertEquals("123.22", JsFunctionCall.paramToString(123.22));
 	}
 }
