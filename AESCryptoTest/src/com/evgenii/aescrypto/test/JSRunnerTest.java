@@ -19,7 +19,7 @@ public class JsRunnerTest extends AndroidTestCase {
 	}
 
 	public void testGetWebView_shouldCreateWebView() {
-		WebView webView = mJsRunner.getWebView();
+		final WebView webView = mJsRunner.getWebView();
 		assertNotNull(webView);
 	}
 
@@ -30,11 +30,20 @@ public class JsRunnerTest extends AndroidTestCase {
 				mJsRunner.getInitialJSConcatenated());
 	}
 
+	public void testGetCompleteInitialJsToEvaluate()
+			throws InitialJsHasAlreadyBeenRun {
+		mJsRunner.addInitialJs("function first(){};");
+		mJsRunner.addInitialJs("function second(){};");
+		assertEquals(
+				"javascript:  function first(){}; function second(){}; AESCrypto.initialJsExecuted(); ",
+				mJsRunner.getCompleteInitialJsToEvaluate());
+	}
+
 	public void testAddInitialJs_canNotAddAfterRunning() {
 		try {
 			mJsRunner.runInitialJs();
 			mJsRunner.addInitialJs("function second(){};");
-		} catch (InitialJsHasAlreadyBeenRun e) {
+		} catch (final InitialJsHasAlreadyBeenRun e) {
 		}
 	}
 
@@ -46,4 +55,5 @@ public class JsRunnerTest extends AndroidTestCase {
 		mJsRunner.runInitialJs();
 		assertTrue(mJsRunner.getIsInitialJsEvaluated());
 	}
+
 }

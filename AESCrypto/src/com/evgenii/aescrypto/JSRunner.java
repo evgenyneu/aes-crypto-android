@@ -14,6 +14,10 @@ public class JsRunner {
 	private WebView mWebView;
 	private String mInitialJSConcatenated = "";
 	private boolean mIsInitialJsEvaluated;
+	private JavaScriptInterface mJsInterface;
+	private final static String JS_NAMESPACE = "AESCrypto";
+	private final static String INITIAL_JS_EXECUTED_CALLBACK = JS_NAMESPACE
+			+ ".initialJsExecuted(); ";
 
 	public JsRunner(Context context) {
 		mContext = context;
@@ -41,6 +45,12 @@ public class JsRunner {
 
 	public void runInitialJs() {
 		mIsInitialJsEvaluated = true;
+		getWebView().loadUrl(getCompleteInitialJsToEvaluate());
+	}
+
+	public String getCompleteInitialJsToEvaluate() {
+		return "javascript: " + getInitialJSConcatenated() + " "
+				+ INITIAL_JS_EXECUTED_CALLBACK;
 	}
 
 	private void initWebView() {
@@ -49,6 +59,8 @@ public class JsRunner {
 
 		mWebView = new WebView(mContext);
 		mWebView.loadData("", "text/html", null);
+		mJsInterface = new JavaScriptInterface();
+		mWebView.addJavascriptInterface(mJsInterface, JS_NAMESPACE);
 	}
 
 }
