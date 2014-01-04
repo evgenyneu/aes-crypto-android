@@ -1,5 +1,7 @@
 package com.evgenii.aescrypto;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.webkit.WebView;
 
@@ -19,6 +21,8 @@ public class JsRunner implements JsRunnerCallbackInterface {
 	private final static String JS_NAMESPACE = "AESCrypto";
 	private final static String INITIAL_JS_EXECUTED_CALLBACK = JS_NAMESPACE
 			+ ".initialJsExecuted(); ";
+
+	private final ArrayList<JsFunctionCall> mPendingJsCalls = new ArrayList<JsFunctionCall>();
 
 	public JsRunner(Context context) {
 		mContext = context;
@@ -64,8 +68,15 @@ public class JsRunner implements JsRunnerCallbackInterface {
 		mWebView.addJavascriptInterface(mJsInterface, JS_NAMESPACE);
 	}
 
-	public void runJsFunction(String name, String param) {
+	public ArrayList<JsFunctionCall> getPendingJsCalls() {
+		return mPendingJsCalls;
+	}
 
+	public void runJsFunction(String name, String param) {
+		final ArrayList<Object> params = new ArrayList<Object>();
+		params.add(param);
+
+		getPendingJsCalls().add(new JsFunctionCall(name, params));
 	}
 
 	@Override

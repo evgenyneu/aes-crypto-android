@@ -59,7 +59,7 @@ public class JsRunnerTest extends AndroidTestCase {
 	public void testRunJsFunction() {
 		mJsRunner.runJsFunction("myFirstName", "param1");
 		mJsRunner.runJsFunction("mySecondName", "param2");
-		// expectEquals(2, mJsRunner.getPendingJs().size);
+		assertEquals(2, mJsRunner.getPendingJsCalls().size());
 	}
 
 	public void testExecuteAllPendingJs() {
