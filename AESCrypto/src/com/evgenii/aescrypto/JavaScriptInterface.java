@@ -17,5 +17,6 @@ public class JavaScriptInterface {
 
 	@JavascriptInterface
 	public void initialJsExecuted() {
+		mJsRunner.executeAllPendingJs();
 	}
 }
