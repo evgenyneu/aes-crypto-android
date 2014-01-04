@@ -56,4 +56,11 @@ public class JsRunnerTest extends AndroidTestCase {
 		assertTrue(mJsRunner.getIsInitialJsEvaluated());
 	}
 
+	public void testRunJsFunction() {
+		mJsRunner.runJsFunction("myFunctionName");
+	}
+
+	public void testExecuteAllPendingJs() {
+		mJsRunner.executeAllPendingJs();
+	}
 }

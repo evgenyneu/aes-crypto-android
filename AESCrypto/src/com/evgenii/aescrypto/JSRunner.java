@@ -4,12 +4,13 @@ import android.content.Context;
 import android.webkit.WebView;
 
 import com.evgenii.aescrypto.exceptions.InitialJsHasAlreadyBeenRun;
+import com.evgenii.aescrypto.interfaces.JsRunnerCallbackInterface;
 
 /**
  * Executes JavaScript code. Loads JS code. Calls a JavaScript function. Allows
  * to pass an argument to function call. Stores the function's return value.
  */
-public class JsRunner {
+public class JsRunner implements JsRunnerCallbackInterface {
 	private final Context mContext;
 	private WebView mWebView;
 	private String mInitialJSConcatenated = "";
@@ -63,4 +64,11 @@ public class JsRunner {
 		mWebView.addJavascriptInterface(mJsInterface, JS_NAMESPACE);
 	}
 
+	public void runJsFunction(String name) {
+
+	}
+
+	public void executeAllPendingJs() {
+
+	}
 }
