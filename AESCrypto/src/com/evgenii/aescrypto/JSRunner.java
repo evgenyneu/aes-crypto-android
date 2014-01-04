@@ -60,7 +60,7 @@ public class JsRunner implements JsRunnerCallbackInterface {
 
 		mWebView = new WebView(mContext);
 		mWebView.loadData("", "text/html", null);
-		mJsInterface = new JavaScriptInterface();
+		mJsInterface = new JavaScriptInterface(this);
 		mWebView.addJavascriptInterface(mJsInterface, JS_NAMESPACE);
 	}
 
@@ -68,6 +68,7 @@ public class JsRunner implements JsRunnerCallbackInterface {
 
 	}
 
+	@Override
 	public void executeAllPendingJs() {
 
 	}

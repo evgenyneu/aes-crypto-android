@@ -28,10 +28,10 @@ public class MainActivity extends Activity {
 		myWebView.loadUrl("javascript: function wow(){return 'cuul!';}");
 		myWebView.loadUrl("javascript: function oh(){return 'holy!';}");
 
-		WebSettings webSettings = myWebView.getSettings();
+		final WebSettings webSettings = myWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
-		myJSInterface = new JavaScriptInterface();
-		myWebView.addJavascriptInterface(myJSInterface, "Android");
+		// myJSInterface = new JavaScriptInterface();
+		// myWebView.addJavascriptInterface(myJSInterface, "Android");
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 		myWebView
 				.loadUrl("javascript: Android.sendResult(Android.getString());");
 
-		myJSInterface.myData = "Updated String!";
+		// myJSInterface.myData = "Updated String!";
 
 		myWebView
 				.loadUrl("javascript: Android.sendResult(Android.getString());");
