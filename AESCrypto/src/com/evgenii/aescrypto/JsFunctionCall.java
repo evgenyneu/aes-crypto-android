@@ -26,14 +26,17 @@ public class JsFunctionCall {
 
 	@Override
 	public String toString() {
-		final String str = mName;
-		final ArrayList<String> paramsStr = new ArrayList<String>();
+		final StringBuilder paramsStr = new StringBuilder();
 
 		for (final Object param : mParams) {
+			if (paramsStr.length() > 0) {
+				paramsStr.append(", ");
+			}
 
+			paramsStr.append(paramToString(param));
 		}
 
-		return str;
+		return String.format("%s(%s);", mName, paramsStr);
 	}
 
 	public static String paramToString(Object param) {

@@ -26,14 +26,13 @@ public class JsFunctionCallTest extends AndroidTestCase {
 
 	public void testToString() {
 		final ArrayList<Object> params = new ArrayList<Object>();
-		params.add("Evgenii's milk");
+		params.add("Milk");
 		params.add(2);
 
 		final JsFunctionCall jsFunctionCall = new JsFunctionCall("drink",
 				params);
 
-		// assertEquals("drink('Evgenii\'s milk', 2);",
-		// jsFunctionCall.toString());
+		assertEquals("drink('Milk', 2);", jsFunctionCall.toString());
 
 	}
 
