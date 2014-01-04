@@ -47,13 +47,29 @@ public class JsRunnerTest extends AndroidTestCase {
 		}
 	}
 
-	public void testInitialJsShouldNotBeEvaluatedByDefault() {
-		assertFalse(mJsRunner.getIsInitialJsEvaluated());
+	public void testInitialJsEvaluationShouldNotBeStartedByDefault() {
+		assertFalse(mJsRunner.getInitialJsEvaluationStarted());
 	}
 
-	public void testRunInitialJs_markInitialJsAsEvaluated() {
+	public void testRunInitialJs_startInitialJsEvaluation() {
 		mJsRunner.runInitialJs();
-		assertTrue(mJsRunner.getIsInitialJsEvaluated());
+		assertTrue(mJsRunner.getInitialJsEvaluationStarted());
+	}
+
+	public void testInitialJsEvaluationShouldNotBeFinishedByDefault() {
+		assertFalse(mJsRunner.getInitialJsEvaluationFinished());
+	}
+
+	public void testInitalJsEvaluationHasFinished_markInitialJsAsFinished() {
+		mJsRunner.initalJsEvaluationHasFinished();
+		assertTrue(mJsRunner.getInitialJsEvaluationFinished());
+	}
+
+	public void testInitalJsEvaluationHasFinished_executesPendingJs() {
+		mJsRunner.runJsFunction("myFirstName", "param1");
+		mJsRunner.runJsFunction("mySecondName", "param2");
+		mJsRunner.initalJsEvaluationHasFinished();
+		assertEquals(0, mJsRunner.getPendingJsCalls().size());
 	}
 
 	public void testRunJsFunction() {

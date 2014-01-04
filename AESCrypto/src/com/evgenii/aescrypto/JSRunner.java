@@ -16,7 +16,8 @@ public class JsRunner implements JsRunnerCallbackInterface {
 	private final Context mContext;
 	private WebView mWebView;
 	private String mInitialJSConcatenated = "";
-	private boolean mIsInitialJsEvaluated;
+	private boolean mInitialJsEvaluationStarted;
+	private boolean mInitialJsEvaluationFinished;
 	private JavaScriptInterface mJsInterface;
 	private final static String JS_NAMESPACE = "AESCrypto";
 	private final static String INITIAL_JS_EXECUTED_CALLBACK = JS_NAMESPACE
@@ -38,18 +39,22 @@ public class JsRunner implements JsRunnerCallbackInterface {
 	}
 
 	public void addInitialJs(String js) throws InitialJsHasAlreadyBeenRun {
-		if (mIsInitialJsEvaluated)
+		if (mInitialJsEvaluationStarted)
 			throw new InitialJsHasAlreadyBeenRun();
 
 		mInitialJSConcatenated += " " + js;
 	}
 
-	public boolean getIsInitialJsEvaluated() {
-		return mIsInitialJsEvaluated;
+	public boolean getInitialJsEvaluationStarted() {
+		return mInitialJsEvaluationStarted;
+	}
+
+	public boolean getInitialJsEvaluationFinished() {
+		return mInitialJsEvaluationFinished;
 	}
 
 	public void runInitialJs() {
-		mIsInitialJsEvaluated = true;
+		mInitialJsEvaluationStarted = true;
 		getWebView().loadUrl(getCompleteInitialJsToEvaluate());
 	}
 
@@ -79,8 +84,21 @@ public class JsRunner implements JsRunnerCallbackInterface {
 		getPendingJsCalls().add(new JsFunctionCall(name, params));
 	}
 
-	@Override
 	public void executeAllPendingJs() {
+		if (mPendingJsCalls.size() == 0)
+			return;
 
+		while (mPendingJsCalls.size() > 0) {
+			final JsFunctionCall jsFunctionCall = mPendingJsCalls
+					.get(mPendingJsCalls.size() - 1);
+
+			mPendingJsCalls.remove(mPendingJsCalls.size() - 1);
+		}
+	}
+
+	@Override
+	public void initalJsEvaluationHasFinished() {
+		mInitialJsEvaluationFinished = true;
+		executeAllPendingJs();
 	}
 }

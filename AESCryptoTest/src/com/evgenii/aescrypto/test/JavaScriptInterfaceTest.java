@@ -16,7 +16,8 @@ public class JavaScriptInterfaceTest extends AndroidTestCase {
 	}
 
 	public void testInitialJsExecuted_executesAllPendingJs() {
+		assertFalse(mJsRunnerMock.mInitalEvaluationHasFinished);
 		mJavaScriptInterface.initialJsExecuted();
-		assertTrue(mJsRunnerMock.mAllPendingExecuted);
+		assertTrue(mJsRunnerMock.mInitalEvaluationHasFinished);
 	}
 }
