@@ -64,7 +64,7 @@ public class JsRunner implements JsRunnerCallbackInterface {
 		mWebView.addJavascriptInterface(mJsInterface, JS_NAMESPACE);
 	}
 
-	public void runJsFunction(String name) {
+	public void runJsFunction(String name, String param) {
 
 	}
 
