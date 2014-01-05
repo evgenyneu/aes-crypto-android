@@ -20,6 +20,7 @@ public class JsRunner implements JsRunnerCallbackInterface {
 	private boolean mInitialJsEvaluationFinished;
 	private JavaScriptInterface mJsInterface;
 	private final static String JS_NAMESPACE = "AESCrypto";
+	private final static String JS_RESULT_FUNCTION = "result";
 	private final static String INITIAL_JS_EXECUTED_CALLBACK = JS_NAMESPACE
 			+ ".initialJsExecuted(); ";
 
@@ -59,8 +60,8 @@ public class JsRunner implements JsRunnerCallbackInterface {
 	}
 
 	public String getCompleteInitialJsToEvaluate() {
-		return "javascript: " + getInitialJSConcatenated() + " "
-				+ INITIAL_JS_EXECUTED_CALLBACK;
+		return String.format("javascript: %s %s", getInitialJSConcatenated(),
+				INITIAL_JS_EXECUTED_CALLBACK);
 	}
 
 	private void initWebView() {
@@ -93,7 +94,17 @@ public class JsRunner implements JsRunnerCallbackInterface {
 					.get(mPendingJsCalls.size() - 1);
 
 			mPendingJsCalls.remove(mPendingJsCalls.size() - 1);
+
+			final String js = JsRunner.getJsForFunctionCall(jsFunctionCall
+					.toString());
+
+			getWebView().loadUrl(js);
 		}
+	}
+
+	public static String getJsForFunctionCall(String functionCallStr) {
+		return String.format("javascript: %s.%s(%s);", JS_NAMESPACE,
+				JS_RESULT_FUNCTION, functionCallStr);
 	}
 
 	@Override

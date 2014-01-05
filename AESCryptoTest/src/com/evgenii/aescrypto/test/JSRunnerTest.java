@@ -81,4 +81,9 @@ public class JsRunnerTest extends AndroidTestCase {
 	public void testExecuteAllPendingJs() {
 		mJsRunner.executeAllPendingJs();
 	}
+
+	public void testGetJsForFunctionCall() {
+		assertEquals("javascript: AESCrypto.result(drink('milk'));",
+				JsRunner.getJsForFunctionCall("drink('milk')"));
+	}
 }

@@ -36,7 +36,7 @@ public class JsFunctionCall {
 			paramsStr.append(paramToString(param));
 		}
 
-		return String.format("%s(%s);", mName, paramsStr);
+		return String.format("%s(%s)", mName, paramsStr);
 	}
 
 	public static String paramToString(Object param) {

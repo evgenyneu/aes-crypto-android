@@ -32,7 +32,7 @@ public class JsFunctionCallTest extends AndroidTestCase {
 		final JsFunctionCall jsFunctionCall = new JsFunctionCall("drink",
 				params);
 
-		assertEquals("drink('Milk', 2);", jsFunctionCall.toString());
+		assertEquals("drink('Milk', 2)", jsFunctionCall.toString());
 
 	}
 
