@@ -5,4 +5,6 @@ package com.evgenii.aescrypto.interfaces;
  */
 public interface JsRunnerCallbackInterface {
 	public void initalJsEvaluationHasFinished();
+
+	public void jsCallFinished(String value, Integer callIndex);
 }

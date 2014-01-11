@@ -20,4 +20,11 @@ public class JavaScriptInterfaceTest extends AndroidTestCase {
 		mJavaScriptInterface.initialJsExecuted();
 		assertTrue(mJsRunnerMock.mInitalEvaluationHasFinished);
 	}
+
+	public void testResult() {
+		mJavaScriptInterface.result("test value", 12);
+		assertEquals("test value", mJsRunnerMock.jsCallFinished_paramValue);
+		assertEquals(Integer.valueOf(12),
+				mJsRunnerMock.jsCallFinished_paramCallIndex);
+	}
 }

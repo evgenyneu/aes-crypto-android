@@ -19,4 +19,9 @@ public class JavaScriptInterface {
 	public void initialJsExecuted() {
 		mJsRunner.initalJsEvaluationHasFinished();
 	}
+
+	@JavascriptInterface
+	public void result(String value, Integer callIndex) {
+		mJsRunner.jsCallFinished(value, callIndex);
+	}
 }

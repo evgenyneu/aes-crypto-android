@@ -1,10 +1,14 @@
 package com.evgenii.aescrypto.test;
 
+import java.util.ArrayList;
+
 import android.test.AndroidTestCase;
 import android.webkit.WebView;
 
 import com.evgenii.aescrypto.JsRunner;
 import com.evgenii.aescrypto.exceptions.InitialJsHasAlreadyBeenRun;
+import com.evgenii.aescrypto.interfaces.JsCallback;
+import com.evgenii.aescrypto.test.mocks.JsCallbackMock;
 
 public class JsRunnerTest extends AndroidTestCase {
 	protected JsRunner mJsRunner;
@@ -85,5 +89,14 @@ public class JsRunnerTest extends AndroidTestCase {
 	public void testGetJsForFunctionCall() {
 		assertEquals("javascript: AESCrypto.result(drink('milk'));",
 				JsRunner.getJsForFunctionCall("drink('milk')"));
+	}
+
+	public void testJsCallFinished_runsCallback() {
+		final ArrayList<JsCallback> callbacks = mJsRunner.getJsCallbacks();
+		final JsCallbackMock callback = new JsCallbackMock();
+		callbacks.add(callback);
+
+		mJsRunner.jsCallFinished("my result", 0);
+		assertEquals("my result", callback.resultValue);
 	}
 }

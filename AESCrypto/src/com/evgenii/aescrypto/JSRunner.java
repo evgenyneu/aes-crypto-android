@@ -6,6 +6,7 @@ import android.content.Context;
 import android.webkit.WebView;
 
 import com.evgenii.aescrypto.exceptions.InitialJsHasAlreadyBeenRun;
+import com.evgenii.aescrypto.interfaces.JsCallback;
 import com.evgenii.aescrypto.interfaces.JsRunnerCallbackInterface;
 
 /**
@@ -24,6 +25,8 @@ public class JsRunner implements JsRunnerCallbackInterface {
 	private final static String INITIAL_JS_EXECUTED_CALLBACK = JS_NAMESPACE
 			+ ".initialJsExecuted(); ";
 
+	private final ArrayList<JsCallback> mJsCallbacks = new ArrayList<JsCallback>();
+
 	private final ArrayList<JsFunctionCall> mPendingJsCalls = new ArrayList<JsFunctionCall>();
 
 	public JsRunner(Context context) {
@@ -33,6 +36,10 @@ public class JsRunner implements JsRunnerCallbackInterface {
 	public WebView getWebView() {
 		initWebView();
 		return mWebView;
+	}
+
+	public ArrayList<JsCallback> getJsCallbacks() {
+		return mJsCallbacks;
 	}
 
 	public String getInitialJSConcatenated() {
@@ -112,4 +119,11 @@ public class JsRunner implements JsRunnerCallbackInterface {
 		mInitialJsEvaluationFinished = true;
 		executeAllPendingJs();
 	}
+
+	@Override
+	public void jsCallFinished(String value, Integer callbackIndex) {
+		final JsCallback callback = mJsCallbacks.get(callbackIndex);
+		callback.onResult(value);
+	}
+
 }
