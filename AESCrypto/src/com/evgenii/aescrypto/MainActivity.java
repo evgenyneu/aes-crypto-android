@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 		jsRunner = new JsRunner(this);
 
 		try {
-			jsRunner.addInitialJs("function myInitial() { return 'Hello from intial'; } ");
+			jsRunner.addInitialJs("function greet(name) { return 'Hello, ' + name; } ");
 			Log.d("ii", "addInitialJs()");
 			jsRunner.runInitialJs();
 			Log.d("ii", "runInitialJs()");
@@ -73,10 +73,10 @@ public class MainActivity extends Activity {
 		// myWebView
 		// .loadUrl("javascript: Android.sendResult(Android.getString());");
 
-		jsRunner.runJsFunction("myInitial", "", new JsCallback() {
+		jsRunner.runJsFunction("greet", "Evgenii", new JsCallback() {
 			@Override
 			public void onResult(String value) {
-				Log.d("ii", "result of myInitial()");
+				Log.d("ii", "result of greet()");
 				Log.d("ii", value);
 			}
 		});
