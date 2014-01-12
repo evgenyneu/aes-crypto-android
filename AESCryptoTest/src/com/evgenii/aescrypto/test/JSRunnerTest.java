@@ -124,8 +124,8 @@ public class JsRunnerTest extends AndroidTestCase {
 	}
 
 	public void testGetJsForFunctionCall() {
-		assertEquals("javascript: AESCrypto.result(drink('milk'));",
-				JsRunner.getJsForFunctionCall("drink('milk')"));
+		assertEquals("javascript: AESCrypto.result(drink('milk'), 8);",
+				JsRunner.getJsForFunctionCall("drink('milk')", 8));
 	}
 
 	public void testJsCallFinished_runsCallback() {

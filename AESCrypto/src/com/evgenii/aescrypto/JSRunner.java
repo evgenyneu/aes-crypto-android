@@ -109,16 +109,18 @@ public class JsRunner implements JsRunnerCallbackInterface {
 
 			mPendingJsCalls.remove(mPendingJsCalls.size() - 1);
 
-			final String js = JsRunner.getJsForFunctionCall(jsFunctionCall
-					.toString());
+			final String js = JsRunner.getJsForFunctionCall(
+					jsFunctionCall.toString(),
+					jsFunctionCall.getCallbackIndex());
 
 			getWebView().loadUrl(js);
 		}
 	}
 
-	public static String getJsForFunctionCall(String functionCallStr) {
-		return String.format("javascript: %s.%s(%s);", JS_NAMESPACE,
-				JS_RESULT_FUNCTION, functionCallStr);
+	public static String getJsForFunctionCall(String functionCallStr,
+			Integer callbackIndex) {
+		return String.format("javascript: %s.%s(%s, %s);", JS_NAMESPACE,
+				JS_RESULT_FUNCTION, functionCallStr, callbackIndex);
 	}
 
 	@Override
@@ -132,5 +134,4 @@ public class JsRunner implements JsRunnerCallbackInterface {
 		final JsCallback callback = mJsCallbacks.get(callbackIndex);
 		callback.onResult(value);
 	}
-
 }

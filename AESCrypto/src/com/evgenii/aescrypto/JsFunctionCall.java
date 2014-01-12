@@ -43,12 +43,6 @@ public class JsFunctionCall {
 			paramsStr.append(paramToString(param));
 		}
 
-		if (paramsStr.length() > 0) {
-			paramsStr.append(", ");
-		}
-
-		paramsStr.append(paramToString(getCallbackIndex()));
-
 		return String.format("%s(%s)", mName, paramsStr);
 	}
 
