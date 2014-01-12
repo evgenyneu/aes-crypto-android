@@ -21,7 +21,7 @@ public class JavaScriptInterface {
 	}
 
 	@JavascriptInterface
-	public void result(String value, Integer callIndex) {
+	public void result(String value, int callIndex) {
 		mJsRunner.jsCallFinished(value, callIndex);
 	}
 }
