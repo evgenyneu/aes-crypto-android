@@ -89,8 +89,9 @@ public class JsRunner implements JsRunnerCallbackInterface {
 		final ArrayList<Object> params = new ArrayList<Object>();
 		params.add(param);
 
+		getPendingJsCalls().add(
+				new JsFunctionCall(name, params, getJsCallbacks().size()));
 		getJsCallbacks().add(callback);
-		getPendingJsCalls().add(new JsFunctionCall(name, params));
 
 		if (!getInitialJsEvaluationFinished())
 			return;

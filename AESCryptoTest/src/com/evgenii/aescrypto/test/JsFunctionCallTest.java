@@ -14,7 +14,7 @@ public class JsFunctionCallTest extends AndroidTestCase {
 		params.add(2);
 
 		final JsFunctionCall jsFunctionCall = new JsFunctionCall("drink",
-				params);
+				params, 101);
 
 		assertEquals("drink", jsFunctionCall.getName());
 
@@ -22,6 +22,8 @@ public class JsFunctionCallTest extends AndroidTestCase {
 		assertEquals(2, jsParams.size());
 		assertEquals("milk", jsParams.get(0));
 		assertEquals(2, jsParams.get(1));
+
+		assertEquals(Integer.valueOf(101), jsFunctionCall.getCallbackIndex());
 	}
 
 	public void testToString() {
@@ -30,9 +32,9 @@ public class JsFunctionCallTest extends AndroidTestCase {
 		params.add(2);
 
 		final JsFunctionCall jsFunctionCall = new JsFunctionCall("drink",
-				params);
+				params, 5);
 
-		assertEquals("drink('Milk', 2)", jsFunctionCall.toString());
+		assertEquals("drink('Milk', 2, 5)", jsFunctionCall.toString());
 
 	}
 

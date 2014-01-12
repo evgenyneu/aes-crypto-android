@@ -10,10 +10,13 @@ import java.util.ArrayList;
 public class JsFunctionCall {
 	private final String mName;
 	private final ArrayList<Object> mParams;
+	private final Integer mCallbackIndex;
 
-	public JsFunctionCall(String name, ArrayList<Object> params) {
+	public JsFunctionCall(String name, ArrayList<Object> params,
+			Integer callbackIndex) {
 		mName = name;
 		mParams = params;
+		mCallbackIndex = callbackIndex;
 	}
 
 	public String getName() {
@@ -22,6 +25,10 @@ public class JsFunctionCall {
 
 	public ArrayList<Object> getParams() {
 		return mParams;
+	}
+
+	public Integer getCallbackIndex() {
+		return mCallbackIndex;
 	}
 
 	@Override
@@ -35,6 +42,12 @@ public class JsFunctionCall {
 
 			paramsStr.append(paramToString(param));
 		}
+
+		if (paramsStr.length() > 0) {
+			paramsStr.append(", ");
+		}
+
+		paramsStr.append(paramToString(getCallbackIndex()));
 
 		return String.format("%s(%s)", mName, paramsStr);
 	}

@@ -90,12 +90,14 @@ public class JsRunnerTest extends AndroidTestCase {
 				.get(0);
 		assertEquals("myFirstName", functionCall.getName());
 		assertEquals("param1", functionCall.getParams().get(0));
+		assertEquals(Integer.valueOf(0), functionCall.getCallbackIndex());
 
 		// Check second function
 		final JsFunctionCall functionCall2 = mJsRunner.getPendingJsCalls().get(
 				1);
 		assertEquals("mySecondName", functionCall2.getName());
 		assertEquals("param2", functionCall2.getParams().get(0));
+		assertEquals(Integer.valueOf(1), functionCall2.getCallbackIndex());
 	}
 
 	public void testRunJsFunction_registersCallback() {
