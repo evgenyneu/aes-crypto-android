@@ -2,7 +2,9 @@ package com.evgenii.aescrypto;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.evgenii.aescrypto.exceptions.InitialJsHasAlreadyBeenRun;
@@ -71,12 +73,15 @@ public class JsRunner implements JsRunnerCallbackInterface {
 				INITIAL_JS_EXECUTED_CALLBACK);
 	}
 
+	@SuppressLint("SetJavaScriptEnabled")
 	private void initWebView() {
 		if (mWebView != null)
 			return;
 
 		mWebView = new WebView(mContext);
 		mWebView.loadData("", "text/html", null);
+		final WebSettings webSettings = mWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
 		mJsInterface = new JavaScriptInterface(this);
 		mWebView.addJavascriptInterface(mJsInterface, JS_NAMESPACE);
 	}
