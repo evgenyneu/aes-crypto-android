@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.test.AndroidTestCase;
 import android.webkit.WebView;
 
+import com.evgenii.aescrypto.JsFunctionCall;
 import com.evgenii.aescrypto.JsRunner;
 import com.evgenii.aescrypto.exceptions.InitialJsHasAlreadyBeenRun;
 import com.evgenii.aescrypto.interfaces.JsCallback;
@@ -70,16 +71,50 @@ public class JsRunnerTest extends AndroidTestCase {
 	}
 
 	public void testInitalJsEvaluationHasFinished_executesPendingJs() {
-		mJsRunner.runJsFunction("myFirstName", "param1");
-		mJsRunner.runJsFunction("mySecondName", "param2");
+		final JsCallbackMock callback = new JsCallbackMock();
+		mJsRunner.runJsFunction("myFirstName", "param1", callback);
+		mJsRunner.runJsFunction("mySecondName", "param2", callback);
 		mJsRunner.initalJsEvaluationHasFinished();
 		assertEquals(0, mJsRunner.getPendingJsCalls().size());
 	}
 
-	public void testRunJsFunction() {
-		mJsRunner.runJsFunction("myFirstName", "param1");
-		mJsRunner.runJsFunction("mySecondName", "param2");
+	public void testRunJsFunction_addsJsToPendingWithoutRunning() {
+		final JsCallbackMock callback = new JsCallbackMock();
+		mJsRunner.runJsFunction("myFirstName", "param1", callback);
+		mJsRunner.runJsFunction("mySecondName", "param2", callback);
+
 		assertEquals(2, mJsRunner.getPendingJsCalls().size());
+
+		// Check first function
+		final JsFunctionCall functionCall = mJsRunner.getPendingJsCalls()
+				.get(0);
+		assertEquals("myFirstName", functionCall.getName());
+		assertEquals("param1", functionCall.getParams().get(0));
+
+		// Check second function
+		final JsFunctionCall functionCall2 = mJsRunner.getPendingJsCalls().get(
+				1);
+		assertEquals("mySecondName", functionCall2.getName());
+		assertEquals("param2", functionCall2.getParams().get(0));
+	}
+
+	public void testRunJsFunction_registersCallback() {
+		final JsCallbackMock callback1 = new JsCallbackMock();
+		final JsCallbackMock callback2 = new JsCallbackMock();
+		mJsRunner.runJsFunction("myFirstName", "param1", callback1);
+		mJsRunner.runJsFunction("mySecondName", "param2", callback2);
+		assertEquals(2, mJsRunner.getJsCallbacks().size());
+
+		// Check callbacks
+		assertEquals(mJsRunner.getJsCallbacks().get(0), callback1);
+		assertEquals(mJsRunner.getJsCallbacks().get(1), callback2);
+	}
+
+	public void testRunJsFunction_runsJsIfInitialJsEvaluationHasFinished() {
+		final JsCallbackMock callback = new JsCallbackMock();
+		mJsRunner.initalJsEvaluationHasFinished();
+		mJsRunner.runJsFunction("myFirstName", "param1", callback);
+		assertEquals(0, mJsRunner.getPendingJsCalls().size());
 	}
 
 	public void testExecuteAllPendingJs() {
