@@ -7,14 +7,14 @@ import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
 
-import com.evgenii.aescrypto.exceptions.InitialJsHasAlreadyBeenRun;
-import com.evgenii.aescrypto.interfaces.JsCallback;
+import com.evgenii.jsevaluator.JsRunner;
+import com.evgenii.jsevaluator.exceptions.InitialJsHasAlreadyBeenRun;
+import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
 	public WebView myWebView;
-	public JavaScriptInterface myJSInterface;
 
 	protected JsRunner jsRunner;
 
