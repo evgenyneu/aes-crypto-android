@@ -38,12 +38,5 @@
 			android:inputType="textMultiLine"
 			android:gravity="top" />
 
-	    <Button
-	        android:layout_width="100dp"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="right"
-	        android:text="Send"
-	        android:onClick="onSendClicked" />
-
     </LinearLayout>
 </ScrollView>

@@ -7,8 +7,10 @@ import java.util.Scanner;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.evgenii.aescrypto.interfaces.AssetsFileReaderInterface;
+
 /** Reads text file to string from assets/ directory */
-public class AssetsFileReader {
+public class AssetsFileReader implements AssetsFileReaderInterface {
 	private final Context mContext;
 
 	public AssetsFileReader(Context context) {
@@ -16,8 +18,8 @@ public class AssetsFileReader {
 	}
 
 	public String ReadFile(String fileName) throws IOException {
-		AssetManager am = mContext.getAssets();
-		InputStream inputStream = am.open(fileName);
+		final AssetManager am = mContext.getAssets();
+		final InputStream inputStream = am.open(fileName);
 
 		return new Scanner(inputStream, "UTF-8").useDelimiter("\\A").next();
 	}

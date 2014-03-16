@@ -1,22 +1,20 @@
 package com.evgenii.aescrypto;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.webkit.WebView;
 
-import com.evgenii.jsevaluator.JsRunner;
-import com.evgenii.jsevaluator.exceptions.InitialJsHasAlreadyBeenRun;
+import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
-	public WebView myWebView;
-
-	protected JsRunner jsRunner;
+	protected JsEvaluator mJsEvaluator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +24,18 @@ public class MainActivity extends Activity {
 				R.string.menu_decrypt_title);
 		setContentView(R.layout.activity_main);
 
-		jsRunner = new JsRunner(this);
-
+		mJsEvaluator = new JsEvaluator(this);
+		final AssetsFileReader fileReader = new AssetsFileReader(this);
 		try {
-			jsRunner.addInitialJs("function greet(name) { return 'Hello, ' + name; } ");
-			jsRunner.runInitialJs();
-		} catch (final InitialJsHasAlreadyBeenRun e) {
+			Log.d("ii", fileReader.ReadFile("hello_word.txt"));
+		} catch (final IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -50,13 +47,12 @@ public class MainActivity extends Activity {
 	}
 
 	public void onSendClicked(View view) {
-		jsRunner.runJsFunction("greet", "Evgenii", new JsCallback() {
+		mJsEvaluator.evaluate("2 * 17", new JsCallback() {
 			@Override
-			public void onResult(String value) {
-				Log.d("ii", String.format("result of greet(): %s", value));
+			public void onResult(final String value) {
+				currentDecryptMenuTitle = value;
+				invalidateOptionsMenu();
 			}
 		});
-		currentDecryptMenuTitle = "Hey :)";
-		invalidateOptionsMenu();
 	}
 }
