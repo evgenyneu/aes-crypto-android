@@ -21,13 +21,22 @@ public class JSEncryptorTests extends AndroidTestCase {
 		mJsEncryptor = new JsEncryptor(mContext, mAssetsFileReaderMock, mJsEvaluatorMock);
 	}
 
+	public void testEvaluateScripts() {
+		mJsEncryptor.getScripts().add("test script one");
+		mJsEncryptor.getScripts().add("test script two");
+		mJsEncryptor.evaluateScripts();
+		assertEquals(2, mJsEvaluatorMock.mEvaluatedScripts.size());
+		assertEquals("test script one", mJsEvaluatorMock.mEvaluatedScripts.get(0));
+		assertEquals("test script two", mJsEvaluatorMock.mEvaluatedScripts.get(1));
+	}
+
 	public void testReadScripts() throws IOException {
 		mJsEncryptor.ReadScripts();
 
-		final ArrayList<String> scripts = mJsEncryptor.scripts();
+		final ArrayList<String> scripts = mJsEncryptor.getScripts();
 		assertEquals(7, scripts.size());
-		assertEquals(scripts.get(0), "javascript/crypto-js/core.js script");
-		assertEquals(scripts.get(1), "javascript/crypto-js/enc-base64.js script");
-		assertEquals(scripts.get(6), "javascript/aes_crypto.js script");
+		assertEquals("javascript/crypto-js/core.js script", scripts.get(0));
+		assertEquals("javascript/crypto-js/enc-base64.js script", scripts.get(1));
+		assertEquals("javascript/aes_crypto.js script", scripts.get(6));
 	}
 }

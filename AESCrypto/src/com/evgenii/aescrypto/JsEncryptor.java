@@ -28,6 +28,20 @@ public class JsEncryptor {
 
 	}
 
+	public void evaluateScripts() {
+		final ArrayList<String> scripts = getScripts();
+		for (final String scriptText : scripts) {
+			mJsEvaluator.evaluate(scriptText);
+		}
+	}
+
+	public ArrayList<String> getScripts() {
+		if (mScriptsText == null) {
+			mScriptsText = new ArrayList<String>();
+		}
+		return mScriptsText;
+	}
+
 	public void ReadScripts() throws IOException {
 		final ArrayList<String> scriptsToLoad = new ArrayList<String>();
 		for (final String scriptName : cryptoJsFileNames) {
@@ -35,14 +49,10 @@ public class JsEncryptor {
 		}
 		scriptsToLoad.add(jsRootDir + "/" + aesCryptoFileName + ".js");
 
-		mScriptsText = new ArrayList<String>();
+		final ArrayList<String> scriptsText = getScripts();
 
 		for (final String scriptName : scriptsToLoad) {
-			mScriptsText.add(mAssetsFileReader.ReadFile(scriptName));
+			scriptsText.add(mAssetsFileReader.ReadFile(scriptName));
 		}
-	}
-
-	public ArrayList<String> scripts() {
-		return mScriptsText;
 	}
 }
