@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 		mJsEvaluator = new JsEvaluator(this);
 		final AssetsFileReader fileReader = new AssetsFileReader(this);
 		try {
-			Log.d("ii", fileReader.ReadFile("hello_word.txt"));
+			Log.d("ii", fileReader.ReadFile("javascript/aes_crypto.js"));
 		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
