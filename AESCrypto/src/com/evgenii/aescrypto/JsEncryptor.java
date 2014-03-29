@@ -13,7 +13,7 @@ public class JsEncryptor {
 	private final Context mContext;
 	private final AssetsFileReaderInterface mAssetsFileReader;
 	private final JsEvaluatorInterface mJsEvaluator;
-	private final String[] cryptoJsFileNames = { "core", "WOWenc-base64", "md5", "evpkdf",
+	private final String[] cryptoJsFileNames = { "core", "enc-base64", "md5", "evpkdf",
 			"cipher-core", "aes" };
 	private final String aesCryptoFileName = "aes_crypto";
 	private final String cryptoJsDir = "crypto-js";
