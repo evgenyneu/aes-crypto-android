@@ -31,7 +31,7 @@ public class JSEncryptorTests extends AndroidTestCase {
 	}
 
 	public void testReadScripts() throws IOException {
-		mJsEncryptor.ReadScripts();
+		mJsEncryptor.readScripts();
 
 		final ArrayList<String> scripts = mJsEncryptor.getScripts();
 		assertEquals(7, scripts.size());

@@ -3,35 +3,35 @@ package com.evgenii.aescrypto;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
 import com.evgenii.jsevaluator.JsEvaluator;
-import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
-	protected JsEvaluator mJsEvaluator;
+	protected JsEncryptor mJsEncryptor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		currentDecryptMenuTitle = getResources().getString(
-				R.string.menu_decrypt_title);
+		currentDecryptMenuTitle = getResources().getString(R.string.menu_decrypt_title);
 		setContentView(R.layout.activity_main);
 
-		mJsEvaluator = new JsEvaluator(this);
-		final AssetsFileReader fileReader = new AssetsFileReader(this);
+		final AssetsFileReader assetsFileReader = new AssetsFileReader(this);
+		final JsEvaluator jsEvaluator = new JsEvaluator(this);
+		mJsEncryptor = new JsEncryptor(this, assetsFileReader, jsEvaluator);
 		try {
-			Log.d("ii", fileReader.ReadFile("javascript/aes_crypto.js"));
+			mJsEncryptor.readScripts();
 		} catch (final IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showFataErrorAlertAndExit("Can not read JavaScript program", e);
 		}
+		mJsEncryptor.evaluateScripts();
 	}
 
 	@Override
@@ -47,12 +47,24 @@ public class MainActivity extends Activity {
 	}
 
 	public void onSendClicked(View view) {
-		mJsEvaluator.evaluate("2 * 17", new JsCallback() {
-			@Override
-			public void onResult(final String value) {
-				currentDecryptMenuTitle = value;
-				invalidateOptionsMenu();
-			}
-		});
+		// mJsEvaluator.evaluate("2 * 17", new JsCallback() {
+		// @Override
+		// public void onResult(final String value) {
+		// currentDecryptMenuTitle = value;
+		// invalidateOptionsMenu();
+		// }
+		// });
+	}
+
+	public void showFataErrorAlertAndExit(String message, final Exception e) {
+		new AlertDialog.Builder(this).setTitle("Fatal Error").setMessage(message)
+				.setCancelable(false)
+				.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						e.printStackTrace();
+						finish();
+					}
+				}).show();
 	}
 }
