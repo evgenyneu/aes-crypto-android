@@ -16,6 +16,18 @@ public class MainActivity extends Activity {
 	public String currentDecryptMenuTitle;
 	protected JsEncryptor mJsEncryptor;
 
+	public void evaluateScripts() {
+		final AssetsFileReader assetsFileReader = new AssetsFileReader(this);
+		final JsEvaluator jsEvaluator = new JsEvaluator(this);
+		mJsEncryptor = new JsEncryptor(this, assetsFileReader, jsEvaluator);
+		try {
+			mJsEncryptor.readScripts();
+		} catch (final IOException e) {
+			showFataErrorAlertAndExit("Can not read JavaScript file.", e);
+		}
+		mJsEncryptor.evaluateScripts();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,15 +35,7 @@ public class MainActivity extends Activity {
 		currentDecryptMenuTitle = getResources().getString(R.string.menu_decrypt_title);
 		setContentView(R.layout.activity_main);
 
-		final AssetsFileReader assetsFileReader = new AssetsFileReader(this);
-		final JsEvaluator jsEvaluator = new JsEvaluator(this);
-		mJsEncryptor = new JsEncryptor(this, assetsFileReader, jsEvaluator);
-		try {
-			mJsEncryptor.readScripts();
-		} catch (final IOException e) {
-			showFataErrorAlertAndExit("Can not read JavaScript program", e);
-		}
-		mJsEncryptor.evaluateScripts();
+		evaluateScripts();
 	}
 
 	@Override
@@ -57,6 +61,11 @@ public class MainActivity extends Activity {
 	}
 
 	public void showFataErrorAlertAndExit(String message, final Exception e) {
+		String errorMessage = e.getMessage();
+		if (errorMessage.length() > 200) {
+			errorMessage = errorMessage.substring(0, 199) + "...";
+		}
+		message = message + "\n\nDetails: " + errorMessage;
 		new AlertDialog.Builder(this).setTitle("Fatal Error").setMessage(message)
 				.setCancelable(false)
 				.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
