@@ -21,6 +21,10 @@ public class JSEncryptorTests extends AndroidTestCase {
 		mJsEncryptor = new JsEncryptor(mContext, mAssetsFileReaderMock, mJsEvaluatorMock);
 	}
 
+	public void testEncrypt() {
+		// mJsEncryptor.encrypt("my message", "my password");
+	}
+
 	public void testEvaluateScripts() {
 		mJsEncryptor.getScripts().add("test script one");
 		mJsEncryptor.getScripts().add("test script two");

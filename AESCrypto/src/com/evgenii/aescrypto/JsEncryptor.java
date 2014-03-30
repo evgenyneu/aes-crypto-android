@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.content.Context;
 
 import com.evgenii.aescrypto.interfaces.AssetsFileReaderInterface;
+import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 
 /** Encrypts text using JavaScript library */
@@ -26,6 +27,14 @@ public class JsEncryptor {
 		mAssetsFileReader = assetsFileReader;
 		mJsEvaluator = jsEvaluator;
 
+	}
+
+	public void decrypt(String text, String password, JsCallback callback) {
+		mJsEvaluator.callFunction(callback, "aesCrypto.decrypt", text, password);
+	}
+
+	public void encrypt(String text, String password, JsCallback callback) {
+		mJsEvaluator.callFunction(callback, "aesCrypto.hello", text, password);
 	}
 
 	public void evaluateScripts() {

@@ -6,10 +6,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
-import android.view.View;
+import android.view.MenuItem;
 
 import com.evgenii.jsevaluator.JsEvaluator;
+import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class MainActivity extends Activity {
 
@@ -44,20 +46,33 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public void onEncryptClicked() {
+		Log.d("ii", "onEncryptClicked");
+		mJsEncryptor.encrypt("hello word", "test", new JsCallback() {
+			@Override
+			public void onResult(final String value) {
+				Log.d("ii", "onResult");
+				Log.d("ii", value);
+			}
+		});
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.action_encrypt:
+			onEncryptClicked();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(R.id.action_decrypt).setTitle(currentDecryptMenuTitle);
 		return super.onPrepareOptionsMenu(menu);
-	}
-
-	public void onSendClicked(View view) {
-		// mJsEvaluator.evaluate("2 * 17", new JsCallback() {
-		// @Override
-		// public void onResult(final String value) {
-		// currentDecryptMenuTitle = value;
-		// invalidateOptionsMenu();
-		// }
-		// });
 	}
 
 	public void showFataErrorAlertAndExit(String message, final Exception e) {
