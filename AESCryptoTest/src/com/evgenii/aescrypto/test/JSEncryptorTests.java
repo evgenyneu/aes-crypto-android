@@ -42,12 +42,6 @@ public class JSEncryptorTests extends AndroidTestCase {
 		assertEquals("test password", mJsEvaluatorMock.mEvaluateArguments[1]);
 	}
 
-	// public void testEncryptIntegration() {
-	// final JsEncryptor encryptor = new JsEncryptor(mContext, new
-	// AssetsFileReader(mContext),
-	// new JsEvaluator(mContext));
-	// }
-
 	public void testEvaluateScripts() {
 		mJsEncryptor.getScripts().add("test script one");
 		mJsEncryptor.getScripts().add("test script two");

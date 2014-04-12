@@ -13,6 +13,10 @@ public class MainActivity extends Activity {
 	public String currentDecryptMenuTitle;
 	protected JsEncryptor mJsEncryptor;
 
+	public JsEncryptor getEncryptor() {
+		return mJsEncryptor;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
