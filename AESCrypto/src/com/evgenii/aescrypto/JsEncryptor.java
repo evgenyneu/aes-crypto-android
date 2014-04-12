@@ -14,10 +14,8 @@ public class JsEncryptor {
 	private final Context mContext;
 	private final AssetsFileReaderInterface mAssetsFileReader;
 	private final JsEvaluatorInterface mJsEvaluator;
-	private final String[] cryptoJsFileNames = { "core", "enc-base64", "md5", "evpkdf",
-			"cipher-core", "aes" };
+	private final String cryptoJsFileNames = "crypto_js";
 	private final String aesCryptoFileName = "aes_crypto";
-	private final String cryptoJsDir = "crypto-js";
 	private final String jsRootDir = "javascript";
 	private ArrayList<String> mScriptsText;
 
@@ -34,7 +32,7 @@ public class JsEncryptor {
 	}
 
 	public void encrypt(String text, String password, JsCallback callback) {
-		mJsEvaluator.callFunction(callback, "aesCrypto.hello", text, password);
+		mJsEvaluator.callFunction(callback, "aesCrypto.encrypt", text, password);
 	}
 
 	public void evaluateScripts() {
@@ -53,9 +51,8 @@ public class JsEncryptor {
 
 	public void readScripts() throws IOException {
 		final ArrayList<String> scriptsToLoad = new ArrayList<String>();
-		for (final String scriptName : cryptoJsFileNames) {
-			scriptsToLoad.add(jsRootDir + "/" + cryptoJsDir + "/" + scriptName + ".js");
-		}
+
+		scriptsToLoad.add(jsRootDir + "/" + cryptoJsFileNames + ".js");
 		scriptsToLoad.add(jsRootDir + "/" + aesCryptoFileName + ".js");
 
 		final ArrayList<String> scriptsText = getScripts();

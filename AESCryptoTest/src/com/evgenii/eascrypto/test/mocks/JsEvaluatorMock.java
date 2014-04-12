@@ -8,10 +8,13 @@ import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 public class JsEvaluatorMock implements JsEvaluatorInterface {
 	public ArrayList<String> mEvaluatedScripts = new ArrayList<String>();
 	public ArrayList<JsCallback> mEvaluateCallbacks = new ArrayList<JsCallback>();
+	public Object[] mEvaluateArguments = null;
 
 	@Override
 	public void callFunction(JsCallback callabck, String script, Object... jsArguments) {
-
+		mEvaluateCallbacks.add(callabck);
+		mEvaluatedScripts.add(script);
+		mEvaluateArguments = jsArguments;
 	}
 
 	@Override

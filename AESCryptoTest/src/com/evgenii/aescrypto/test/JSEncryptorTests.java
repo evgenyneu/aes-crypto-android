@@ -8,6 +8,7 @@ import android.test.AndroidTestCase;
 import com.evgenii.aescrypto.JsEncryptor;
 import com.evgenii.eascrypto.test.mocks.AssetsFileReaderMock;
 import com.evgenii.eascrypto.test.mocks.JsEvaluatorMock;
+import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class JSEncryptorTests extends AndroidTestCase {
 	JsEncryptor mJsEncryptor;
@@ -22,7 +23,23 @@ public class JSEncryptorTests extends AndroidTestCase {
 	}
 
 	public void testEncrypt() {
-		// mJsEncryptor.encrypt("my message", "my password");
+		final JsCallback callback = new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+			}
+		};
+
+		mJsEncryptor.encrypt("test text", "test password", callback);
+
+		assertEquals(1, mJsEvaluatorMock.mEvaluateCallbacks.size());
+		assertSame(callback, mJsEvaluatorMock.mEvaluateCallbacks.get(0));
+
+		assertEquals(1, mJsEvaluatorMock.mEvaluatedScripts.size());
+		assertEquals("aesCrypto.encrypt", mJsEvaluatorMock.mEvaluatedScripts.get(0));
+
+		assertEquals(2, mJsEvaluatorMock.mEvaluateArguments.length);
+		assertEquals("test text", mJsEvaluatorMock.mEvaluateArguments[0]);
+		assertEquals("test password", mJsEvaluatorMock.mEvaluateArguments[1]);
 	}
 
 	public void testEvaluateScripts() {
@@ -38,9 +55,8 @@ public class JSEncryptorTests extends AndroidTestCase {
 		mJsEncryptor.readScripts();
 
 		final ArrayList<String> scripts = mJsEncryptor.getScripts();
-		assertEquals(7, scripts.size());
-		assertEquals("javascript/crypto-js/core.js script", scripts.get(0));
-		assertEquals("javascript/crypto-js/enc-base64.js script", scripts.get(1));
-		assertEquals("javascript/aes_crypto.js script", scripts.get(6));
+		assertEquals(2, scripts.size());
+		assertEquals("javascript/crypto_js.js script", scripts.get(0));
+		assertEquals("javascript/aes_crypto.js script", scripts.get(1));
 	}
 }
