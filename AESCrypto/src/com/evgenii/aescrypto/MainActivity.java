@@ -2,9 +2,9 @@ package com.evgenii.aescrypto;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
@@ -34,18 +34,15 @@ public class MainActivity extends Activity {
 	}
 
 	public void onEncryptClicked() {
-		Log.d("ii", "onEncryptClicked");
-		mJsEncryptor.encrypt("hello word", "test", new JsCallback() {
+		final EditText editText = (EditText) findViewById(R.id.message);
+		final String message = editText.getText().toString();
+		mJsEncryptor.encrypt(message, "test", new JsCallback() {
 			@Override
 			public void onResult(final String value) {
-				Log.d("ii", "encrypted");
-				Log.d("ii", value);
-
 				mJsEncryptor.decrypt(value, "test", new JsCallback() {
 					@Override
-					public void onResult(final String value) {
-						Log.d("ii", "decrypted");
-						Log.d("ii", value);
+					public void onResult(final String valueDecrypted) {
+						editText.setText(valueDecrypted + "!!!");
 					}
 				});
 			}
