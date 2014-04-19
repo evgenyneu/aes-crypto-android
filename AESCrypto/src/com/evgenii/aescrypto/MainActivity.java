@@ -1,7 +1,10 @@
 package com.evgenii.aescrypto;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -12,9 +15,24 @@ public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
 	protected JsEncryptor mJsEncryptor;
+	protected EditText mMessage;
+	protected EditText mPassword;
+	protected boolean isEncrypting = false;
 
 	public JsEncryptor getEncryptor() {
 		return mJsEncryptor;
+	}
+
+	public boolean hasMessage() {
+		return mMessage.getText().toString().trim().length() > 0;
+	}
+
+	public boolean hasPassword() {
+		return mPassword.getText().toString().trim().length() > 0;
+	}
+
+	public boolean isEncryptable() {
+		return hasMessage() && hasPassword() && !isEncrypting;
 	}
 
 	@Override
@@ -25,6 +43,11 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		mJsEncryptor = JsEncryptor.evaluateAllScripts(this);
+
+		mMessage = (EditText) findViewById(R.id.message);
+		mPassword = (EditText) findViewById(R.id.password);
+
+		setupInputChange();
 	}
 
 	@Override
@@ -34,17 +57,14 @@ public class MainActivity extends Activity {
 	}
 
 	public void onEncryptClicked() {
-		final EditText editText = (EditText) findViewById(R.id.message);
-		final String message = editText.getText().toString();
-		mJsEncryptor.encrypt(message, "test", new JsCallback() {
+		final String message = mMessage.getText().toString();
+		final String password = mPassword.getText().toString();
+		isEncrypting = true;
+		mJsEncryptor.encrypt(message, password, new JsCallback() {
 			@Override
-			public void onResult(final String value) {
-				mJsEncryptor.decrypt(value, "test", new JsCallback() {
-					@Override
-					public void onResult(final String valueDecrypted) {
-						editText.setText(valueDecrypted + "!!!");
-					}
-				});
+			public void onResult(final String encryptedMessage) {
+				isEncrypting = false;
+				shareMessage(encryptedMessage);
 			}
 		});
 	}
@@ -61,9 +81,59 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	private void onPasswordOrMessageChanged() {
+		invalidateOptionsMenu();
+	}
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(R.id.action_decrypt).setTitle(currentDecryptMenuTitle);
+		menu.findItem(R.id.action_encrypt).setEnabled(isEncryptable());
 		return super.onPrepareOptionsMenu(menu);
+	}
+
+	private void setupInputChange() {
+		mMessage.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				onPasswordOrMessageChanged();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+		});
+
+		mPassword.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				onPasswordOrMessageChanged();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+		});
+	}
+
+	private void shareMessage(String message) {
+		final Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+		final String subject = getResources().getString(R.string.share_encrypted_message_subject);
+		sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		sendIntent.setType("text/plain");
+		final String title = getResources().getString(R.string.share_encrypted_message_title);
+		startActivity(Intent.createChooser(sendIntent, title));
 	}
 }
