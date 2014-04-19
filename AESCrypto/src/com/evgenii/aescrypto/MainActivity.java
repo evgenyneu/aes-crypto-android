@@ -60,10 +60,12 @@ public class MainActivity extends Activity {
 		final String message = mMessage.getText().toString();
 		final String password = mPassword.getText().toString();
 		isEncrypting = true;
+		invalidateOptionsMenu();
 		mJsEncryptor.encrypt(message, password, new JsCallback() {
 			@Override
 			public void onResult(final String encryptedMessage) {
 				isEncrypting = false;
+				invalidateOptionsMenu();
 				shareMessage(encryptedMessage);
 			}
 		});
