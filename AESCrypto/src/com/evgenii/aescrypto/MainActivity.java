@@ -1,7 +1,8 @@
 package com.evgenii.aescrypto;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,12 +15,18 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
-	public Intent mSharingIntent; // Used in tests, could not find a better way
-									// of verifying sharing
 	protected JsEncryptor mJsEncryptor;
 	protected EditText mMessage;
 	protected EditText mPassword;
 	protected boolean isEncrypting = false;
+	protected boolean mJustCopied = false;
+
+	public String getEncryptMenuTitle() {
+		if (mJustCopied)
+			return getResources().getString(R.string.menu_encrypt_title_copied);
+		else
+			return getResources().getString(R.string.menu_encrypt_title);
+	}
 
 	public JsEncryptor getEncryptor() {
 		return mJsEncryptor;
@@ -86,12 +93,15 @@ public class MainActivity extends Activity {
 	}
 
 	private void onPasswordOrMessageChanged() {
+		mJustCopied = false;
 		invalidateOptionsMenu();
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(R.id.action_decrypt).setTitle(currentDecryptMenuTitle);
+		menu.findItem(R.id.action_encrypt).setTitle(getEncryptMenuTitle());
+
 		menu.findItem(R.id.action_encrypt).setEnabled(isEncryptable());
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -131,13 +141,11 @@ public class MainActivity extends Activity {
 	}
 
 	private void shareMessage(String message) {
-		mSharingIntent = new Intent();
-		mSharingIntent.setAction(Intent.ACTION_SEND);
-		mSharingIntent.putExtra(Intent.EXTRA_TEXT, message);
-		final String subject = getResources().getString(R.string.share_encrypted_message_subject);
-		mSharingIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		mSharingIntent.setType("text/plain");
-		final String title = getResources().getString(R.string.share_encrypted_message_title);
-		startActivity(Intent.createChooser(mSharingIntent, title));
+		final ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+		final ClipData clip = ClipData.newPlainText("Message ecrypted by AESCrypto", message);
+		clipboard.setPrimaryClip(clip);
+
+		mJustCopied = true;
+		invalidateOptionsMenu();
 	}
 }
