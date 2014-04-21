@@ -106,6 +106,12 @@ public class MainActivity extends Activity {
 		return super.onPrepareOptionsMenu(menu);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// TODO: Read text from clipboard
+	}
+
 	private void setupInputChange() {
 		mMessage.addTextChangedListener(new TextWatcher() {
 
