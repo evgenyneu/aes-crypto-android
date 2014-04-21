@@ -14,6 +14,8 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 public class MainActivity extends Activity {
 
 	public String currentDecryptMenuTitle;
+	public Intent mSharingIntent; // Used in tests, could not find a better way
+									// of verifying sharing
 	protected JsEncryptor mJsEncryptor;
 	protected EditText mMessage;
 	protected EditText mPassword;
@@ -129,13 +131,13 @@ public class MainActivity extends Activity {
 	}
 
 	private void shareMessage(String message) {
-		final Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+		mSharingIntent = new Intent();
+		mSharingIntent.setAction(Intent.ACTION_SEND);
+		mSharingIntent.putExtra(Intent.EXTRA_TEXT, message);
 		final String subject = getResources().getString(R.string.share_encrypted_message_subject);
-		sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		sendIntent.setType("text/plain");
+		mSharingIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		mSharingIntent.setType("text/plain");
 		final String title = getResources().getString(R.string.share_encrypted_message_title);
-		startActivity(Intent.createChooser(sendIntent, title));
+		startActivity(Intent.createChooser(mSharingIntent, title));
 	}
 }
