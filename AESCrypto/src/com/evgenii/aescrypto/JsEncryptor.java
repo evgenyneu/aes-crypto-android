@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
 
 import com.evgenii.aescrypto.interfaces.AssetsFileReaderInterface;
 import com.evgenii.jsevaluator.JsEvaluator;
@@ -16,7 +15,7 @@ public class JsEncryptor {
 	public static JsEncryptor evaluateAllScripts(Activity context) {
 		final AssetsFileReader assetsFileReader = new AssetsFileReader(context);
 		final JsEvaluator jsEvaluator = new JsEvaluator(context);
-		final JsEncryptor jsEncryptor = new JsEncryptor(context, assetsFileReader, jsEvaluator);
+		final JsEncryptor jsEncryptor = new JsEncryptor(assetsFileReader, jsEvaluator);
 		try {
 			jsEncryptor.readScripts();
 		} catch (final IOException e) {
@@ -26,18 +25,17 @@ public class JsEncryptor {
 		return jsEncryptor;
 	}
 
-	private final Context mContext;
 	private final AssetsFileReaderInterface mAssetsFileReader;
 	private final JsEvaluatorInterface mJsEvaluator;
 	private final String cryptoJsFileNames = "crypto_js";
 	private final String aesCryptoFileName = "aes_crypto";
 	private final String jsRootDir = "javascript";
 
+	private static final String prefix = "AESCryptoV10";
+
 	private ArrayList<String> mScriptsText;
 
-	public JsEncryptor(Context context, AssetsFileReaderInterface assetsFileReader,
-			JsEvaluatorInterface jsEvaluator) {
-		mContext = context;
+	public JsEncryptor(AssetsFileReaderInterface assetsFileReader, JsEvaluatorInterface jsEvaluator) {
 		mAssetsFileReader = assetsFileReader;
 		mJsEvaluator = jsEvaluator;
 	}
@@ -62,6 +60,13 @@ public class JsEncryptor {
 			mScriptsText = new ArrayList<String>();
 		}
 		return mScriptsText;
+	}
+
+	public boolean isEncrypted(String text) {
+		if (text == null)
+			return false;
+
+		return text.trim().startsWith(prefix);
 	}
 
 	public void readScripts() throws IOException {

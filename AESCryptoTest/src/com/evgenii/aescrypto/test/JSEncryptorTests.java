@@ -19,7 +19,7 @@ public class JSEncryptorTests extends AndroidTestCase {
 	protected void setUp() {
 		mAssetsFileReaderMock = new AssetsFileReaderMock();
 		mJsEvaluatorMock = new JsEvaluatorMock();
-		mJsEncryptor = new JsEncryptor(mContext, mAssetsFileReaderMock, mJsEvaluatorMock);
+		mJsEncryptor = new JsEncryptor(mAssetsFileReaderMock, mJsEvaluatorMock);
 	}
 
 	public void testEncrypt() {
@@ -49,6 +49,18 @@ public class JSEncryptorTests extends AndroidTestCase {
 		assertEquals(2, mJsEvaluatorMock.mEvaluatedScripts.size());
 		assertEquals("test script one", mJsEvaluatorMock.mEvaluatedScripts.get(0));
 		assertEquals("test script two", mJsEvaluatorMock.mEvaluatedScripts.get(1));
+	}
+
+	public void testIsEncrypted_no() {
+		assertFalse(mJsEncryptor.isEncrypted("not encrypted"));
+	}
+
+	public void testIsEncrypted_noWhenNull() {
+		assertFalse(mJsEncryptor.isEncrypted(null));
+	}
+
+	public void testIsEncrypted_yes() {
+		assertTrue(mJsEncryptor.isEncrypted(" AESCryptoV101319d  "));
 	}
 
 	public void testReadScripts() throws IOException {

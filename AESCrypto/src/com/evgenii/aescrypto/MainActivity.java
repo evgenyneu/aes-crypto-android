@@ -1,8 +1,6 @@
 package com.evgenii.aescrypto;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +18,12 @@ public class MainActivity extends Activity {
 	protected EditText mPassword;
 	protected boolean isEncrypting = false;
 	protected boolean mJustCopied = false;
+	public Clipboard mClipboard;
+	public String mTextToDecrypt;
+
+	protected void decryptAndUpdate() {
+
+	}
 
 	public String getEncryptMenuTitle() {
 		if (mJustCopied)
@@ -33,15 +37,19 @@ public class MainActivity extends Activity {
 	}
 
 	public boolean hasMessage() {
-		return mMessage.getText().toString().trim().length() > 0;
+		return messageTrimmed().length() > 0;
 	}
 
 	public boolean hasPassword() {
-		return mPassword.getText().toString().trim().length() > 0;
+		return passwordTrimmed().length() > 0;
 	}
 
 	public boolean isEncryptable() {
 		return hasMessage() && hasPassword() && !isEncrypting;
+	}
+
+	public String messageTrimmed() {
+		return mMessage.getText().toString().trim();
 	}
 
 	@Override
@@ -55,6 +63,7 @@ public class MainActivity extends Activity {
 
 		mMessage = (EditText) findViewById(R.id.message);
 		mPassword = (EditText) findViewById(R.id.password);
+		mClipboard = new Clipboard(this);
 
 		setupInputChange();
 	}
@@ -66,16 +75,14 @@ public class MainActivity extends Activity {
 	}
 
 	public void onEncryptClicked() {
-		final String message = mMessage.getText().toString();
-		final String password = mPassword.getText().toString();
 		isEncrypting = true;
 		invalidateOptionsMenu();
-		mJsEncryptor.encrypt(message, password, new JsCallback() {
+		mJsEncryptor.encrypt(messageTrimmed(), passwordTrimmed(), new JsCallback() {
 			@Override
 			public void onResult(final String encryptedMessage) {
 				isEncrypting = false;
 				invalidateOptionsMenu();
-				shareMessage(encryptedMessage);
+				storeMessageInClipboard(encryptedMessage);
 			}
 		});
 	}
@@ -109,7 +116,12 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// TODO: Read text from clipboard
+		storeTextToDecrypt();
+		decryptAndUpdate();
+	}
+
+	public String passwordTrimmed() {
+		return mPassword.getText().toString().trim();
 	}
 
 	private void setupInputChange() {
@@ -146,12 +158,17 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	private void shareMessage(String message) {
-		final ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-		final ClipData clip = ClipData.newPlainText("Message ecrypted by AESCrypto", message);
-		clipboard.setPrimaryClip(clip);
-
+	private void storeMessageInClipboard(String message) {
+		mClipboard.set(message);
 		mJustCopied = true;
 		invalidateOptionsMenu();
+	}
+
+	public void storeTextToDecrypt() {
+		final String clipboardText = mClipboard.get();
+		if (!mJsEncryptor.isEncrypted(clipboardText))
+			return;
+
+		mTextToDecrypt = clipboardText;
 	}
 }
