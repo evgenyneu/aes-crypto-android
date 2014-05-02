@@ -17,10 +17,14 @@ public class AssetsFileReader implements AssetsFileReaderInterface {
 		mContext = context;
 	}
 
+	@Override
 	public String ReadFile(String fileName) throws IOException {
 		final AssetManager am = mContext.getAssets();
 		final InputStream inputStream = am.open(fileName);
 
-		return new Scanner(inputStream, "UTF-8").useDelimiter("\\A").next();
+		final Scanner scanner = new Scanner(inputStream, "UTF-8");
+		final String text = scanner.useDelimiter("\\A").next();
+		scanner.close();
+		return text;
 	}
 }
