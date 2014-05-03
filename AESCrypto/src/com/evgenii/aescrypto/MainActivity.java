@@ -58,9 +58,16 @@ public class MainActivity extends Activity {
 		case R.id.action_encrypt:
 			mEncrypt.encryptAndUpdate();
 			return true;
+		case R.id.action_decrypt:
+			mDecrypt.showFullDecryptedText();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void onPasswordChanged() {
+		mDecrypt.decryptAndUpdate();
 	}
 
 	private void onPasswordOrMessageChanged() {
@@ -85,6 +92,10 @@ public class MainActivity extends Activity {
 		mDecrypt.decryptAndUpdate();
 	}
 
+	public void setMessage(String message) {
+		mMessage.setText(message);
+	}
+
 	private void setupInputChange() {
 		mMessage.addTextChangedListener(new TextWatcher() {
 
@@ -107,6 +118,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void afterTextChanged(Editable s) {
 				onPasswordOrMessageChanged();
+				onPasswordChanged();
 			}
 
 			@Override

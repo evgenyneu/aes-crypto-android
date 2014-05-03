@@ -56,6 +56,14 @@ public class Decrypt {
 		return true;
 	}
 
+	public void showFullDecryptedText() {
+		if (mDecryptedText == null)
+			return;
+
+		mActivity.setMessage(mDecryptedText);
+		mActivity.invalidateOptionsMenu();
+	}
+
 	public void storeTextToDecrypt() {
 		final String clipboardText = mClipboard.get();
 		if (!mJsEncryptor.isEncrypted(clipboardText))
@@ -72,6 +80,8 @@ public class Decrypt {
 	private void updateDecryptButtonTitle(String title) {
 		if (title == null)
 			return;
+
+		title = title.replaceAll("\\r|\\n", " ");
 
 		if (title.length() > 10) {
 			title = title.substring(0, 10);
