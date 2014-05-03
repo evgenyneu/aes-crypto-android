@@ -14,18 +14,7 @@ public class Encrypt {
 		mClipboard = clipboard;
 	}
 
-	public String getMenuTitle() {
-		if (mJustCopied)
-			return mActivity.getResources().getString(R.string.menu_encrypt_title_copied);
-		else
-			return mActivity.getResources().getString(R.string.menu_encrypt_title);
-	}
-
-	public boolean isEncryptable() {
-		return mActivity.hasMessage() && mActivity.hasPassword() && !mActivity.isBusy();
-	}
-
-	public void onEncryptClicked() {
+	public void encryptAndUpdate() {
 		mActivity.updateBusy(true);
 		mJsEncryptor.encrypt(mActivity.trimmedMessage(), mActivity.trimmedPassword(),
 				new JsCallback() {
@@ -35,6 +24,17 @@ public class Encrypt {
 						storeMessageInClipboard(encryptedMessage);
 					}
 				});
+	}
+
+	public String getMenuTitle() {
+		if (mJustCopied)
+			return mActivity.getResources().getString(R.string.menu_encrypt_title_copied);
+		else
+			return mActivity.getResources().getString(R.string.menu_encrypt_title);
+	}
+
+	public boolean isEncryptable() {
+		return mActivity.hasMessage() && mActivity.hasPassword() && !mActivity.isBusy();
 	}
 
 	private void storeMessageInClipboard(String message) {

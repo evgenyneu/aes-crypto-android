@@ -30,7 +30,7 @@ public class Decrypt {
 		});
 	}
 
-	protected void finishedDecrypting(String decryptedText) {
+	private void finishedDecrypting(String decryptedText) {
 		mDecryptedText = decryptedText;
 		if (mDecryptedText != null) {
 			mDecryptedText = mDecryptedText.trim();
@@ -64,12 +64,12 @@ public class Decrypt {
 		mTextToDecrypt = clipboardText;
 	}
 
-	protected void updateDecryptButton() {
+	private void updateDecryptButton() {
 		updateDecryptButtonTitle(mDecryptedText);
 		mActivity.invalidateOptionsMenu();
 	}
 
-	protected void updateDecryptButtonTitle(String title) {
+	private void updateDecryptButtonTitle(String title) {
 		if (title == null)
 			return;
 

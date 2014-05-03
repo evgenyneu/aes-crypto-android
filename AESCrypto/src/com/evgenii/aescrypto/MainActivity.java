@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
-
 	private JsEncryptor mJsEncryptor;
 	private EditText mMessage;
 	private EditText mPassword;
@@ -55,10 +54,9 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_encrypt:
-			mEncrypt.onEncryptClicked();
+			mEncrypt.encryptAndUpdate();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
