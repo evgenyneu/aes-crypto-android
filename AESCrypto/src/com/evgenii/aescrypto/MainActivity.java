@@ -17,6 +17,10 @@ public class MainActivity extends Activity {
 	private Encrypt mEncrypt;
 	private Decrypt mDecrypt;
 
+	public JsEncryptor getEncryptor() {
+		return mJsEncryptor;
+	}
+
 	public boolean hasMessage() {
 		return trimmedMessage().length() > 0;
 	}
