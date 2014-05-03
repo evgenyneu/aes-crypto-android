@@ -3,26 +3,28 @@ package com.evgenii.aescrypto;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class Decrypt {
-	protected MainActivity mActivity;
-	protected JsEncryptor mJsEncryptor;
-	protected String mTextToDecrypt;
-	protected String mDecryptedText;
-	public String currentDecryptMenuTitle;
+	private final MainActivity mActivity;
+	private final JsEncryptor mJsEncryptor;
+	private final Clipboard mClipboard;
+	private String mTextToDecrypt;
+	private String mDecryptedText;
+	private String mCurrentDecryptMenuTitle;
 
-	public Decrypt(MainActivity activity) {
+	public Decrypt(MainActivity activity, JsEncryptor jsEncryptor, Clipboard clipboard) {
 		mActivity = activity;
-		mJsEncryptor = activity.mJsEncryptor;
+		mJsEncryptor = jsEncryptor;
+		mClipboard = clipboard;
 	}
 
 	public void decryptAndUpdate() {
 		if (mTextToDecrypt == null)
 			return;
 
-		mActivity.isEncryptingOrDecrypting = true;
-		mJsEncryptor.decrypt(mTextToDecrypt, mActivity.passwordTrimmed(), new JsCallback() {
+		mActivity.updateBusy(true);
+		mJsEncryptor.decrypt(mTextToDecrypt, mActivity.trimmedPassword(), new JsCallback() {
 			@Override
 			public void onResult(final String decryptedTextFromJs) {
-				mActivity.isEncryptingOrDecrypting = false;
+				mActivity.updateBusy(false);
 				finishedDecrypting(decryptedTextFromJs);
 			}
 		});
@@ -40,18 +42,22 @@ public class Decrypt {
 		updateDecryptButton();
 	}
 
+	public String getMenuTitle() {
+		return mCurrentDecryptMenuTitle;
+	}
+
 	public boolean isDecryptable() {
-		if (mActivity.isEncryptingOrDecrypting)
+		if (mActivity.isBusy())
 			return false;
 
-		if (mDecryptedText == null || mDecryptedText.equals(mActivity.messageTrimmed()))
+		if (mDecryptedText == null || mDecryptedText.equals(mActivity.trimmedMessage()))
 			return false;
 
 		return true;
 	}
 
 	public void storeTextToDecrypt() {
-		final String clipboardText = mActivity.mClipboard.get();
+		final String clipboardText = mClipboard.get();
 		if (!mJsEncryptor.isEncrypted(clipboardText))
 			return;
 
@@ -72,6 +78,6 @@ public class Decrypt {
 			title = title + "...";
 		}
 
-		currentDecryptMenuTitle = "↓" + title;
+		mCurrentDecryptMenuTitle = "↓" + title;
 	}
 }

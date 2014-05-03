@@ -8,43 +8,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.evgenii.jsevaluator.interfaces.JsCallback;
-
 public class MainActivity extends Activity {
 
-	protected JsEncryptor mJsEncryptor;
-	protected EditText mMessage;
-	protected EditText mPassword;
-	public boolean isEncryptingOrDecrypting = false;
-	protected boolean mJustCopied = false;
-	public Clipboard mClipboard;
-	public Decrypt mDecrypt;
-
-	public String getEncryptMenuTitle() {
-		if (mJustCopied)
-			return getResources().getString(R.string.menu_encrypt_title_copied);
-		else
-			return getResources().getString(R.string.menu_encrypt_title);
-	}
-
-	public JsEncryptor getEncryptor() {
-		return mJsEncryptor;
-	}
+	private JsEncryptor mJsEncryptor;
+	private EditText mMessage;
+	private EditText mPassword;
+	private boolean mIsBusy;
+	private Clipboard mClipboard;
+	private Encrypt mEncrypt;
+	private Decrypt mDecrypt;
 
 	public boolean hasMessage() {
-		return messageTrimmed().length() > 0;
+		return trimmedMessage().length() > 0;
 	}
 
 	public boolean hasPassword() {
-		return passwordTrimmed().length() > 0;
+		return trimmedPassword().length() > 0;
 	}
 
-	public boolean isEncryptable() {
-		return hasMessage() && hasPassword() && !isEncryptingOrDecrypting;
-	}
-
-	public String messageTrimmed() {
-		return mMessage.getText().toString().trim();
+	public boolean isBusy() {
+		return mIsBusy;
 	}
 
 	@Override
@@ -58,7 +41,8 @@ public class MainActivity extends Activity {
 		mMessage = (EditText) findViewById(R.id.message);
 		mPassword = (EditText) findViewById(R.id.password);
 		mClipboard = new Clipboard(this);
-		mDecrypt = new Decrypt(this);
+		mDecrypt = new Decrypt(this, mJsEncryptor, mClipboard);
+		mEncrypt = new Encrypt(this, mJsEncryptor, mClipboard);
 
 		setupInputChange();
 	}
@@ -69,25 +53,12 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void onEncryptClicked() {
-		isEncryptingOrDecrypting = true;
-		invalidateOptionsMenu();
-		mJsEncryptor.encrypt(messageTrimmed(), passwordTrimmed(), new JsCallback() {
-			@Override
-			public void onResult(final String encryptedMessage) {
-				isEncryptingOrDecrypting = false;
-				invalidateOptionsMenu();
-				storeMessageInClipboard(encryptedMessage);
-			}
-		});
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_encrypt:
-			onEncryptClicked();
+			mEncrypt.onEncryptClicked();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -95,18 +66,17 @@ public class MainActivity extends Activity {
 	}
 
 	private void onPasswordOrMessageChanged() {
-		mJustCopied = false;
-		invalidateOptionsMenu();
+		mEncrypt.updateJustCopied(false);
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(R.id.action_decrypt).setVisible(mDecrypt.isDecryptable());
-		menu.findItem(R.id.action_decrypt).setTitle(mDecrypt.currentDecryptMenuTitle);
+		menu.findItem(R.id.action_decrypt).setTitle(mDecrypt.getMenuTitle());
 
-		menu.findItem(R.id.action_encrypt).setTitle(getEncryptMenuTitle());
+		menu.findItem(R.id.action_encrypt).setEnabled(mEncrypt.isEncryptable());
+		menu.findItem(R.id.action_encrypt).setTitle(mEncrypt.getMenuTitle());
 
-		menu.findItem(R.id.action_encrypt).setEnabled(isEncryptable());
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -115,10 +85,6 @@ public class MainActivity extends Activity {
 		super.onResume();
 		mDecrypt.storeTextToDecrypt();
 		mDecrypt.decryptAndUpdate();
-	}
-
-	public String passwordTrimmed() {
-		return mPassword.getText().toString().trim();
 	}
 
 	private void setupInputChange() {
@@ -155,9 +121,17 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	private void storeMessageInClipboard(String message) {
-		mClipboard.set(message);
-		mJustCopied = true;
+	public String trimmedMessage() {
+		return mMessage.getText().toString().trim();
+	}
+
+	public String trimmedPassword() {
+		return mPassword.getText().toString().trim();
+	}
+
+	public void updateBusy(boolean isBusy) {
+		mIsBusy = isBusy;
 		invalidateOptionsMenu();
 	}
+
 }
