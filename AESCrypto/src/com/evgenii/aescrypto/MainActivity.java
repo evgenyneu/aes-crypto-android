@@ -12,18 +12,13 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class MainActivity extends Activity {
 
-	public String currentDecryptMenuTitle;
 	protected JsEncryptor mJsEncryptor;
 	protected EditText mMessage;
 	protected EditText mPassword;
-	protected boolean isEncrypting = false;
+	public boolean isEncryptingOrDecrypting = false;
 	protected boolean mJustCopied = false;
 	public Clipboard mClipboard;
-	public String mTextToDecrypt;
-
-	protected void decryptAndUpdate() {
-
-	}
+	public Decrypt mDecrypt;
 
 	public String getEncryptMenuTitle() {
 		if (mJustCopied)
@@ -45,7 +40,7 @@ public class MainActivity extends Activity {
 	}
 
 	public boolean isEncryptable() {
-		return hasMessage() && hasPassword() && !isEncrypting;
+		return hasMessage() && hasPassword() && !isEncryptingOrDecrypting;
 	}
 
 	public String messageTrimmed() {
@@ -56,7 +51,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		currentDecryptMenuTitle = getResources().getString(R.string.menu_decrypt_title);
 		setContentView(R.layout.activity_main);
 
 		mJsEncryptor = JsEncryptor.evaluateAllScripts(this);
@@ -64,6 +58,7 @@ public class MainActivity extends Activity {
 		mMessage = (EditText) findViewById(R.id.message);
 		mPassword = (EditText) findViewById(R.id.password);
 		mClipboard = new Clipboard(this);
+		mDecrypt = new Decrypt(this);
 
 		setupInputChange();
 	}
@@ -75,12 +70,12 @@ public class MainActivity extends Activity {
 	}
 
 	public void onEncryptClicked() {
-		isEncrypting = true;
+		isEncryptingOrDecrypting = true;
 		invalidateOptionsMenu();
 		mJsEncryptor.encrypt(messageTrimmed(), passwordTrimmed(), new JsCallback() {
 			@Override
 			public void onResult(final String encryptedMessage) {
-				isEncrypting = false;
+				isEncryptingOrDecrypting = false;
 				invalidateOptionsMenu();
 				storeMessageInClipboard(encryptedMessage);
 			}
@@ -106,7 +101,9 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(R.id.action_decrypt).setTitle(currentDecryptMenuTitle);
+		menu.findItem(R.id.action_decrypt).setVisible(mDecrypt.isDecryptable());
+		menu.findItem(R.id.action_decrypt).setTitle(mDecrypt.currentDecryptMenuTitle);
+
 		menu.findItem(R.id.action_encrypt).setTitle(getEncryptMenuTitle());
 
 		menu.findItem(R.id.action_encrypt).setEnabled(isEncryptable());
@@ -116,8 +113,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		storeTextToDecrypt();
-		decryptAndUpdate();
+		mDecrypt.storeTextToDecrypt();
+		mDecrypt.decryptAndUpdate();
 	}
 
 	public String passwordTrimmed() {
@@ -162,13 +159,5 @@ public class MainActivity extends Activity {
 		mClipboard.set(message);
 		mJustCopied = true;
 		invalidateOptionsMenu();
-	}
-
-	public void storeTextToDecrypt() {
-		final String clipboardText = mClipboard.get();
-		if (!mJsEncryptor.isEncrypted(clipboardText))
-			return;
-
-		mTextToDecrypt = clipboardText;
 	}
 }
