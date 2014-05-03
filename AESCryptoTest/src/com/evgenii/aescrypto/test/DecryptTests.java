@@ -25,8 +25,9 @@ public class DecryptTests extends AndroidTestCase {
 	}
 
 	public void testGetTextToDecrypt() {
-		// mActivity.mClipboard.set("AESCryptoV10 ˁ˚ᴥ˚ˀ");
-		// mActivity.storeTextToDecrypt();
-		// assertEquals("AESCryptoV10 ˁ˚ᴥ˚ˀ", mActivity.mTextToDecrypt);
+		mClipboardMock.set("AESCryptoV10 ˁ˚ᴥ˚ˀ");
+		mJsEncryptorMock.mTestIsEcrypted = true;
+		mDecrypt.storeTextToDecrypt();
+		assertEquals("AESCryptoV10 ˁ˚ᴥ˚ˀ", mDecrypt.getTextToDecrypt());
 	}
 }

@@ -50,6 +50,10 @@ public class Decrypt {
 		return mCurrentDecryptMenuTitle;
 	}
 
+	public String getTextToDecrypt() {
+		return mTextToDecrypt;
+	}
+
 	public boolean isDecryptable() {
 		if (mActivity.isBusy())
 			return false;
