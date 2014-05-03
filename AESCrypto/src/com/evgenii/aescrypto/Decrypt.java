@@ -11,7 +11,7 @@ public class Decrypt {
 	private final ClipboardInterface mClipboard;
 	private String mTextToDecrypt;
 	private String mDecryptedText;
-	private String mCurrentDecryptMenuTitle;
+	private String mMenuTitle;
 
 	public Decrypt(MainActivityInterface activity, JsEncryptorInterface jsEncryptor,
 			ClipboardInterface clipboard) {
@@ -29,25 +29,18 @@ public class Decrypt {
 			@Override
 			public void onResult(final String decryptedTextFromJs) {
 				mActivity.updateBusy(false);
-				finishedDecrypting(decryptedTextFromJs);
+				setDecryptedText(decryptedTextFromJs);
+				updateDecryptButton();
 			}
 		});
 	}
 
-	private void finishedDecrypting(String decryptedText) {
-		mDecryptedText = decryptedText;
-		if (mDecryptedText != null) {
-			mDecryptedText = mDecryptedText.trim();
-			if (mDecryptedText.length() == 0) {
-				mDecryptedText = null;
-			}
-		}
-
-		updateDecryptButton();
+	public String getDecryptedText() {
+		return mDecryptedText;
 	}
 
 	public String getMenuTitle() {
-		return mCurrentDecryptMenuTitle;
+		return mMenuTitle;
 	}
 
 	public String getTextToDecrypt() {
@@ -62,6 +55,22 @@ public class Decrypt {
 			return false;
 
 		return true;
+	}
+
+	public void setDecryptedText(String decryptedText) {
+		mDecryptedText = decryptedText;
+		if (mDecryptedText == null)
+			return;
+
+		mDecryptedText = mDecryptedText.trim();
+
+		if (mDecryptedText.length() == 0) {
+			mDecryptedText = null;
+		}
+	}
+
+	public void setTextToDecrypt(String textToDecrypt) {
+		mTextToDecrypt = textToDecrypt;
 	}
 
 	public void showFullDecryptedText() {
@@ -85,7 +94,7 @@ public class Decrypt {
 		mActivity.invalidateOptionsMenu();
 	}
 
-	private void updateDecryptButtonTitle(String title) {
+	public void updateDecryptButtonTitle(String title) {
 		if (title == null)
 			return;
 
@@ -96,6 +105,6 @@ public class Decrypt {
 			title = title + "...";
 		}
 
-		mCurrentDecryptMenuTitle = "↓" + title;
+		mMenuTitle = "↓" + title;
 	}
 }

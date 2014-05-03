@@ -3,6 +3,11 @@ package com.evgenii.eascrypto.test.mocks;
 import com.evgenii.aescrypto.interfaces.MainActivityInterface;
 
 public class MainActivityMock implements MainActivityInterface {
+	public boolean mTestIsBusy;
+	public String mTestTrimmedMessage;
+	public String mTestTrimmedPassword;
+	public String mTestMessage;
+	public boolean mTestOptionsMenuInvalidated;
 
 	@Override
 	public boolean hasMessage() {
@@ -18,32 +23,27 @@ public class MainActivityMock implements MainActivityInterface {
 
 	@Override
 	public void invalidateOptionsMenu() {
-		// TODO Auto-generated method stub
-
+		mTestOptionsMenuInvalidated = true;
 	}
 
 	@Override
 	public boolean isBusy() {
-		// TODO Auto-generated method stub
-		return false;
+		return mTestIsBusy;
 	}
 
 	@Override
 	public void setMessage(String message) {
-		// TODO Auto-generated method stub
-
+		mTestMessage = message;
 	}
 
 	@Override
 	public String trimmedMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return mTestTrimmedMessage;
 	}
 
 	@Override
 	public String trimmedPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return mTestTrimmedPassword;
 	}
 
 	@Override

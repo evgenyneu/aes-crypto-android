@@ -6,10 +6,15 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 public class JsEncryptorMock implements JsEncryptorInterface {
 	public boolean mTestIsEcrypted;
 
+	public String mTestDecryptText;
+	public String mTestDecryptPassword;
+	public JsCallback mTestDecryptCallback;
+
 	@Override
 	public void decrypt(String text, String password, JsCallback callback) {
-		// TODO Auto-generated method stub
-
+		mTestDecryptText = text;
+		mTestDecryptPassword = password;
+		mTestDecryptCallback = callback;
 	}
 
 	@Override
