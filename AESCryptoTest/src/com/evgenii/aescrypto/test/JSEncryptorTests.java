@@ -22,6 +22,26 @@ public class JSEncryptorTests extends AndroidTestCase {
 		mJsEncryptor = new JsEncryptor(mAssetsFileReaderMock, mJsEvaluatorMock);
 	}
 
+	public void testDecrypt() {
+		final JsCallback callback = new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+			}
+		};
+
+		mJsEncryptor.decrypt("decrypted text", "test password", callback);
+
+		assertEquals(1, mJsEvaluatorMock.mEvaluateCallbacks.size());
+		assertSame(callback, mJsEvaluatorMock.mEvaluateCallbacks.get(0));
+
+		assertEquals(1, mJsEvaluatorMock.mEvaluatedScripts.size());
+		assertEquals("aesCrypto.decrypt", mJsEvaluatorMock.mEvaluatedScripts.get(0));
+
+		assertEquals(2, mJsEvaluatorMock.mEvaluateArguments.length);
+		assertEquals("decrypted text", mJsEvaluatorMock.mEvaluateArguments[0]);
+		assertEquals("test password", mJsEvaluatorMock.mEvaluateArguments[1]);
+	}
+
 	public void testEncrypt() {
 		final JsCallback callback = new JsCallback() {
 			@Override
