@@ -1,15 +1,17 @@
 package com.evgenii.aescrypto;
 
+import com.evgenii.aescrypto.interfaces.JsEncryptorInterface;
 import com.evgenii.aescrypto.interfaces.MainActivityInterface;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class Encrypt {
 	private final MainActivityInterface mActivity;
-	private final JsEncryptor mJsEncryptor;
+	private final JsEncryptorInterface mJsEncryptor;
 	private final Clipboard mClipboard;
 	private boolean mJustCopied;
 
-	public Encrypt(MainActivityInterface activity, JsEncryptor jsEncryptor, Clipboard clipboard) {
+	public Encrypt(MainActivityInterface activity, JsEncryptorInterface jsEncryptor,
+			Clipboard clipboard) {
 		mActivity = activity;
 		mJsEncryptor = jsEncryptor;
 		mClipboard = clipboard;

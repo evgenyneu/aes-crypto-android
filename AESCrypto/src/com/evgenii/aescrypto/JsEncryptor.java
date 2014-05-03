@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import android.app.Activity;
 
 import com.evgenii.aescrypto.interfaces.AssetsFileReaderInterface;
+import com.evgenii.aescrypto.interfaces.JsEncryptorInterface;
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 
 /** Encrypts text using JavaScript library */
-public class JsEncryptor {
+public class JsEncryptor implements JsEncryptorInterface {
 	public static JsEncryptor evaluateAllScripts(Activity context) {
 		final AssetsFileReader assetsFileReader = new AssetsFileReader(context);
 		final JsEvaluator jsEvaluator = new JsEvaluator(context);
@@ -40,10 +41,12 @@ public class JsEncryptor {
 		mJsEvaluator = jsEvaluator;
 	}
 
+	@Override
 	public void decrypt(String text, String password, JsCallback callback) {
 		mJsEvaluator.callFunction(callback, "aesCrypto.decrypt", text, password);
 	}
 
+	@Override
 	public void encrypt(String text, String password, JsCallback callback) {
 		mJsEvaluator.callFunction(callback, "aesCrypto.encrypt", text, password);
 	}
@@ -62,6 +65,7 @@ public class JsEncryptor {
 		return mScriptsText;
 	}
 
+	@Override
 	public boolean isEncrypted(String text) {
 		if (text == null)
 			return false;
