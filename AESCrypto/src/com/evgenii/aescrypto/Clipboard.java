@@ -5,13 +5,16 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 
-public class Clipboard {
+import com.evgenii.aescrypto.interfaces.ClipboardInterface;
+
+public class Clipboard implements ClipboardInterface {
 	protected Context mContext;
 
 	public Clipboard(Context context) {
 		mContext = context;
 	}
 
+	@Override
 	public String get() {
 		final ClipboardManager clipboard = (ClipboardManager) mContext
 				.getSystemService(Activity.CLIPBOARD_SERVICE);
@@ -35,6 +38,7 @@ public class Clipboard {
 		return clipboardData.toString();
 	}
 
+	@Override
 	public void set(String text) {
 		final ClipboardManager clipboard = (ClipboardManager) mContext
 				.getSystemService(Activity.CLIPBOARD_SERVICE);

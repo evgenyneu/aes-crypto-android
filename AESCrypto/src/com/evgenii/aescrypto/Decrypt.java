@@ -1,5 +1,6 @@
 package com.evgenii.aescrypto;
 
+import com.evgenii.aescrypto.interfaces.ClipboardInterface;
 import com.evgenii.aescrypto.interfaces.JsEncryptorInterface;
 import com.evgenii.aescrypto.interfaces.MainActivityInterface;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
@@ -7,13 +8,13 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 public class Decrypt {
 	private final MainActivityInterface mActivity;
 	private final JsEncryptorInterface mJsEncryptor;
-	private final Clipboard mClipboard;
+	private final ClipboardInterface mClipboard;
 	private String mTextToDecrypt;
 	private String mDecryptedText;
 	private String mCurrentDecryptMenuTitle;
 
 	public Decrypt(MainActivityInterface activity, JsEncryptorInterface jsEncryptor,
-			Clipboard clipboard) {
+			ClipboardInterface clipboard) {
 		mActivity = activity;
 		mJsEncryptor = jsEncryptor;
 		mClipboard = clipboard;
