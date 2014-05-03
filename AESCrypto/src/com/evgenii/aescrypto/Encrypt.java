@@ -26,11 +26,8 @@ public class Encrypt {
 				});
 	}
 
-	public String getMenuTitle() {
-		if (mJustCopied)
-			return mActivity.getResources().getString(R.string.menu_encrypt_title_copied);
-		else
-			return mActivity.getResources().getString(R.string.menu_encrypt_title);
+	public boolean getJustCopied() {
+		return mJustCopied;
 	}
 
 	public boolean isEncryptable() {

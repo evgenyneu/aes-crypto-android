@@ -1,16 +1,17 @@
 package com.evgenii.aescrypto;
 
+import com.evgenii.aescrypto.interfaces.MainActivityInterface;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class Decrypt {
-	private final MainActivity mActivity;
+	private final MainActivityInterface mActivity;
 	private final JsEncryptor mJsEncryptor;
 	private final Clipboard mClipboard;
 	private String mTextToDecrypt;
 	private String mDecryptedText;
 	private String mCurrentDecryptMenuTitle;
 
-	public Decrypt(MainActivity activity, JsEncryptor jsEncryptor, Clipboard clipboard) {
+	public Decrypt(MainActivityInterface activity, JsEncryptor jsEncryptor, Clipboard clipboard) {
 		mActivity = activity;
 		mJsEncryptor = jsEncryptor;
 		mClipboard = clipboard;

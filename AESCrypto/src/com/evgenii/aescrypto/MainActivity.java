@@ -8,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-public class MainActivity extends Activity {
+import com.evgenii.aescrypto.interfaces.MainActivityInterface;
+
+public class MainActivity extends Activity implements MainActivityInterface {
 	private JsEncryptor mJsEncryptor;
 	private EditText mMessage;
 	private EditText mPassword;
@@ -17,18 +19,28 @@ public class MainActivity extends Activity {
 	private Encrypt mEncrypt;
 	private Decrypt mDecrypt;
 
+	private String getEncryptMenuTitle() {
+		if (mEncrypt.getJustCopied())
+			return getResources().getString(R.string.menu_encrypt_title_copied);
+		else
+			return getResources().getString(R.string.menu_encrypt_title);
+	}
+
 	public JsEncryptor getEncryptor() {
 		return mJsEncryptor;
 	}
 
+	@Override
 	public boolean hasMessage() {
 		return trimmedMessage().length() > 0;
 	}
 
+	@Override
 	public boolean hasPassword() {
 		return trimmedPassword().length() > 0;
 	}
 
+	@Override
 	public boolean isBusy() {
 		return mIsBusy;
 	}
@@ -84,7 +96,7 @@ public class MainActivity extends Activity {
 		menu.findItem(R.id.action_decrypt).setTitle(mDecrypt.getMenuTitle());
 
 		menu.findItem(R.id.action_encrypt).setEnabled(mEncrypt.isEncryptable());
-		menu.findItem(R.id.action_encrypt).setTitle(mEncrypt.getMenuTitle());
+		menu.findItem(R.id.action_encrypt).setTitle(getEncryptMenuTitle());
 
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -96,6 +108,7 @@ public class MainActivity extends Activity {
 		mDecrypt.decryptAndUpdate();
 	}
 
+	@Override
 	public void setMessage(String message) {
 		mMessage.setText(message);
 	}
@@ -135,14 +148,17 @@ public class MainActivity extends Activity {
 		});
 	}
 
+	@Override
 	public String trimmedMessage() {
 		return mMessage.getText().toString().trim();
 	}
 
+	@Override
 	public String trimmedPassword() {
 		return mPassword.getText().toString().trim();
 	}
 
+	@Override
 	public void updateBusy(boolean isBusy) {
 		mIsBusy = isBusy;
 		invalidateOptionsMenu();
