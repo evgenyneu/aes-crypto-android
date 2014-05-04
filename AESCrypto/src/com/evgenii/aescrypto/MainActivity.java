@@ -102,7 +102,7 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		mDecrypt.storeTextToDecrypt();
 		mDecrypt.decryptAndUpdate();

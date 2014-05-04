@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.view.View;
 import android.widget.EditText;
 
 import com.evgenii.aescrypto.MainActivity;
@@ -38,7 +39,7 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		mActivity = getActivity();
 	}
 
-	public void testFillPasswordAndMessage_clickEncrypt_shareEncryptedMessage()
+	public void testFillPasswordAndMessage_clickEncrypt_putEncryptedMessageToClipboard()
 			throws InterruptedException {
 		fillIn(R.id.password, "Test Password");
 		fillIn(R.id.message, "Test Tech Bubble");
@@ -58,5 +59,40 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		final ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
 		final String clipboardText = (String) item.getText();
 		assertEquals("AESCryptoV10", clipboardText.substring(0, 12));
+	}
+
+	public void testFillPasswordAndMessage_resumesActivityWithEncryptedMessageInClipboard_showsDecryptedMessage()
+			throws InterruptedException {
+		final ClipboardManager clipboard = (ClipboardManager) mActivity
+				.getSystemService(Context.CLIPBOARD_SERVICE);
+		final ClipData clip = ClipData
+				.newPlainText("Message ecrypted by AESCrypto",
+						"AESCryptoV108f46e2fb15f50e9c170442ec5ec70e6fcded6378b13f1a659f0eb65e8eddb2335de8e76be90b2f0a");
+		clipboard.setPrimaryClip(clip);
+
+		getInstrumentation().runOnMainSync(new Runnable() {
+			@Override
+			public void run() {
+				mActivity.onResume();
+			}
+		});
+
+		fillIn(R.id.password, "test");
+
+		Thread.sleep(1000);
+		final View decryptMenuItem = mActivity.findViewById(R.id.action_decrypt);
+		TouchUtils.clickView(this, decryptMenuItem);
+
+		final String expectedMessage = "My Test Message 日本";
+		final EditText messageEditText = (EditText) mActivity.findViewById(R.id.message);
+
+		for (int i = 0; i < 100; i++) {
+			if (messageEditText.getText().toString().equals(expectedMessage)) {
+				break;
+			}
+			Thread.sleep(100);
+		}
+
+		assertEquals(expectedMessage, messageEditText.getText().toString());
 	}
 }
