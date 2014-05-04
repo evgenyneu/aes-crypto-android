@@ -3,7 +3,7 @@ package com.evgenii.eascrypto.test.mocks;
 import com.evgenii.aescrypto.interfaces.ClipboardInterface;
 
 public class ClipboardMock implements ClipboardInterface {
-	private String mTestClipboardContent;
+	public String mTestClipboardContent;
 
 	@Override
 	public String get() {

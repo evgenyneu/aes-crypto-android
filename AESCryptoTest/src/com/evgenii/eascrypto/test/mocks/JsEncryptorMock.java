@@ -10,6 +10,10 @@ public class JsEncryptorMock implements JsEncryptorInterface {
 	public String mTestDecryptPassword;
 	public JsCallback mTestDecryptCallback;
 
+	public String mTestEncryptText;
+	public String mTestEncryptPassword;
+	public JsCallback mTestEncryptCallback;
+
 	@Override
 	public void decrypt(String text, String password, JsCallback callback) {
 		mTestDecryptText = text;
@@ -19,8 +23,9 @@ public class JsEncryptorMock implements JsEncryptorInterface {
 
 	@Override
 	public void encrypt(String text, String password, JsCallback callback) {
-		// TODO Auto-generated method stub
-
+		mTestEncryptText = text;
+		mTestEncryptPassword = password;
+		mTestEncryptCallback = callback;
 	}
 
 	@Override

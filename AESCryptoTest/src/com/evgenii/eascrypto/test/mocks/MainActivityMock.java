@@ -8,17 +8,17 @@ public class MainActivityMock implements MainActivityInterface {
 	public String mTestTrimmedPassword;
 	public String mTestMessage;
 	public boolean mTestOptionsMenuInvalidated;
+	public boolean mTestHasMessage;
+	public boolean mTestHasPassword;
 
 	@Override
 	public boolean hasMessage() {
-		// TODO Auto-generated method stub
-		return false;
+		return mTestHasMessage;
 	}
 
 	@Override
 	public boolean hasPassword() {
-		// TODO Auto-generated method stub
-		return false;
+		return mTestHasPassword;
 	}
 
 	@Override
