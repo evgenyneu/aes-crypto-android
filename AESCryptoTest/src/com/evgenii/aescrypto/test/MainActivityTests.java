@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -80,6 +81,9 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		fillIn(R.id.password, "test");
 
 		Thread.sleep(1000);
+		final MenuItem menuItem = mActivity.mMenuForTest.findItem(R.id.action_decrypt);
+		assertEquals("↓My Test Me...", menuItem.getTitle());
+
 		final View decryptMenuItem = mActivity.findViewById(R.id.action_decrypt);
 		TouchUtils.clickView(this, decryptMenuItem);
 

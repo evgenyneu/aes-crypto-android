@@ -19,6 +19,8 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	private Encrypt mEncrypt;
 	private Decrypt mDecrypt;
 
+	public Menu mMenuForTest;
+
 	private String getEncryptMenuTitle() {
 		if (mEncrypt.getJustCopied())
 			return getResources().getString(R.string.menu_encrypt_title_copied);
@@ -64,6 +66,7 @@ public class MainActivity extends Activity implements MainActivityInterface {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		mMenuForTest = menu;
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
