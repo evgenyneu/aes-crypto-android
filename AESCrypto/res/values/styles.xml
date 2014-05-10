@@ -16,7 +16,7 @@
     <style name="myTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:actionBarStyle">@style/myTheme.ActionBar</item>
-        <item name="android:actionMenuTextColor">@color/actionBarText</item>
+        <item name="android:actionMenuTextColor">@drawable/action_menu</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 

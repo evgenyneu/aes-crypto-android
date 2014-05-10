@@ -1,4 +1,5 @@
 <resources>
  <color name="actionBarBackground">#6fd274</color>
  <color name="actionBarText">#ffffff</color>
+ <color name="actionBarTextDisabled">#88ffffff</color>
 </resources>
