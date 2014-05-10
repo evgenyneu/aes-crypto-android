@@ -1,13 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >    
     <item
         android:id="@+id/action_decrypt"
-        android:title="@string/menu_decrypt_title"
+        android:title=""
         android:orderInCategory="100"
         android:showAsAction="always" />
 
     <item
         android:id="@+id/action_encrypt"
-        android:title="@string/menu_decrypt_title"
+        android:title="@string/menu_encrypt_title"
         android:orderInCategory="100"
         android:showAsAction="always"  />
 
