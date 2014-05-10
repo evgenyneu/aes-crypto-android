@@ -1,4 +1,4 @@
 <resources>
- <color name="background">#6fd274</color>
- <color name="text">#ffffff</color>
+ <color name="actionBarBackground">#6fd274</color>
+ <color name="actionBarText">#ffffff</color>
 </resources>
