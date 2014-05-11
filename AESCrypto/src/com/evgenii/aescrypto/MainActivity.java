@@ -1,10 +1,10 @@
 package com.evgenii.aescrypto;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -114,10 +114,8 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	}
 
 	public void onShowHelpClicked(View view) {
-		// final Intent intent = new Intent(this,
-		// EvaluateJsStringActivity.class);
-		// startActivity(intent);
-		Log.d("ii", "onShowHelpClicked");
+		final Intent intent = new Intent(this, HelpActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
