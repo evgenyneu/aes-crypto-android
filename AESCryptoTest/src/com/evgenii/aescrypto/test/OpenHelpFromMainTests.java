@@ -41,6 +41,7 @@ public class OpenHelpFromMainTests extends ActivityInstrumentationTestCase2<Main
 				helpActivityMonitor.getHits());
 		assertEquals("Activity is of wrong type", HelpActivity.class, helpActivity.getClass());
 
+		// Go back to main activity
 		final View homeButton = helpActivity.findViewById(android.R.id.home);
 		TouchUtils.clickView(this, homeButton);
 
