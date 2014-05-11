@@ -1,12 +1,22 @@
 package com.evgenii.aescrypto;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class HelpActivity extends Activity {
+
+	public void loadText() throws IOException {
+		final AssetsFileReader fileReader = new AssetsFileReader(this);
+		final String text = fileReader.ReadFile("help.txt");
+		final TextView helpTextView = (TextView) findViewById(R.id.helpTextView);
+		helpTextView.setText(text);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +25,12 @@ public class HelpActivity extends Activity {
 
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+
+		try {
+			loadText();
+		} catch (final IOException e) {
+			ShowFatalError.showAlertAndExit(this, "Can not read help file.", e);
+		}
 	}
 
 	@Override
