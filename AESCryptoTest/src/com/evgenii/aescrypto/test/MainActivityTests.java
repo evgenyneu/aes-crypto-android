@@ -82,7 +82,7 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 
 		Thread.sleep(1000);
 		final MenuItem menuItem = mActivity.mMenuForTest.findItem(R.id.action_decrypt);
-		assertEquals("↓My Test Me...", menuItem.getTitle());
+		assertEquals("↓ My Test Me...", menuItem.getTitle());
 
 		final View decryptMenuItem = mActivity.findViewById(R.id.action_decrypt);
 		TouchUtils.clickView(this, decryptMenuItem);

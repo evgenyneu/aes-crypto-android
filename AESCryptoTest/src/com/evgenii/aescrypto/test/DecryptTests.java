@@ -40,7 +40,7 @@ public class DecryptTests extends AndroidTestCase {
 
 		mJsEncryptorMock.mTestDecryptCallback.onResult("test decrypted string");
 		assertEquals("test decrypted string", mDecrypt.getDecryptedText());
-		assertEquals("↓test decry...", mDecrypt.getMenuTitle());
+		assertEquals("↓ test decry...", mDecrypt.getMenuTitle());
 		assertTrue(mMainActivityMock.mTestOptionsMenuInvalidated);
 	}
 
@@ -103,16 +103,16 @@ public class DecryptTests extends AndroidTestCase {
 
 	public void testUpdateDecryptButtonTitle() {
 		mDecrypt.updateDecryptButtonTitle("1234567890");
-		assertEquals("↓1234567890", mDecrypt.getMenuTitle());
+		assertEquals("↓ 1234567890", mDecrypt.getMenuTitle());
 	}
 
 	public void testUpdateDecryptButtonTitle_removeNewLines() {
 		mDecrypt.updateDecryptButtonTitle("one\ntwo");
-		assertEquals("↓one two", mDecrypt.getMenuTitle());
+		assertEquals("↓ one two", mDecrypt.getMenuTitle());
 	}
 
 	public void testUpdateDecryptButtonTitle_truncateLongText() {
 		mDecrypt.updateDecryptButtonTitle("1234567890this is a long message");
-		assertEquals("↓1234567890...", mDecrypt.getMenuTitle());
+		assertEquals("↓ 1234567890...", mDecrypt.getMenuTitle());
 	}
 }

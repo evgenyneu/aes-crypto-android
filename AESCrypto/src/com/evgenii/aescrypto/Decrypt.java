@@ -105,6 +105,6 @@ public class Decrypt {
 			title = title + "...";
 		}
 
-		mMenuTitle = "↓" + title;
+		mMenuTitle = "↓ " + title;
 	}
 }
