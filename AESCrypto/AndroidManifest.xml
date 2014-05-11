@@ -26,10 +26,10 @@
         <activity
             android:name="com.evgenii.aescrypto.HelpActivity"
             android:label="@string/title_activity_help"
-            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity" >
+            android:parentActivityName="com.evgenii.aescrypto.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.evgenii.jsevaluatortests.MainActivity" />
+                android:value="com.evgenii.aescrypto.MainActivity" />
         </activity>
     </application>
 
