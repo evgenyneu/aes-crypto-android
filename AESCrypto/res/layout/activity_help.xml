@@ -12,7 +12,8 @@
         android:id="@+id/helpTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autoLink="web" />
+        android:autoLink="web"
+        android:textSize="@dimen/main_text_size" />
 
 </RelativeLayout>
 

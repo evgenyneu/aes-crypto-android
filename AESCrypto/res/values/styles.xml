@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -17,18 +17,30 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:actionBarStyle">@style/myTheme.ActionBar</item>
         <item name="android:actionMenuTextColor">@drawable/action_menu</item>
+        <item name="android:actionMenuTextAppearance">@style/myTheme.ActionBar.MenuText</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="myTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/actionBarBackground</item>
-        <item name="android:titleTextStyle">@style/myTheme.ActionBar.TitleText</item>
-        <item name="android:displayOptions">useLogo|showHome</item>
+        <item name="android:titleTextStyle">@style/myTheme.ActionBar.MenuText</item>
     </style>
 
-    <style name="myTheme.ActionBar.TitleText"
-           parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/actionBarText</item>
+    <style name="myTheme.ActionBar.MenuText" parent="@android:style/TextAppearance">
+		<item name="android:textColor">@color/actionBarText</item>
+		<item name="android:textSize">@dimen/main_text_size</item>
+		<item name="android:shadowColor">@color/actionBarTextShadowColor</item>
+		<item name="android:shadowRadius">1</item>
+		<item name="android:shadowDy">1</item>
+		<item name="android:shadowDx">0</item>
+    </style>
+
+    <style name="myTheme.mainActivityTheme">
+        <item name="android:actionBarStyle">@style/myTheme.ActionBar.mainActivity</item>
+    </style>
+
+    <style name="myTheme.ActionBar.mainActivity">
+        <item name="android:displayOptions">useLogo|showHome</item>
     </style>
 
 </resources>

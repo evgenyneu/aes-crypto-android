@@ -25,11 +25,11 @@
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
 				android:id="@+id/password"
-				android:ems="10"
 				android:hint="@string/password_hint"
 				android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
 				android:singleLine="true"
-				android:imeOptions="actionDone">
+				android:imeOptions="actionDone"
+				android:textSize="@dimen/main_text_size">
 	
 		        <requestFocus />
 		    </EditText>
@@ -52,10 +52,10 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight="1"
-	        android:ems="10"
 	        android:gravity="top"
 	        android:hint="@string/message_hint"
-	        android:inputType="textMultiLine" />
+	        android:inputType="textMultiLine"
+	        android:textSize="@dimen/main_text_size" />
 
     </LinearLayout>
 </ScrollView>
