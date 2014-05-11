@@ -3,6 +3,7 @@ package com.evgenii.aescrypto;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -46,7 +47,15 @@ public class HelpActivity extends Activity {
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.action_view_drawing:
+			showDrawing();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void showDrawing() {
+		final Intent intent = new Intent(this, DrawingActivity.class);
+		startActivity(intent);
 	}
 }

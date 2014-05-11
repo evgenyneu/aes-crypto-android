@@ -31,6 +31,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.aescrypto.MainActivity" />
         </activity>
+        <activity
+            android:name="com.evgenii.aescrypto.DrawingActivity"
+            android:label="@string/title_activity_drawing"
+            android:parentActivityName="com.evgenii.aescrypto.HelpActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evgenii.aescrypto.HelpActivity" />
+        </activity>
     </application>
 
 </manifest>

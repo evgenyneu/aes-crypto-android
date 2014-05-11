@@ -12,5 +12,6 @@
     <string name="helpButtonDescription">View help</string>
     <string name="title_activity_help">Help</string>
     <string name="view_drawing_menu_title">Drawing</string>
-
+    <string name="title_activity_drawing">Drawing</string>
+    <string name="drawing_description">Drawing: Crypto and Koo</string>
 </resources>
