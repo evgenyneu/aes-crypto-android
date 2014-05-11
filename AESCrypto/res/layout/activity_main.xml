@@ -15,18 +15,37 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 		
-	    <EditText
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/password"
-			android:ems="10"
-			android:hint="@string/password_hint"
-			android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
-			android:singleLine="true"
-			android:imeOptions="actionDone">
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        
+		    <EditText
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:id="@+id/password"
+				android:ems="10"
+				android:hint="@string/password_hint"
+				android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
+				android:singleLine="true"
+				android:imeOptions="actionDone">
+	
+		        <requestFocus />
+		    </EditText>
+	        
+		    <ImageButton
+		        android:id="@+id/helpImageButton"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:paddingTop="3dp"
+		        android:paddingLeft="8dp"
+		        android:background="@null"
+		        android:contentDescription="@string/helpButtonDescription"
+		        android:src="@drawable/ic_help_button_icon"
+		        android:onClick="onShowHelpClicked" />
 
-	        <requestFocus />
-	    </EditText>
+	    </LinearLayout>
 	    
 	    <EditText
 	        android:id="@+id/message"
