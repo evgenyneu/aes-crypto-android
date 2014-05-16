@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 public class DrawingActivity extends Activity {
 
@@ -14,6 +15,9 @@ public class DrawingActivity extends Activity {
 
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+
+		final ImageView imageViewDrawing = (ImageView) findViewById(R.id.imageViewDrawing);
+		imageViewDrawing.setImageDrawable(getResources().getDrawable(R.drawable.drawing_720px));
 	}
 
 	@Override
