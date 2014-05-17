@@ -80,9 +80,18 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 
 		fillIn(R.id.password, "test");
 
-		Thread.sleep(1000);
-		final MenuItem menuItem = mActivity.mMenuForTest.findItem(R.id.action_decrypt);
-		assertEquals("↓ My Test Me...", menuItem.getTitle());
+		final String expectedDecryptBtnText = "↓ My Test Me...";
+		MenuItem menuItem = null;
+		for (int i = 0; i < 100; i++) {
+			menuItem = mActivity.mMenuForTest.findItem(R.id.action_decrypt);
+			if (menuItem != null && menuItem.getTitle() != null
+					&& menuItem.getTitle().toString().equals(expectedDecryptBtnText)) {
+				break;
+			}
+			Thread.sleep(100);
+		}
+
+		assertEquals(expectedDecryptBtnText, menuItem.getTitle());
 
 		final View decryptMenuItem = mActivity.findViewById(R.id.action_decrypt);
 		TouchUtils.clickView(this, decryptMenuItem);

@@ -24,7 +24,6 @@ public class OpenDrawingActivityFromHelpTexts extends
 	@MediumTest
 	public void testOpenDrawingActivity() throws InterruptedException {
 		final ImageView drawingView = (ImageView) mActivity.findViewById(R.id.imageViewDrawing);
-		final float widthRemainder = drawingView.getDrawable().getIntrinsicWidth() % 720;
-		assertTrue(widthRemainder == 0.0);
+		assertTrue(drawingView.getDrawable().getIntrinsicWidth() > 0);
 	}
 }
