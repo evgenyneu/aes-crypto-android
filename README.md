@@ -6,7 +6,7 @@ Android app for encypting text messages. AES with 256-bit key is used for encryp
 
 <img src='https://raw.githubusercontent.com/evgenyneu/aes-crypto-android/master/Graphics/screenshots/phone/phone_1080x1920_1.png' width='400' alt='AES Text Encryption for Android'>
 
-## Credits
+## Using JavaScript in Android app
 
 CryptoJS library was used for encryption:
 
