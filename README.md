@@ -8,8 +8,6 @@ Android app for encypting text messages. AES with 256-bit key is used for encryp
 
 ## Using JavaScript in Android app
 
-CryptoJS library was used for encryption:
+CryptoJS library was used for encryption: [https://code.google.com/p/crypto-js](https://code.google.com/p/crypto-js)
 
-[https://code.google.com/p/crypto-js](https://code.google.com/p/crypto-js)
-
-To execute JavaScript I used [JsEvaluator library](https://github.com/evgenyneu/js-evaluator-for-android).
+[JsEvaluator library](https://github.com/evgenyneu/js-evaluator-for-android) was used to execute JavaScript.
