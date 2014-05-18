@@ -12,4 +12,4 @@ CryptoJS library was used for encryption:
 
 [https://code.google.com/p/crypto-js](https://code.google.com/p/crypto-js)
 
-[https://github.com/evgenyneu/js-evaluator-for-android](JsEvaluator library) was used to execute JavaScript.
+[JsEvaluator library](https://github.com/evgenyneu/js-evaluator-for-android) was used to execute JavaScript.
