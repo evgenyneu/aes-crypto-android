@@ -2,8 +2,8 @@ AES Crypto encrypts text messages. When message is encrypted it is automatically
 
 To decrypt: copy encrypted message in another app, open AES Crypto and enter password.
 
-AES Crypto uses AES encryption with a 256-bit key. New salt and IV is generated for each encryption.
+Advanced Encryption Standard is used to encrypt messages with a 256-bit key. New salt and IV is generated for each encryption.
 
-Feel free to contact me at evgenii.com.
+AES Crypto is open source and available on Android, iOS and Web.
 
-Source code is publicly available for your review or modification at github.com/evgenyneu/aes-crypto-android
+http://aescrypto.com
