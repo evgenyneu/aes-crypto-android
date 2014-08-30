@@ -22,7 +22,6 @@ public class JsEncryptor implements JsEncryptorInterface {
 		} catch (final IOException e) {
 			ShowFatalError.showAlertAndExit(context, "Can not read JavaScript file.", e);
 		}
-		jsEncryptor.evaluateScripts();
 		return jsEncryptor;
 	}
 
@@ -41,21 +40,27 @@ public class JsEncryptor implements JsEncryptorInterface {
 		mJsEvaluator = jsEvaluator;
 	}
 
+	public String concatenateScripts() {
+		final StringBuilder stringBuilder = new StringBuilder();
+		final ArrayList<String> scripts = getScripts();
+		for (final String scriptText : scripts) {
+			stringBuilder.append(scriptText);
+			stringBuilder.append("; ");
+		}
+
+		return stringBuilder.toString();
+	}
+
 	@Override
 	public void decrypt(String text, String password, JsCallback callback) {
-		mJsEvaluator.callFunction(callback, "aesCrypto.decrypt", text, password);
+		final String libraryJsCode = concatenateScripts();
+		mJsEvaluator.callFunction(libraryJsCode, callback, "aesCrypto.decrypt", text, password);
 	}
 
 	@Override
 	public void encrypt(String text, String password, JsCallback callback) {
-		mJsEvaluator.callFunction(callback, "aesCrypto.encrypt", text, password);
-	}
-
-	public void evaluateScripts() {
-		final ArrayList<String> scripts = getScripts();
-		for (final String scriptText : scripts) {
-			mJsEvaluator.evaluate(scriptText);
-		}
+		final String libraryJsCode = concatenateScripts();
+		mJsEvaluator.callFunction(libraryJsCode, callback, "aesCrypto.encrypt", text, password);
 	}
 
 	public ArrayList<String> getScripts() {
