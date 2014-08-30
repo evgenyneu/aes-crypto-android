@@ -22,6 +22,13 @@ public class JSEncryptorTests extends AndroidTestCase {
 		mJsEncryptor = new JsEncryptor(mAssetsFileReaderMock, mJsEvaluatorMock);
 	}
 
+	public void testConcatenateScripts() {
+		mJsEncryptor.getScripts().add("test script one");
+		mJsEncryptor.getScripts().add("test script two");
+		final String result = mJsEncryptor.concatenateScripts();
+		assertEquals("test script one; test script two; ", result);
+	}
+
 	public void testDecrypt() {
 		final JsCallback callback = new JsCallback() {
 			@Override
@@ -60,15 +67,6 @@ public class JSEncryptorTests extends AndroidTestCase {
 		assertEquals(2, mJsEvaluatorMock.mEvaluateArguments.length);
 		assertEquals("test text", mJsEvaluatorMock.mEvaluateArguments[0]);
 		assertEquals("test password", mJsEvaluatorMock.mEvaluateArguments[1]);
-	}
-
-	public void testEvaluateScripts() {
-		mJsEncryptor.getScripts().add("test script one");
-		mJsEncryptor.getScripts().add("test script two");
-		mJsEncryptor.evaluateScripts();
-		assertEquals(2, mJsEvaluatorMock.mEvaluatedScripts.size());
-		assertEquals("test script one", mJsEvaluatorMock.mEvaluatedScripts.get(0));
-		assertEquals("test script two", mJsEvaluatorMock.mEvaluatedScripts.get(1));
 	}
 
 	public void testIsEncrypted_no() {

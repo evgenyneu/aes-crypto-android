@@ -11,7 +11,8 @@ public class JsEvaluatorMock implements JsEvaluatorInterface {
 	public Object[] mEvaluateArguments = null;
 
 	@Override
-	public void callFunction(JsCallback callabck, String script, Object... jsArguments) {
+	public void callFunction(String jsCode, JsCallback callabck, String script,
+			Object... jsArguments) {
 		mEvaluateCallbacks.add(callabck);
 		mEvaluatedScripts.add(script);
 		mEvaluateArguments = jsArguments;
