@@ -2,6 +2,7 @@ package com.evgenii.aescrypto;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 
@@ -26,7 +27,8 @@ public class Clipboard implements ClipboardInterface {
 
 		final String mimeType = clipboard.getPrimaryClipDescription().getMimeType(0);
 
-		if (!mimeType.equals("text/plain"))
+		if (!mimeType.equals(ClipDescription.MIMETYPE_TEXT_HTML)
+				&& !mimeType.equals(ClipDescription.MIMETYPE_TEXT_PLAIN))
 			return null;
 
 		final ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
