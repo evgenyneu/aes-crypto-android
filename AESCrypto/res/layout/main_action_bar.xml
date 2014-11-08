@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    
+    <Button
+		android:id="@+id/decryptButton"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:layout_marginLeft="0dp"
+		android:layout_marginTop="0dp"
+		android:background="@android:color/transparent"
+		android:textColor="@drawable/actionbar_button_text_color"
+		android:gravity="left|center_vertical"
+		android:text="@string/menu_decrypt_title" />
+    
+    <ImageView />
+    
+    
+    <Button
+		android:id="@+id/encryptButton"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:layout_marginLeft="0dp"
+		android:layout_marginTop="0dp"
+		android:background="@android:color/transparent"
+		android:textColor="@drawable/actionbar_button_text_color"
+		android:gravity="right|center_vertical"
+		android:text="@string/menu_encrypt_title" />
+    
+</LinearLayout>
