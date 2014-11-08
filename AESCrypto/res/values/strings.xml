@@ -6,6 +6,7 @@
     <string name="password_hint">Password</string>
     <string name="message_hint">Message</string>
     <string name="menu_encrypt_title">Encrypt</string>
+    <string name="menu_decrypt_title">Decrypt</string>
     <string name="menu_encrypt_title_copied">Copied✓</string>
     <string name="share_encrypted_message_title">Share encrypted message</string>
     <string name="share_encrypted_message_subject">Encrypted by AESCrypto</string>

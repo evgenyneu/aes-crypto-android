@@ -1,12 +1,11 @@
 package com.evgenii.aescrypto;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -21,14 +20,14 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	private Encrypt mEncrypt;
 	private Decrypt mDecrypt;
 
-	public Menu mMenuForTest;
+	// public Menu mMenuForTest;
 
-	private String getEncryptMenuTitle() {
-		if (mEncrypt.getJustCopied())
-			return getResources().getString(R.string.menu_encrypt_title_copied);
-		else
-			return getResources().getString(R.string.menu_encrypt_title);
-	}
+	// private String getEncryptMenuTitle() {
+	// if (mEncrypt.getJustCopied())
+	// return getResources().getString(R.string.menu_encrypt_title_copied);
+	// else
+	// return getResources().getString(R.string.menu_encrypt_title);
+	// }
 
 	public JsEncryptor getEncryptor() {
 		return mJsEncryptor;
@@ -64,29 +63,29 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		mEncrypt = new Encrypt(this, mJsEncryptor, mClipboard);
 
 		setupInputChange();
+
+		setupActionBar();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		mMenuForTest = menu;
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.action_encrypt:
-			mEncrypt.encryptAndUpdate();
-			return true;
-		case R.id.action_decrypt:
-			mDecrypt.showFullDecryptedText();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// mMenuForTest = menu;
+	// getMenuInflater().inflate(R.menu.main, menu);
+	// return true;
+	// }
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// switch (item.getItemId()) {
+	// case R.id.action_encrypt:
+	// mEncrypt.encryptAndUpdate();
+	// return true;
+	// case R.id.action_decrypt:
+	// mDecrypt.showFullDecryptedText();
+	// return true;
+	// default:
+	// return super.onOptionsItemSelected(item);
+	// }
+	// }
 	private void onPasswordChanged() {
 		mDecrypt.decryptAndUpdate();
 	}
@@ -95,17 +94,16 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		mEncrypt.updateJustCopied(false);
 	}
 
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(R.id.action_decrypt).setVisible(mDecrypt.isDecryptable());
-		menu.findItem(R.id.action_decrypt).setTitle(mDecrypt.getMenuTitle());
-
-		menu.findItem(R.id.action_encrypt).setEnabled(mEncrypt.isEncryptable());
-		menu.findItem(R.id.action_encrypt).setTitle(getEncryptMenuTitle());
-
-		return super.onPrepareOptionsMenu(menu);
-	}
-
+	// @Override
+	// public boolean onPrepareOptionsMenu(Menu menu) {
+	// menu.findItem(R.id.action_decrypt).setVisible(mDecrypt.isDecryptable());
+	// menu.findItem(R.id.action_decrypt).setTitle(mDecrypt.getMenuTitle());
+	//
+	// menu.findItem(R.id.action_encrypt).setEnabled(mEncrypt.isEncryptable());
+	// menu.findItem(R.id.action_encrypt).setTitle(getEncryptMenuTitle());
+	//
+	// return super.onPrepareOptionsMenu(menu);
+	// }
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -121,6 +119,15 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	@Override
 	public void setMessage(String message) {
 		mMessage.setText(message);
+	}
+
+	protected void setupActionBar() {
+		final ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setCustomView(R.layout.main_action_bar);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 	}
 
 	private void setupInputChange() {

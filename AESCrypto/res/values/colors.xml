@@ -5,5 +5,6 @@
  <color name="actionBarTextShadowColor">#777777</color>
  <color name="toolbarButton">#58BE5F</color>
  <color name="toolbarButtonPressed">#44974A</color>
- 
+ <color name="actionbarButton">#ffffff</color>
+ <color name="actionbarButtonPressed">#9ef2a2</color>
 </resources>
