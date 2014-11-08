@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
@@ -20,14 +21,14 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	private Encrypt mEncrypt;
 	private Decrypt mDecrypt;
 
-	// public Menu mMenuForTest;
+//	public Menu mMenuForTest;
 
-	// private String getEncryptMenuTitle() {
-	// if (mEncrypt.getJustCopied())
-	// return getResources().getString(R.string.menu_encrypt_title_copied);
-	// else
-	// return getResources().getString(R.string.menu_encrypt_title);
-	// }
+//	private String getEncryptMenuTitle() {
+//		if (mEncrypt.getJustCopied())
+//			return getResources().getString(R.string.menu_encrypt_title_copied);
+//		else
+//			return getResources().getString(R.string.menu_encrypt_title);
+//	}
 
 	public JsEncryptor getEncryptor() {
 		return mJsEncryptor;

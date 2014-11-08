@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/action_bar_horizontal_margin"
+    android:paddingRight="@dimen/action_bar_horizontal_margin"
+    >
     
     <Button
 		android:id="@+id/decryptButton"
@@ -14,10 +17,15 @@
 		android:background="@android:color/transparent"
 		android:textColor="@drawable/actionbar_button_text_color"
 		android:gravity="left|center_vertical"
-		android:text="@string/menu_decrypt_title" />
+		android:text="@string/menu_decrypt_title"
+		android:textSize="@dimen/main_text_size" />
     
-    <ImageView />
-    
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/logo"
+        android:contentDescription="@null"/>
     
     <Button
 		android:id="@+id/encryptButton"
@@ -29,6 +37,7 @@
 		android:background="@android:color/transparent"
 		android:textColor="@drawable/actionbar_button_text_color"
 		android:gravity="right|center_vertical"
-		android:text="@string/menu_encrypt_title" />
+		android:text="@string/menu_encrypt_title"
+		android:textSize="@dimen/main_text_size" />
     
 </LinearLayout>

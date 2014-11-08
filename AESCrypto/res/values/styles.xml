@@ -29,10 +29,6 @@
     <style name="myTheme.ActionBar.MenuText" parent="@android:style/TextAppearance">
 		<item name="android:textColor">@color/actionBarText</item>
 		<item name="android:textSize">@dimen/main_text_size</item>
-		<item name="android:shadowColor">@color/actionBarTextShadowColor</item>
-		<item name="android:shadowRadius">1</item>
-		<item name="android:shadowDy">1</item>
-		<item name="android:shadowDx">0</item>
     </style>
 
     <style name="myTheme.mainActivityTheme">

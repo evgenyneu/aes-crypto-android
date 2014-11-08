@@ -72,7 +72,8 @@
 				android:background="@android:color/transparent"
 				android:textColor="@drawable/toolbar_button_text_color"
 				android:gravity="left|center_vertical"
-				android:text="@string/copy_button" />
+				android:text="@string/copy_button"
+				android:textSize="@dimen/main_text_size" />
 	        
 	        <Button
 				android:id="@+id/pasteButton"
@@ -83,7 +84,8 @@
 				android:layout_marginTop="0dp"
 				android:background="@android:color/transparent"
 				android:textColor="@drawable/toolbar_button_text_color"
-				android:text="@string/paste_button" />
+				android:text="@string/paste_button"
+				android:textSize="@dimen/main_text_size" />
 	        
 	        <Button
 				android:id="@+id/clearButton"
@@ -95,7 +97,8 @@
 				android:background="@android:color/transparent"
 				android:textColor="@drawable/toolbar_button_text_color"
 				android:gravity="right|center_vertical"
-				android:text="@string/clear_button" />
+				android:text="@string/clear_button"
+				android:textSize="@dimen/main_text_size" />
 		 
 		</LinearLayout>
 
