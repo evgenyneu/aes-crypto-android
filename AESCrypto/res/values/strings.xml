@@ -14,4 +14,7 @@
     <string name="view_drawing_menu_title">Drawing</string>
     <string name="title_activity_drawing">Krypto and Koo</string>
     <string name="drawing_description">Drawing: Crypto and Koo</string>
+    <string name="copy_button">Copy</string>
+    <string name="paste_button">Paste</string>
+    <string name="clear_button">Clear</string>
 </resources>

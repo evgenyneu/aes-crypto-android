@@ -3,4 +3,7 @@
  <color name="actionBarText">#ffffff</color>
  <color name="actionBarTextDisabled">#9ef2a2</color>
  <color name="actionBarTextShadowColor">#777777</color>
+ <color name="toolbarButton">#58BE5F</color>
+ <color name="toolbarButtonPressed">#44974A</color>
+ 
 </resources>
