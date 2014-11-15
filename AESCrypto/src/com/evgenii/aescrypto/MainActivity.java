@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		mMessage = (EditText) findViewById(R.id.message);
 		mPassword = (EditText) findViewById(R.id.password);
 		mClipboard = new Clipboard(this);
-		mDecrypt = new Decrypt(this, mJsEncryptor, mClipboard);
+		mDecrypt = new Decrypt(this, mJsEncryptor);
 		mEncrypt = new Encrypt(this, mJsEncryptor, mClipboard);
 
 		setupInputChange();
@@ -118,12 +118,12 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	//
 	// return super.onPrepareOptionsMenu(menu);
 	// }
-	@Override
-	public void onResume() {
-		super.onResume();
-		mDecrypt.storeTextToDecrypt();
-		mDecrypt.decryptAndUpdate();
-	}
+	// @Override
+	// public void onResume() {
+	// super.onResume();
+	// mDecrypt.storeTextToDecrypt();
+	// mDecrypt.decryptAndUpdate();
+	// }
 
 	public void onShowHelpClicked(View view) {
 		final Intent intent = new Intent(this, HelpActivity.class);

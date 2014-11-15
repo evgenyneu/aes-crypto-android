@@ -3,7 +3,6 @@ package com.evgenii.aescrypto.test;
 import android.test.AndroidTestCase;
 
 import com.evgenii.aescrypto.Decrypt;
-import com.evgenii.eascrypto.test.mocks.ClipboardMock;
 import com.evgenii.eascrypto.test.mocks.JsEncryptorMock;
 import com.evgenii.eascrypto.test.mocks.MainActivityMock;
 
@@ -11,7 +10,12 @@ public class DecryptTests extends AndroidTestCase {
 	protected Decrypt mDecrypt;
 	protected MainActivityMock mMainActivityMock;
 	protected JsEncryptorMock mJsEncryptorMock;
-	protected ClipboardMock mClipboardMock;
+
+	private void makeDecryptable() {
+		mMainActivityMock.mTestIsBusy = false;
+		mMainActivityMock.mTestHasPassword = true;
+		mJsEncryptorMock.mTestIsEcrypted = true;
+	}
 
 	@Override
 	protected void setUp() throws Exception {
@@ -19,12 +23,13 @@ public class DecryptTests extends AndroidTestCase {
 
 		mMainActivityMock = new MainActivityMock();
 		mJsEncryptorMock = new JsEncryptorMock();
-		mClipboardMock = new ClipboardMock();
 
-		mDecrypt = new Decrypt(mMainActivityMock, mJsEncryptorMock, mClipboardMock);
+		mDecrypt = new Decrypt(mMainActivityMock, mJsEncryptorMock);
 	}
 
 	public void testDecryptAndUpdate_decryptsTextWithThePassword() {
+		makeDecryptable();
+
 		mMainActivityMock.mTestTrimmedPassword = "test password";
 		mMainActivityMock.mTestTrimmedMessage = "test text to decrypt";
 
@@ -32,93 +37,51 @@ public class DecryptTests extends AndroidTestCase {
 
 		assertEquals("test text to decrypt", mJsEncryptorMock.mTestDecryptText);
 		assertEquals("test password", mJsEncryptorMock.mTestDecryptPassword);
-
 	}
 
-	public void testDecryptAndUpdate_receiveDecryptedText() {
-		mDecrypt.setTextToDecrypt("test text to decrypt");
+	public void testDecryptAndUpdate_doNotDecrypt_ifNotDecryptable() {
+		mMainActivityMock.mTestHasPassword = false;
+		mMainActivityMock.mTestTrimmedPassword = "test password";
+
 		mDecrypt.decryptAndUpdate();
 
-		mJsEncryptorMock.mTestDecryptCallback.onResult("test decrypted string");
-		assertEquals("test decrypted string", mDecrypt.getDecryptedText());
-		assertEquals("↓ test decry...", mDecrypt.getMenuTitle());
+		assertNull(mJsEncryptorMock.mTestDecryptPassword);
 	}
 
 	public void testDecryptAndUpdate_showsDecryptedText() {
+		makeDecryptable();
+
 		mDecrypt.decryptAndUpdate();
 
 		mJsEncryptorMock.mTestDecryptCallback.onResult("test decrypted string");
 		assertEquals("test decrypted string", mMainActivityMock.mTestMessage);
 	}
 
-	public void testGetTextToDecrypt() {
-		mClipboardMock.set("AESCryptoV10 ˁ˚ᴥ˚ˀ");
-		mJsEncryptorMock.mTestIsEcrypted = true;
-		mDecrypt.storeTextToDecrypt();
-		assertEquals("AESCryptoV10 ˁ˚ᴥ˚ˀ", mDecrypt.getTextToDecrypt());
-	}
-
 	public void testIsDecryptable_NO_whenBusy() {
 		mMainActivityMock.mTestIsBusy = true;
-		mMainActivityMock.mTestTrimmedMessage = null;
-		mDecrypt.setDecryptedText("Hello");
+		mMainActivityMock.mTestHasPassword = true;
+		mJsEncryptorMock.mTestIsEcrypted = true;
 		assertFalse(mDecrypt.isDecryptable());
 	}
 
-	public void testIsDecryptable_NO_whenTextEqualsMessage() {
+	public void testIsDecryptable_NO_whenMessageIsNotEncrypted() {
 		mMainActivityMock.mTestIsBusy = false;
-		mMainActivityMock.mTestTrimmedMessage = "Hello";
-		mDecrypt.setDecryptedText("Hello");
+		mMainActivityMock.mTestHasPassword = true;
+		mJsEncryptorMock.mTestIsEcrypted = false;
 		assertFalse(mDecrypt.isDecryptable());
 	}
 
-	public void testIsDecryptable_NO_withNoText() {
+	public void testIsDecryptable_NO_withNoPassword() {
 		mMainActivityMock.mTestIsBusy = false;
-		mMainActivityMock.mTestTrimmedMessage = null;
-		mDecrypt.setDecryptedText(null);
+		mMainActivityMock.mTestHasPassword = false;
+		mJsEncryptorMock.mTestIsEcrypted = true;
 		assertFalse(mDecrypt.isDecryptable());
 	}
 
-	public void testIsDecryptable_YES_withTextToDecrypt() {
+	public void testIsDecryptable_YES() {
 		mMainActivityMock.mTestIsBusy = false;
-		mMainActivityMock.mTestTrimmedMessage = null;
-		mDecrypt.setDecryptedText("Hello");
+		mMainActivityMock.mTestHasPassword = true;
+		mJsEncryptorMock.mTestIsEcrypted = true;
 		assertTrue(mDecrypt.isDecryptable());
-	}
-
-	public void testSetDecryptedText() {
-		mDecrypt.setDecryptedText("Hi there");
-		assertEquals("Hi there", mDecrypt.getDecryptedText());
-	}
-
-	public void testSetDecryptedText_empty() {
-		mDecrypt.setDecryptedText("  ");
-		assertEquals(null, mDecrypt.getDecryptedText());
-	}
-
-	public void testSetDecryptedText_null() {
-		mDecrypt.setDecryptedText(null);
-		assertEquals(null, mDecrypt.getDecryptedText());
-	}
-
-	public void testShowFullDecryptedText() {
-		mDecrypt.setDecryptedText("One two");
-		mDecrypt.showFullDecryptedText();
-		assertEquals("One two", mMainActivityMock.mTestMessage);
-	}
-
-	public void testUpdateDecryptButtonTitle() {
-		mDecrypt.updateDecryptButtonTitle("1234567890");
-		assertEquals("↓ 1234567890", mDecrypt.getMenuTitle());
-	}
-
-	public void testUpdateDecryptButtonTitle_removeNewLines() {
-		mDecrypt.updateDecryptButtonTitle("one\ntwo");
-		assertEquals("↓ one two", mDecrypt.getMenuTitle());
-	}
-
-	public void testUpdateDecryptButtonTitle_truncateLongText() {
-		mDecrypt.updateDecryptButtonTitle("1234567890this is a long message");
-		assertEquals("↓ 1234567890...", mDecrypt.getMenuTitle());
 	}
 }
