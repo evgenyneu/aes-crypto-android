@@ -17,13 +17,13 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 	}
 
 	private void fillIn(int id, String text) {
-		final EditText passwordEditText = (EditText) mActivity.findViewById(id);
+		final EditText editText = (EditText) mActivity.findViewById(id);
 
 		// Send string input value
 		getInstrumentation().runOnMainSync(new Runnable() {
 			@Override
 			public void run() {
-				passwordEditText.requestFocus();
+				editText.requestFocus();
 			}
 		});
 		getInstrumentation().waitForIdleSync();
@@ -110,12 +110,22 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		// assertEquals(expectedMessage, messageEditText.getText().toString());
 	}
 
-	public void testFillPasswordAndMessage_tapEncrypt_encryptsText() throws InterruptedException {
+	public void testFillPasswordAndMessage_tapEncrypt_encryptsText_tapDecrypt_decryptsText()
+			throws InterruptedException {
+
+		// Fill in password and message
+		// ---------------------------
 
 		fillIn(R.id.password, "Test Password");
 		fillIn(R.id.message, "Test Tech Bubble");
 
+		// Click 'Encrypt' button
+		// ---------------------------
+
 		TouchUtils.clickView(this, mActivity.findViewById(R.id.encryptButton));
+
+		// Shows encrypted message
+		// ---------------------------
 
 		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
 
@@ -126,9 +136,32 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 			}
 		}
 
+		assertEquals("AESCryptoV10", messageTextView.getText().toString().substring(0, 12));
 		final Button encryptButton = (Button) mActivity.findViewById(R.id.encryptButton);
 
-		assertEquals("AESCryptoV10", messageTextView.getText().toString().substring(0, 12));
+		// Text of 'Encrypt' button is changed to "Copied✓"
 		assertEquals("Copied✓", encryptButton.getText().toString());
+
+		// When text is entered into password it changed 'Encrypt' button text
+		// to 'Encrypt'
+		fillIn(R.id.password, " ");
+		assertEquals("Encrypt", encryptButton.getText().toString());
+
+		// Click 'Decrypt' button
+		// ---------------------------
+
+		TouchUtils.clickView(this, mActivity.findViewById(R.id.decryptButton));
+
+		// Shows decrypted message
+		// ---------------------------
+
+		for (int i = 0; i < 100; i++) {
+			Thread.sleep(100);
+			if (messageTextView.getText().toString().equals("Test Tech Bubble")) {
+				break;
+			}
+		}
+
+		assertEquals("Test Tech Bubble", messageTextView.getText().toString());
 	}
 }
