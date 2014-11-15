@@ -40,6 +40,18 @@ public class EncryptTests extends AndroidTestCase {
 		assertTrue(mEncrypt.getJustCopied());
 	}
 
+	public void testEncryptAndUpdate_showsEncryptedMessage() {
+		mEncrypt.encryptAndUpdate();
+		mJsEncryptorMock.mTestEncryptCallback.onResult("Encrypted test message :)");
+		assertEquals("Encrypted test message :)", mMainActivityMock.mTestMessage);
+	}
+
+	public void testEncryptAndUpdate_updatedEncryptButtonTittle() {
+		mEncrypt.encryptAndUpdate();
+		mJsEncryptorMock.mTestEncryptCallback.onResult("Encrypted test message :)");
+		assertTrue(mMainActivityMock.mEncryptButtonTitleUpdated);
+	}
+
 	public void testIsEncryptable_NO_hasNoMessage() {
 		mMainActivityMock.mTestHasMessage = false;
 		mMainActivityMock.mTestHasPassword = true;

@@ -26,6 +26,8 @@ public class Encrypt {
 					public void onResult(final String encryptedMessage) {
 						mActivity.updateBusy(false);
 						storeMessageInClipboard(encryptedMessage);
+						showTestMessage(encryptedMessage);
+						mActivity.updateEncryptButtonTitle();
 					}
 				});
 	}
@@ -36,6 +38,10 @@ public class Encrypt {
 
 	public boolean isEncryptable() {
 		return mActivity.hasMessage() && mActivity.hasPassword() && !mActivity.isBusy();
+	}
+
+	private void showTestMessage(String message) {
+		mActivity.setMessage(message);
 	}
 
 	private void storeMessageInClipboard(String message) {

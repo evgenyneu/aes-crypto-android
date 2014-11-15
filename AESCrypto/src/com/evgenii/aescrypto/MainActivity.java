@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.evgenii.aescrypto.interfaces.MainActivityInterface;
@@ -23,12 +24,12 @@ public class MainActivity extends Activity implements MainActivityInterface {
 
 	// public Menu mMenuForTest;
 
-	// private String getEncryptMenuTitle() {
-	// if (mEncrypt.getJustCopied())
-	// return getResources().getString(R.string.menu_encrypt_title_copied);
-	// else
-	// return getResources().getString(R.string.menu_encrypt_title);
-	// }
+	private String getEncryptButtonTitle() {
+		if (mEncrypt.getJustCopied())
+			return getResources().getString(R.string.menu_encrypt_title_copied);
+		else
+			return getResources().getString(R.string.menu_encrypt_title);
+	}
 
 	public JsEncryptor getEncryptor() {
 		return mJsEncryptor;
@@ -190,6 +191,12 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	public void updateBusy(boolean isBusy) {
 		mIsBusy = isBusy;
 		invalidateOptionsMenu();
+	}
+
+	@Override
+	public void updateEncryptButtonTitle() {
+		final Button encryptButton = (Button) findViewById(R.id.encryptButton);
+		encryptButton.setText(getEncryptButtonTitle());
 	}
 
 }

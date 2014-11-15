@@ -16,4 +16,6 @@ public interface MainActivityInterface {
 	public String trimmedPassword();
 
 	public void updateBusy(boolean isBusy);
+
+	public void updateEncryptButtonTitle();
 }

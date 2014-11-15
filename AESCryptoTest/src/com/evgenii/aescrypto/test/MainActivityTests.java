@@ -37,27 +37,6 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		mActivity = getActivity();
 	}
 
-	public void testFillPasswordAndMessage_clickEncrypt_encryptsText() throws InterruptedException {
-
-		fillIn(R.id.password, "Test Password");
-		fillIn(R.id.message, "Test Tech Bubble");
-
-		TouchUtils.clickView(this, mActivity.findViewById(R.id.encryptButton));
-
-		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
-
-		Log.d("ii", "!!!!!!!!!!!!!!" + messageTextView.getText().toString() + "!!!!!");
-
-		for (int i = 0; i < 100; i++) {
-			Thread.sleep(100);
-			if (!messageTextView.getText().toString().equals("Test Tech Bubble")) {
-				break;
-			}
-		}
-
-		assertEquals("AESCryptoV10", messageTextView.getText().toString().substring(0, 12));
-	}
-
 	public void testFillPasswordAndMessage_clickEncrypt_putEncryptedMessageToClipboard()
 			throws InterruptedException {
 
@@ -129,5 +108,26 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		// }
 		//
 		// assertEquals(expectedMessage, messageEditText.getText().toString());
+	}
+
+	public void testFillPasswordAndMessage_tapEncrypt_encryptsText() throws InterruptedException {
+
+		fillIn(R.id.password, "Test Password");
+		fillIn(R.id.message, "Test Tech Bubble");
+
+		TouchUtils.clickView(this, mActivity.findViewById(R.id.encryptButton));
+
+		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
+
+		Log.d("ii", "!!!!!!!!!!!!!!" + messageTextView.getText().toString() + "!!!!!");
+
+		for (int i = 0; i < 100; i++) {
+			Thread.sleep(100);
+			if (!messageTextView.getText().toString().equals("Test Tech Bubble")) {
+				break;
+			}
+		}
+
+		assertEquals("AESCryptoV10", messageTextView.getText().toString().substring(0, 12));
 	}
 }
