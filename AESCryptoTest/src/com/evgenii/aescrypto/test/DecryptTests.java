@@ -48,6 +48,16 @@ public class DecryptTests extends AndroidTestCase {
 		assertNull(mJsEncryptorMock.mTestDecryptPassword);
 	}
 
+	public void testDecryptAndUpdate_doNotShowDecryptedText_ifDecryptionResultIsEmpty() {
+		makeDecryptable();
+		mMainActivityMock.mTestMessage = "Message before";
+
+		mDecrypt.decryptAndUpdate();
+
+		mJsEncryptorMock.mTestDecryptCallback.onResult("");
+		assertEquals("Message before", mMainActivityMock.mTestMessage);
+	}
+
 	public void testDecryptAndUpdate_showsDecryptedText() {
 		makeDecryptable();
 

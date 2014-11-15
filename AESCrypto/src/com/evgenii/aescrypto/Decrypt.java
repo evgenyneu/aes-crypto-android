@@ -23,7 +23,10 @@ public class Decrypt {
 					@Override
 					public void onResult(final String decryptedTextFromJs) {
 						mActivity.updateBusy(false);
-						mActivity.setMessage(decryptedTextFromJs);
+
+						if (decryptedTextFromJs != null && !decryptedTextFromJs.trim().isEmpty()) {
+							mActivity.setMessage(decryptedTextFromJs);
+						}
 					}
 				});
 	}
