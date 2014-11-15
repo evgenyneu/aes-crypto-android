@@ -20,7 +20,7 @@
 		android:gravity="left|center_vertical"
 		android:text="@string/menu_decrypt_title"
 		android:textSize="@dimen/main_text_size"
-		android:onClick="onDecryptClicked" />
+		android:onClick="onDecryptTapped" />
     
     <ImageView
         android:id="@+id/imageViewLogo"
@@ -41,6 +41,6 @@
 		android:gravity="right|center_vertical"
 		android:text="@string/menu_encrypt_title"
 		android:textSize="@dimen/main_text_size"
-		android:onClick="onEncryptClicked" />
+		android:onClick="onEncryptTapped" />
     
 </LinearLayout>

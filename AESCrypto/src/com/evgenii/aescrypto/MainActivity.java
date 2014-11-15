@@ -68,12 +68,12 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		setupActionBar();
 	}
 
-	public void onDecryptClicked(View view) {
-		Log.d("ii", "Decrypt clicked");
+	public void onDecryptTapped(View view) {
+		Log.d("ii", "Decrypt tapped");
 	}
 
-	public void onEncryptClicked(View view) {
-		Log.d("ii", "Encrypt clicked");
+	public void onEncryptTapped(View view) {
+		Log.d("ii", "Encrypt tapped");
 	}
 
 	// @Override
