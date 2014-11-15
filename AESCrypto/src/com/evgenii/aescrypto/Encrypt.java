@@ -28,7 +28,7 @@ public class Encrypt {
 					@Override
 					public void onResult(final String encryptedMessage) {
 						storeMessageInClipboard(encryptedMessage);
-						showTestMessage(encryptedMessage);
+						mActivity.setMessage(encryptedMessage);
 						mActivity.updateEncryptButtonTitle();
 						mActivity.updateBusy(false);
 					}
@@ -41,10 +41,6 @@ public class Encrypt {
 
 	public boolean isEncryptable() {
 		return mActivity.hasMessage() && mActivity.hasPassword() && !mActivity.isBusy();
-	}
-
-	private void showTestMessage(String message) {
-		mActivity.setMessage(message);
 	}
 
 	private void storeMessageInClipboard(String message) {
