@@ -2,7 +2,7 @@ package com.evgenii.aescrypto.test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
-import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -119,8 +119,6 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 
 		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
 
-		Log.d("ii", "!!!!!!!!!!!!!!" + messageTextView.getText().toString() + "!!!!!");
-
 		for (int i = 0; i < 100; i++) {
 			Thread.sleep(100);
 			if (!messageTextView.getText().toString().equals("Test Tech Bubble")) {
@@ -128,6 +126,9 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 			}
 		}
 
+		final Button encryptButton = (Button) mActivity.findViewById(R.id.encryptButton);
+
 		assertEquals("AESCryptoV10", messageTextView.getText().toString().substring(0, 12));
+		assertEquals("Copied✓", encryptButton.getText().toString());
 	}
 }

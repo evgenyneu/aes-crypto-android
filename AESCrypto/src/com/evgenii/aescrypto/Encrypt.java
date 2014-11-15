@@ -24,10 +24,10 @@ public class Encrypt {
 				new JsCallback() {
 					@Override
 					public void onResult(final String encryptedMessage) {
-						mActivity.updateBusy(false);
 						storeMessageInClipboard(encryptedMessage);
 						showTestMessage(encryptedMessage);
 						mActivity.updateEncryptButtonTitle();
+						mActivity.updateBusy(false);
 					}
 				});
 	}

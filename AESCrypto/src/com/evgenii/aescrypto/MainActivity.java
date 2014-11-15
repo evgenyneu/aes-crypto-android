@@ -74,7 +74,7 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	}
 
 	public void onEncryptTapped(View view) {
-		Log.d("ii", "Encrypt tapped");
+		mEncrypt.encryptAndUpdate();
 	}
 
 	// @Override
@@ -101,7 +101,11 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	}
 
 	private void onPasswordOrMessageChanged() {
+		if (isBusy())
+			return;
+
 		mEncrypt.updateJustCopied(false);
+		updateEncryptButtonTitle();
 	}
 
 	// @Override
