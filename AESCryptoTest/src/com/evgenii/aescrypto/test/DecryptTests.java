@@ -26,7 +26,8 @@ public class DecryptTests extends AndroidTestCase {
 
 	public void testDecryptAndUpdate_decryptsTextWithThePassword() {
 		mMainActivityMock.mTestTrimmedPassword = "test password";
-		mDecrypt.setTextToDecrypt("test text to decrypt");
+		mMainActivityMock.mTestTrimmedMessage = "test text to decrypt";
+
 		mDecrypt.decryptAndUpdate();
 
 		assertEquals("test text to decrypt", mJsEncryptorMock.mTestDecryptText);
@@ -42,6 +43,13 @@ public class DecryptTests extends AndroidTestCase {
 		assertEquals("test decrypted string", mDecrypt.getDecryptedText());
 		assertEquals("↓ test decry...", mDecrypt.getMenuTitle());
 		assertTrue(mMainActivityMock.mTestOptionsMenuInvalidated);
+	}
+
+	public void testDecryptAndUpdate_showsDecryptedText() {
+		mDecrypt.decryptAndUpdate();
+
+		mJsEncryptorMock.mTestDecryptCallback.onResult("test decrypted string");
+		assertEquals("test decrypted string", mMainActivityMock.mTestMessage);
 	}
 
 	public void testGetTextToDecrypt() {

@@ -21,18 +21,17 @@ public class Decrypt {
 	}
 
 	public void decryptAndUpdate() {
-		if (mTextToDecrypt == null)
-			return;
-
 		mActivity.updateBusy(true);
-		mJsEncryptor.decrypt(mTextToDecrypt, mActivity.trimmedPassword(), new JsCallback() {
-			@Override
-			public void onResult(final String decryptedTextFromJs) {
-				mActivity.updateBusy(false);
-				setDecryptedText(decryptedTextFromJs);
-				updateDecryptButton();
-			}
-		});
+		mJsEncryptor.decrypt(mActivity.trimmedMessage(), mActivity.trimmedPassword(),
+				new JsCallback() {
+					@Override
+					public void onResult(final String decryptedTextFromJs) {
+						mActivity.updateBusy(false);
+						mActivity.setMessage(decryptedTextFromJs);
+						setDecryptedText(decryptedTextFromJs);
+						updateDecryptButton();
+					}
+				});
 	}
 
 	public String getDecryptedText() {
