@@ -1,5 +1,6 @@
 package com.evgenii.aescrypto;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,8 +21,6 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	private Clipboard mClipboard;
 	private Encrypt mEncrypt;
 	private Decrypt mDecrypt;
-
-	// public Menu mMenuForTest;
 
 	private String getEncryptButtonTitle() {
 		if (mEncrypt.getJustCopied())
@@ -76,30 +75,6 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		mEncrypt.encryptAndUpdate();
 	}
 
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// mMenuForTest = menu;
-	// getMenuInflater().inflate(R.menu.main, menu);
-	// return true;
-	// }
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// switch (item.getItemId()) {
-	// case R.id.action_encrypt:
-	// mEncrypt.encryptAndUpdate();
-	// return true;
-	// case R.id.action_decrypt:
-	// mDecrypt.showFullDecryptedText();
-	// return true;
-	// default:
-	// return super.onOptionsItemSelected(item);
-	// }
-	// }
-
-	// private void onPasswordChanged() {
-	// mDecrypt.decryptAndUpdate();
-	// }
-
 	private void onPasswordOrMessageChanged() {
 		if (isBusy())
 			return;
@@ -107,23 +82,6 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		mEncrypt.updateJustCopied(false);
 		updateEncryptButtonTitle();
 	}
-
-	// @Override
-	// public boolean onPrepareOptionsMenu(Menu menu) {
-	// menu.findItem(R.id.action_decrypt).setVisible(mDecrypt.isDecryptable());
-	// menu.findItem(R.id.action_decrypt).setTitle(mDecrypt.getMenuTitle());
-	//
-	// menu.findItem(R.id.action_encrypt).setEnabled(mEncrypt.isEncryptable());
-	// menu.findItem(R.id.action_encrypt).setTitle(getEncryptMenuTitle());
-	//
-	// return super.onPrepareOptionsMenu(menu);
-	// }
-	// @Override
-	// public void onResume() {
-	// super.onResume();
-	// mDecrypt.storeTextToDecrypt();
-	// mDecrypt.decryptAndUpdate();
-	// }
 
 	public void onShowHelpClicked(View view) {
 		final Intent intent = new Intent(this, HelpActivity.class);
@@ -135,6 +93,7 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		mMessage.setText(message);
 	}
 
+	@SuppressLint("InflateParams")
 	protected void setupActionBar() {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
