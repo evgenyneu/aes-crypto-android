@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -21,14 +21,14 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	private Encrypt mEncrypt;
 	private Decrypt mDecrypt;
 
-//	public Menu mMenuForTest;
+	// public Menu mMenuForTest;
 
-//	private String getEncryptMenuTitle() {
-//		if (mEncrypt.getJustCopied())
-//			return getResources().getString(R.string.menu_encrypt_title_copied);
-//		else
-//			return getResources().getString(R.string.menu_encrypt_title);
-//	}
+	// private String getEncryptMenuTitle() {
+	// if (mEncrypt.getJustCopied())
+	// return getResources().getString(R.string.menu_encrypt_title_copied);
+	// else
+	// return getResources().getString(R.string.menu_encrypt_title);
+	// }
 
 	public JsEncryptor getEncryptor() {
 		return mJsEncryptor;
@@ -66,6 +66,14 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		setupInputChange();
 
 		setupActionBar();
+	}
+
+	public void onDecryptClicked(View view) {
+		Log.d("ii", "Decrypt clicked");
+	}
+
+	public void onEncryptClicked(View view) {
+		Log.d("ii", "Encrypt clicked");
 	}
 
 	// @Override
@@ -125,9 +133,11 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	protected void setupActionBar() {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayUseLogoEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
-		actionBar.setCustomView(R.layout.main_action_bar);
+		final View actionBarView = getLayoutInflater().inflate(R.layout.main_action_bar, null);
+		actionBar.setCustomView(actionBarView);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 	}
 

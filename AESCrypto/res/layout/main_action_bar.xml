@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/action_bar_horizontal_margin"
     android:paddingRight="@dimen/action_bar_horizontal_margin"
-    >
+    tools:context=".MainActivity">
     
     <Button
 		android:id="@+id/decryptButton"
@@ -18,7 +19,8 @@
 		android:textColor="@drawable/actionbar_button_text_color"
 		android:gravity="left|center_vertical"
 		android:text="@string/menu_decrypt_title"
-		android:textSize="@dimen/main_text_size" />
+		android:textSize="@dimen/main_text_size"
+		android:onClick="onDecryptClicked" />
     
     <ImageView
         android:id="@+id/imageViewLogo"
@@ -38,6 +40,7 @@
 		android:textColor="@drawable/actionbar_button_text_color"
 		android:gravity="right|center_vertical"
 		android:text="@string/menu_encrypt_title"
-		android:textSize="@dimen/main_text_size" />
+		android:textSize="@dimen/main_text_size"
+		android:onClick="onEncryptClicked" />
     
 </LinearLayout>
