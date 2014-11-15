@@ -1,11 +1,10 @@
 package com.evgenii.aescrypto.test;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.evgenii.aescrypto.MainActivity;
 import com.evgenii.aescrypto.R;
@@ -38,26 +37,49 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		mActivity = getActivity();
 	}
 
-	public void testFillPasswordAndMessage_clickEncrypt_putEncryptedMessageToClipboard()
-			throws InterruptedException {
+	public void testFillPasswordAndMessage_clickEncrypt_encryptsText() throws InterruptedException {
+
 		fillIn(R.id.password, "Test Password");
 		fillIn(R.id.message, "Test Tech Bubble");
 
-		TouchUtils.clickView(this, mActivity.findViewById(R.id.action_encrypt));
+		TouchUtils.clickView(this, mActivity.findViewById(R.id.encryptButton));
 
-		final ClipboardManager clipboard = (ClipboardManager) mActivity
-				.getSystemService(Context.CLIPBOARD_SERVICE);
+		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
+
+		Log.d("ii", "!!!!!!!!!!!!!!" + messageTextView.getText().toString() + "!!!!!");
 
 		for (int i = 0; i < 100; i++) {
-			if (clipboard.hasPrimaryClip()) {
+			Thread.sleep(100);
+			if (!messageTextView.getText().toString().equals("Test Tech Bubble")) {
 				break;
 			}
-			Thread.sleep(100);
 		}
 
-		final ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
-		final String clipboardText = (String) item.getText();
-		assertEquals("AESCryptoV10", clipboardText.substring(0, 12));
+		assertEquals("AESCryptoV10", messageTextView.getText().toString().substring(0, 12));
+	}
+
+	public void testFillPasswordAndMessage_clickEncrypt_putEncryptedMessageToClipboard()
+			throws InterruptedException {
+
+		// fillIn(R.id.password, "Test Password");
+		// fillIn(R.id.message, "Test Tech Bubble");
+		//
+		// TouchUtils.clickView(this,
+		// mActivity.findViewById(R.id.action_encrypt));
+		//
+		// final ClipboardManager clipboard = (ClipboardManager) mActivity
+		// .getSystemService(Context.CLIPBOARD_SERVICE);
+		//
+		// for (int i = 0; i < 100; i++) {
+		// if (clipboard.hasPrimaryClip()) {
+		// break;
+		// }
+		// Thread.sleep(100);
+		// }
+		//
+		// final ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+		// final String clipboardText = (String) item.getText();
+		// assertEquals("AESCryptoV10", clipboardText.substring(0, 12));
 	}
 
 	public void testFillPasswordAndMessage_resumesActivityWithEncryptedMessageInClipboard_showsDecryptedMessage()
