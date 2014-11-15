@@ -54,7 +54,7 @@
 	        android:layout_height="wrap_content"
 	        android:gravity="top"
 	        android:hint="@string/message_hint"
-	        android:inputType="textMultiLine|textNoSuggestions|textPassword|textVisiblePassword"
+	        android:inputType="textMultiLine|textNoSuggestions"
 	        android:textSize="@dimen/main_text_size" />
     
     </ScrollView>
