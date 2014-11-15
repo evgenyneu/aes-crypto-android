@@ -19,6 +19,9 @@ public class Encrypt {
 	}
 
 	public void encryptAndUpdate() {
+		if (!isEncryptable())
+			return;
+
 		mActivity.updateBusy(true);
 		mJsEncryptor.encrypt(mActivity.trimmedMessage(), mActivity.trimmedPassword(),
 				new JsCallback() {
@@ -51,7 +54,6 @@ public class Encrypt {
 
 	public void updateJustCopied(boolean justCopied) {
 		mJustCopied = justCopied;
-		mActivity.invalidateOptionsMenu();
 	}
 
 }

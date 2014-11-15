@@ -77,7 +77,6 @@ public class Decrypt {
 			return;
 
 		mActivity.setMessage(mDecryptedText);
-		mActivity.invalidateOptionsMenu();
 	}
 
 	public void storeTextToDecrypt() {
@@ -90,7 +89,6 @@ public class Decrypt {
 
 	private void updateDecryptButton() {
 		updateDecryptButtonTitle(mDecryptedText);
-		mActivity.invalidateOptionsMenu();
 	}
 
 	public void updateDecryptButtonTitle(String title) {

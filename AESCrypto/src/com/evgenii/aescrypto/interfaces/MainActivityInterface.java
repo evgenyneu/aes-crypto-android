@@ -5,8 +5,6 @@ public interface MainActivityInterface {
 
 	public boolean hasPassword();
 
-	public void invalidateOptionsMenu();
-
 	public boolean isBusy();
 
 	public void setMessage(String message);

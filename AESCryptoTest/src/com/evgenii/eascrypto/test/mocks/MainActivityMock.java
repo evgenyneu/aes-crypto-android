@@ -7,7 +7,6 @@ public class MainActivityMock implements MainActivityInterface {
 	public String mTestTrimmedMessage;
 	public String mTestTrimmedPassword;
 	public String mTestMessage;
-	public boolean mTestOptionsMenuInvalidated;
 	public boolean mEncryptButtonTitleUpdated;
 	public boolean mTestHasMessage;
 	public boolean mTestHasPassword;
@@ -20,11 +19,6 @@ public class MainActivityMock implements MainActivityInterface {
 	@Override
 	public boolean hasPassword() {
 		return mTestHasPassword;
-	}
-
-	@Override
-	public void invalidateOptionsMenu() {
-		mTestOptionsMenuInvalidated = true;
 	}
 
 	@Override

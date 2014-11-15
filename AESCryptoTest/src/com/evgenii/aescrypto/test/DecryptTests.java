@@ -42,7 +42,6 @@ public class DecryptTests extends AndroidTestCase {
 		mJsEncryptorMock.mTestDecryptCallback.onResult("test decrypted string");
 		assertEquals("test decrypted string", mDecrypt.getDecryptedText());
 		assertEquals("↓ test decry...", mDecrypt.getMenuTitle());
-		assertTrue(mMainActivityMock.mTestOptionsMenuInvalidated);
 	}
 
 	public void testDecryptAndUpdate_showsDecryptedText() {
@@ -106,7 +105,6 @@ public class DecryptTests extends AndroidTestCase {
 		mDecrypt.setDecryptedText("One two");
 		mDecrypt.showFullDecryptedText();
 		assertEquals("One two", mMainActivityMock.mTestMessage);
-		assertTrue(mMainActivityMock.mTestOptionsMenuInvalidated);
 	}
 
 	public void testUpdateDecryptButtonTitle() {

@@ -193,7 +193,6 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	@Override
 	public void updateBusy(boolean isBusy) {
 		mIsBusy = isBusy;
-		invalidateOptionsMenu();
 	}
 
 	@Override

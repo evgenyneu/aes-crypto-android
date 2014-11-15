@@ -13,6 +13,12 @@ public class EncryptTests extends AndroidTestCase {
 	protected JsEncryptorMock mJsEncryptorMock;
 	protected ClipboardMock mClipboardMock;
 
+	private void makeEncryptable() {
+		mMainActivityMock.mTestHasMessage = true;
+		mMainActivityMock.mTestHasPassword = true;
+		mMainActivityMock.mTestIsBusy = false;
+	}
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -24,7 +30,30 @@ public class EncryptTests extends AndroidTestCase {
 		mEncrypt = new Encrypt(mMainActivityMock, mJsEncryptorMock, mClipboardMock);
 	}
 
+	public void testEncryptAndUpdate_copiesEncryptedMessageToClipboard() {
+		makeEncryptable();
+
+		mEncrypt.encryptAndUpdate();
+		mJsEncryptorMock.mTestEncryptCallback.onResult("Encrypted test message :)");
+		assertEquals("Encrypted test message :)", mClipboardMock.mTestClipboardContent);
+		assertTrue(mEncrypt.getJustCopied());
+	}
+
+	public void testEncryptAndUpdate_doNotEncryptIfNotEncryptable() {
+		mMainActivityMock.mTestHasMessage = false;
+		mMainActivityMock.mTestHasPassword = true;
+		mMainActivityMock.mTestIsBusy = false;
+
+		mMainActivityMock.mTestTrimmedPassword = "test password one two";
+
+		mEncrypt.encryptAndUpdate();
+
+		assertNull(mJsEncryptorMock.mTestEncryptPassword);
+	}
+
 	public void testEncryptAndUpdate_encryptsMessageWithPassword() {
+		makeEncryptable();
+
 		mMainActivityMock.mTestTrimmedMessage = "message to encrypt";
 		mMainActivityMock.mTestTrimmedPassword = "test password one two";
 		mEncrypt.encryptAndUpdate();
@@ -32,21 +61,17 @@ public class EncryptTests extends AndroidTestCase {
 		assertEquals("test password one two", mJsEncryptorMock.mTestEncryptPassword);
 	}
 
-	public void testEncryptAndUpdate_receivesEncryptedMessage() {
-		mEncrypt.encryptAndUpdate();
-		mJsEncryptorMock.mTestEncryptCallback.onResult("Encrypted test message :)");
-		assertEquals("Encrypted test message :)", mClipboardMock.mTestClipboardContent);
-		assertTrue(mMainActivityMock.mTestOptionsMenuInvalidated);
-		assertTrue(mEncrypt.getJustCopied());
-	}
-
 	public void testEncryptAndUpdate_showsEncryptedMessage() {
+		makeEncryptable();
+
 		mEncrypt.encryptAndUpdate();
 		mJsEncryptorMock.mTestEncryptCallback.onResult("Encrypted test message :)");
 		assertEquals("Encrypted test message :)", mMainActivityMock.mTestMessage);
 	}
 
 	public void testEncryptAndUpdate_updatedEncryptButtonTittle() {
+		makeEncryptable();
+
 		mEncrypt.encryptAndUpdate();
 		mJsEncryptorMock.mTestEncryptCallback.onResult("Encrypted test message :)");
 		assertTrue(mMainActivityMock.mEncryptButtonTitleUpdated);
