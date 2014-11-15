@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +69,7 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	}
 
 	public void onDecryptTapped(View view) {
-		Log.d("ii", "Decrypt tapped");
+		mDecrypt.decryptAndUpdate();
 	}
 
 	public void onEncryptTapped(View view) {
@@ -96,9 +95,10 @@ public class MainActivity extends Activity implements MainActivityInterface {
 	// return super.onOptionsItemSelected(item);
 	// }
 	// }
-	private void onPasswordChanged() {
-		mDecrypt.decryptAndUpdate();
-	}
+
+	// private void onPasswordChanged() {
+	// mDecrypt.decryptAndUpdate();
+	// }
 
 	private void onPasswordOrMessageChanged() {
 		if (isBusy())
@@ -168,7 +168,6 @@ public class MainActivity extends Activity implements MainActivityInterface {
 			@Override
 			public void afterTextChanged(Editable s) {
 				onPasswordOrMessageChanged();
-				onPasswordChanged();
 			}
 
 			@Override

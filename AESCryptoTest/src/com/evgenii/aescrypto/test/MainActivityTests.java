@@ -16,7 +16,7 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		super(MainActivity.class);
 	}
 
-	private void fillIn(int id, String text) {
+	private void fillIn(int id, String text) throws InterruptedException {
 		final EditText editText = (EditText) mActivity.findViewById(id);
 
 		// Send string input value
@@ -29,6 +29,8 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		getInstrumentation().waitForIdleSync();
 		getInstrumentation().sendStringSync(text);
 		getInstrumentation().waitForIdleSync();
+
+		Thread.sleep(100);
 	}
 
 	@Override
@@ -142,11 +144,6 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		// Text of 'Encrypt' button is changed to "Copied✓"
 		assertEquals("Copied✓", encryptButton.getText().toString());
 
-		// When text is entered into password it changed 'Encrypt' button text
-		// to 'Encrypt'
-		fillIn(R.id.password, " ");
-		assertEquals("Encrypt", encryptButton.getText().toString());
-
 		// Click 'Decrypt' button
 		// ---------------------------
 
@@ -163,5 +160,8 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		}
 
 		assertEquals("Test Tech Bubble", messageTextView.getText().toString());
+
+		// Text of 'Encrypt' button is changed back to "Encrypt"
+		assertEquals("Encrypt", encryptButton.getText().toString());
 	}
 }
