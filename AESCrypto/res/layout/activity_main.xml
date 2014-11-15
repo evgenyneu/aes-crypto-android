@@ -1,106 +1,101 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingBottom="0dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:fillViewport="true"
     android:layout_marginTop="0dp"
-    tools:context=".MainActivity">
-
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+    		
     <LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
-		
-	    <LinearLayout
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="horizontal">
-	        
-		    <EditText
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:id="@+id/password"
-				android:hint="@string/password_hint"
-				android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
-				android:singleLine="true"
-				android:imeOptions="actionDone"
-				android:textSize="@dimen/main_text_size">
-	
-		        <requestFocus />
-		    </EditText>
-	        
-		    <ImageButton
-		        android:id="@+id/helpImageButton"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:paddingTop="3dp"
-		        android:paddingLeft="8dp"
-		        android:background="@null"
-		        android:contentDescription="@string/helpButtonDescription"
-		        android:src="@drawable/ic_help_button_icon"
-		        android:onClick="onShowHelpClicked" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+	    <EditText
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:id="@+id/password"
+			android:hint="@string/password_hint"
+			android:inputType="textNoSuggestions|textPassword|textVisiblePassword"
+			android:singleLine="true"
+			android:imeOptions="actionDone"
+			android:textSize="@dimen/main_text_size">
 
-	    </LinearLayout>
-	    
+	        <requestFocus />
+	    </EditText>
+        
+	    <ImageButton
+	        android:id="@+id/helpImageButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="3dp"
+	        android:paddingLeft="8dp"
+	        android:background="@null"
+	        android:contentDescription="@string/helpButtonDescription"
+	        android:src="@drawable/ic_help_button_icon"
+	        android:onClick="onShowHelpClicked" />
+
+    </LinearLayout>
+    
+    <ScrollView 
+	    android:layout_width="fill_parent"
+    	android:fillViewport="true"
+    	android:layout_height="0dp"
+    	android:layout_weight="1">
+    
 	    <EditText
 	        android:id="@+id/message"
-	        android:layout_width="fill_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight="1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
 	        android:gravity="top"
 	        android:hint="@string/message_hint"
 	        android:inputType="textMultiLine|textNoSuggestions|textPassword|textVisiblePassword"
 	        android:textSize="@dimen/main_text_size" />
+    
+    </ScrollView>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="-6dp">
 	    
-	    <LinearLayout
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="horizontal" >
-		    
-	        <Button
-				android:id="@+id/copyButton"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:layout_marginLeft="0dp"
-				android:layout_marginTop="0dp"
-				android:background="@android:color/transparent"
-				android:textColor="@drawable/toolbar_button_text_color"
-				android:gravity="left|center_vertical"
-				android:text="@string/copy_button"
-				android:textSize="@dimen/main_text_size" />
-	        
-	        <Button
-				android:id="@+id/pasteButton"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:layout_marginLeft="0dp"
-				android:layout_marginTop="0dp"
-				android:background="@android:color/transparent"
-				android:textColor="@drawable/toolbar_button_text_color"
-				android:text="@string/paste_button"
-				android:textSize="@dimen/main_text_size" />
-	        
-	        <Button
-				android:id="@+id/clearButton"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:layout_marginLeft="0dp"
-				android:layout_marginTop="0dp"
-				android:background="@android:color/transparent"
-				android:textColor="@drawable/toolbar_button_text_color"
-				android:gravity="right|center_vertical"
-				android:text="@string/clear_button"
-				android:textSize="@dimen/main_text_size" />
-		 
-		</LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+        <Button
+			android:id="@+id/copyButton"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:background="@android:color/transparent"
+			android:textColor="@drawable/toolbar_button_text_color"
+			android:gravity="left|center_vertical"
+			android:text="@string/copy_button"
+			android:textSize="@dimen/main_text_size" />
+        
+        <Button
+			android:id="@+id/pasteButton"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:background="@android:color/transparent"
+			android:textColor="@drawable/toolbar_button_text_color"
+			android:text="@string/paste_button"
+			android:textSize="@dimen/main_text_size" />
+        
+        <Button
+			android:id="@+id/clearButton"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:background="@android:color/transparent"
+			android:textColor="@drawable/toolbar_button_text_color"
+			android:gravity="right|center_vertical"
+			android:text="@string/clear_button"
+			android:textSize="@dimen/main_text_size" />
+	 
+	</LinearLayout>
+</LinearLayout>
