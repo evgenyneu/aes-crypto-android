@@ -85,7 +85,8 @@
 			android:background="@android:color/transparent"
 			android:textColor="@drawable/toolbar_button_text_color"
 			android:text="@string/paste_button"
-			android:textSize="@dimen/main_text_size" />
+			android:textSize="@dimen/main_text_size"
+			android:onClick="onPasteTapped"  />
         
         <Button
 			android:id="@+id/clearButton"

@@ -90,6 +90,11 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		updateEncryptButtonTitle();
 	}
 
+	public void onPasteTapped(View view) {
+		final String messageFromClipboard = mClipboard.get();
+		setMessage(messageFromClipboard);
+	}
+
 	public void onShowHelpClicked(View view) {
 		final Intent intent = new Intent(this, HelpActivity.class);
 		startActivity(intent);
