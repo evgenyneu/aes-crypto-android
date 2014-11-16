@@ -74,7 +74,8 @@
 			android:textColor="@drawable/toolbar_button_text_color"
 			android:gravity="left|center_vertical"
 			android:text="@string/copy_button"
-			android:textSize="@dimen/main_text_size" />
+			android:textSize="@dimen/main_text_size"
+			android:onClick="onCopyTapped" />
         
         <Button
 			android:id="@+id/pasteButton"

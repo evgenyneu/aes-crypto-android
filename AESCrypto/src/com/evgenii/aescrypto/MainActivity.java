@@ -48,6 +48,13 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		return mIsBusy;
 	}
 
+	public void onCopyTapped(View view) {
+		if (!hasMessage())
+			return;
+
+		mClipboard.set(trimmedMessage());
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
