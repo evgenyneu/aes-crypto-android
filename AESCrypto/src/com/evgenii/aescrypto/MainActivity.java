@@ -92,6 +92,9 @@ public class MainActivity extends Activity implements MainActivityInterface {
 
 	public void onPasteTapped(View view) {
 		final String messageFromClipboard = mClipboard.get();
+		if (messageFromClipboard == null || messageFromClipboard.trim().isEmpty())
+			return;
+
 		setMessage(messageFromClipboard);
 	}
 

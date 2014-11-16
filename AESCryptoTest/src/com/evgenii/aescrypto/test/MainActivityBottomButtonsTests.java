@@ -71,6 +71,21 @@ public class MainActivityBottomButtonsTests extends ActivityInstrumentationTestC
 		assertEquals("Possum Hype Check", clipboardText);
 	}
 
+	public void testTapPasteButton_doNotShowEmptyTextFromClipboard() throws InterruptedException {
+		fillIn(R.id.message, "Salt water and a vintage boat");
+
+		final ClipboardManager clipboard = (ClipboardManager) mActivity
+				.getSystemService(Context.CLIPBOARD_SERVICE);
+
+		final ClipData clip = ClipData.newPlainText("Message ecrypted by test", "  ");
+		clipboard.setPrimaryClip(clip);
+
+		TouchUtils.clickView(this, mActivity.findViewById(R.id.pasteButton));
+
+		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
+		assertEquals("Salt water and a vintage boat", messageTextView.getText().toString());
+	}
+
 	public void testTapPasteButton_showsMessageFromClipboard() throws InterruptedException {
 		final ClipboardManager clipboard = (ClipboardManager) mActivity
 				.getSystemService(Context.CLIPBOARD_SERVICE);
