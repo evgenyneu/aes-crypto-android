@@ -6,6 +6,7 @@ import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.evgenii.aescrypto.MainActivity;
 import com.evgenii.aescrypto.R;
@@ -68,5 +69,19 @@ public class MainActivityBottomButtonsTests extends ActivityInstrumentationTestC
 		final ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
 		final String clipboardText = (String) item.getText();
 		assertEquals("Possum Hype Check", clipboardText);
+	}
+
+	public void testTapPasteButton_showsMessageFromClipboard() throws InterruptedException {
+		final ClipboardManager clipboard = (ClipboardManager) mActivity
+				.getSystemService(Context.CLIPBOARD_SERVICE);
+
+		final ClipData clip = ClipData.newPlainText("Message ecrypted by test",
+				"Interstellar movie was dope!");
+		clipboard.setPrimaryClip(clip);
+
+		TouchUtils.clickView(this, mActivity.findViewById(R.id.pasteButton));
+
+		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
+		assertEquals("Interstellar movie was dope!", messageTextView.getText().toString());
 	}
 }
