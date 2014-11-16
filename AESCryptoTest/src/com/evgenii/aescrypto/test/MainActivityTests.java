@@ -141,8 +141,8 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
 		assertEquals("AESCryptoV10", messageTextView.getText().toString().substring(0, 12));
 		final Button encryptButton = (Button) mActivity.findViewById(R.id.encryptButton);
 
-		// Text of 'Encrypt' button is changed to "Copied✓"
-		assertEquals("Copied✓", encryptButton.getText().toString());
+		// Text of 'Encrypt' button is changed to "Copied ✓"
+		assertEquals("Copied ✓", encryptButton.getText().toString());
 
 		// Click 'Decrypt' button
 		// ---------------------------

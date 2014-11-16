@@ -6,7 +6,7 @@
     <string name="message_hint">Message</string>
     <string name="menu_encrypt_title">Encrypt</string>
     <string name="menu_decrypt_title">Decrypt</string>
-    <string name="menu_encrypt_title_copied">Copied✓</string>
+    <string name="menu_encrypt_title_copied">Copied ✓</string>
     <string name="helpButtonDescription">View help</string>
     <string name="title_activity_help">Help</string>
     <string name="view_drawing_menu_title">Drawing</string>
