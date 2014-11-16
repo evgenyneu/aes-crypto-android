@@ -41,6 +41,15 @@ public class MainActivityBottomButtonsTests extends ActivityInstrumentationTestC
 		mActivity = getActivity();
 	}
 
+	public void testTapClearButton_clearsMessageBox() throws InterruptedException {
+		fillIn(R.id.message, "Vegetables are green, red and orage. These are facts.");
+
+		TouchUtils.clickView(this, mActivity.findViewById(R.id.clearButton));
+
+		final TextView messageTextView = (TextView) mActivity.findViewById(R.id.message);
+		assertEquals("", messageTextView.getText().toString());
+	}
+
 	public void testTapCopyButton_doNotPutEmptyMessageToClipboard() throws InterruptedException {
 		fillIn(R.id.message, " ");
 
@@ -86,7 +95,7 @@ public class MainActivityBottomButtonsTests extends ActivityInstrumentationTestC
 		assertEquals("Salt water and a vintage boat", messageTextView.getText().toString());
 	}
 
-	public void testTapPasteButton_showsMessageFromClipboard() throws InterruptedException {
+	public void testTapPasteButton_showsMessageFromClipboard() {
 		final ClipboardManager clipboard = (ClipboardManager) mActivity
 				.getSystemService(Context.CLIPBOARD_SERVICE);
 

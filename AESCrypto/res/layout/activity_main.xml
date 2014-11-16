@@ -97,7 +97,8 @@
 			android:textColor="@drawable/toolbar_button_text_color"
 			android:gravity="right|center_vertical"
 			android:text="@string/clear_button"
-			android:textSize="@dimen/main_text_size" />
+			android:textSize="@dimen/main_text_size"
+			android:onClick="onClearTapped" />
 	 
 	</LinearLayout>
 </LinearLayout>

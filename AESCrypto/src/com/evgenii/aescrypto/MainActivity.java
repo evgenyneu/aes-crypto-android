@@ -48,6 +48,10 @@ public class MainActivity extends Activity implements MainActivityInterface {
 		return mIsBusy;
 	}
 
+	public void onClearTapped(View view) {
+		setMessage("");
+	}
+
 	public void onCopyTapped(View view) {
 		if (!hasMessage())
 			return;
