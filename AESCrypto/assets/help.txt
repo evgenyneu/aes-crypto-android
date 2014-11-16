@@ -1,8 +1,6 @@
-AES Crypto encrypts text messages. When message is encrypted it is automatically copied to clipboard.
+AES Crypto encrypts text messages.
 
-To decrypt: copy encrypted message in another app, open AES Crypto and enter password.
-
-Advanced Encryption Standard is used to encrypt messages with a 256-bit key. New salt and IV is generated for each encryption.
+It uses Advanced Encryption Standard with a 256-bit key.
 
 AES Crypto is open source and available on Android, iOS and Web.
 
