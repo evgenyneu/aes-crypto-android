@@ -12,7 +12,7 @@ CryptoJS library was used for encryption: [https://code.google.com/p/crypto-js](
 
 [JsEvaluator library](https://github.com/evgenyneu/js-evaluator-for-android) was used to execute JavaScript.
 
-## iOS and web apps
+## iOS and Web apps
 
 AES Crypto app is also available on iOS and Web platforms.
 
