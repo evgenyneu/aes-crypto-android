@@ -23,3 +23,5 @@ local.properties
 proguard/
 
 .DS_Store
+
+app_preview_video/
