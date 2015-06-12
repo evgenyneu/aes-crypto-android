@@ -6,6 +6,11 @@ Android app for encypting text messages. AES with 256-bit key is used for encryp
 
 <img src='https://raw.githubusercontent.com/evgenyneu/aes-crypto-android/master/Graphics/screenshots/phone/phone_1080x1920_1.png' width='400' alt='AES Text Encryption for Android'>
 
+## Host AES Crypto on your server
+
+Use [this single self-contained html file](http://aescrypto.com/redist/aes_crypto.html) and host it on your server. You can also save it to a local folder and open it in the web browser for offline use.
+
+
 ## Using JavaScript in Android app
 
 CryptoJS library was used for encryption: [https://code.google.com/p/crypto-js](https://code.google.com/p/crypto-js)
@@ -20,3 +25,7 @@ AES Crypto app is also available on iOS and Web platforms.
 
 **Web**: [https://github.com/evgenyneu/aes-crypto-web](https://github.com/evgenyneu/aes-crypto-web)
 
+
+## License
+
+AES Crypto is released under the [MIT License](LICENSE).
