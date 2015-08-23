@@ -8,7 +8,7 @@ Android app for encypting text messages. AES with 256-bit key is used for encryp
 
 ## Host AES Crypto on your server
 
-Use [this single self-contained html file](http://aescrypto.com/redist/aes_crypto.html) and host it on your server. You can also save it to a local folder and open it in the web browser for offline use.
+Host this [this html file](https://github.com/evgenyneu/aes-crypto-web/blob/master/redist/aes_crypto.html) on your web server or save it to a local folder for offline use.
 
 
 ## Using JavaScript in Android app
