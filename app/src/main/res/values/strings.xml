@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AES Crypto</string>
+    <string name="action_settings">Settings</string>
+    <string name="password_hint">Password</string>
+    <string name="message_hint">Message</string>
+    <string name="menu_encrypt_title">Encrypt</string>
+    <string name="menu_decrypt_title">Decrypt</string>
+    <string name="menu_encrypt_title_copied">Copied ✓</string>
+    <string name="helpButtonDescription">View help</string>
+    <string name="title_activity_help">Help</string>
+    <string name="view_drawing_menu_title">Drawing</string>
+    <string name="title_activity_drawing">Krypto and Koo</string>
+    <string name="drawing_description">Drawing: Crypto and Koo</string>
+    <string name="copy_button">Copy</string>
+    <string name="paste_button">Paste</string>
+    <string name="clear_button">Clear</string>
+</resources>
