@@ -77,8 +77,22 @@ public class MainActivity extends Activity implements MainActivityInterface {
         mEncrypt = new Encrypt(this, mJsEncryptor, mClipboard);
 
         setupInputChange();
-
         setupActionBar();
+        handleIncomingContent();
+    }
+
+    // Receive shared text from other apps
+    private void handleIncomingContent() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (type == null) return;
+        if (!Intent.ACTION_SEND.equals(action)) return;
+        if (!"text/plain".equals(type)) return;
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText == null) return;
+        setMessage(sharedText);
     }
 
     public void onDecryptTapped(View view) {
