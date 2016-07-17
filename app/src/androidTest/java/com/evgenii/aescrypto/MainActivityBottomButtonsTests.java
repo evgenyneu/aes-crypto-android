@@ -42,7 +42,7 @@ public class MainActivityBottomButtonsTests extends ActivityInstrumentationTestC
 	}
 
 	public void testTapClearButton_clearsMessageBox() throws InterruptedException {
-		fillIn(R.id.message, "Vegetables are green, red and orage. These are facts.");
+		fillIn(R.id.message, "Vegetables are green, red and orange. These are facts.");
 
 		TouchUtils.clickView(this, mActivity.findViewById(R.id.clearButton));
 
