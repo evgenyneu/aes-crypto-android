@@ -5,11 +5,14 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.evgenii.aescrypto.interfaces.MainActivityInterface;
 
@@ -86,12 +89,23 @@ public class MainActivity extends Activity implements MainActivityInterface {
         mEncrypt.encryptAndUpdate();
     }
 
+    public void onShareTapped(View view) {
+        if (!hasMessage()) return;
+        Share.shareMessage(this, trimmedMessage());
+    }
+
+    private void updateShareButtonVisibility() {
+        ImageButton button = (ImageButton) findViewById(R.id.shareImageButton);
+        button.setAlpha((float)(hasMessage() ? 1.0 : 0.3));
+    }
+
     private void onPasswordOrMessageChanged() {
         if (isBusy())
             return;
 
         mEncrypt.updateJustCopied(false);
         updateEncryptButtonTitle();
+        updateShareButtonVisibility();
     }
 
     public void onPasteTapped(View view) {
@@ -122,6 +136,7 @@ public class MainActivity extends Activity implements MainActivityInterface {
         final View actionBarView = getLayoutInflater().inflate(R.layout.main_action_bar, null);
         actionBar.setCustomView(actionBarView);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        updateShareButtonVisibility();
     }
 
     private void setupInputChange() {

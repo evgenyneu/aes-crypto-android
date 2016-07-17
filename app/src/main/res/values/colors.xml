@@ -6,4 +6,5 @@
  <color name="toolbarButtonPressed">#44974A</color>
  <color name="actionbarButton">#ffffff</color>
  <color name="actionbarButtonPressed">#9ef2a2</color>
+ <color name="colorTransparent">#00ffffff</color>
 </resources>

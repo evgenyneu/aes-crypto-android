@@ -14,4 +14,5 @@
     <string name="copy_button">Copy</string>
     <string name="paste_button">Paste</string>
     <string name="clear_button">Clear</string>
+    <string name="share_button_description">Share</string>
 </resources>
