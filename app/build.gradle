@@ -1,18 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-        }
-    }
-    compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc2"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
     defaultConfig {
         applicationId "com.evgenii.aescrypto"
         minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 5
-        versionName "1.4"
+        targetSdkVersion 24
+        versionCode 6
+        versionName "1.5"
     }
     buildTypes {
         release {
@@ -24,6 +20,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.2'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.7'
 }

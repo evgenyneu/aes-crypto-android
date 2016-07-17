@@ -1,5 +1,7 @@
 package com.evgenii.aescrypto.mocks;
 
+import android.webkit.WebView;
+
 import java.util.ArrayList;
 
 import com.evgenii.jsevaluator.interfaces.JsCallback;
@@ -28,6 +30,16 @@ public class JsEvaluatorMock implements JsEvaluatorInterface {
 	public void evaluate(String script, JsCallback callback) {
 		mEvaluatedScripts.add(script);
 		mEvaluateCallbacks.add(callback);
+	}
+
+	@Override
+	public void destroy() {
+
+	}
+
+	@Override
+	public WebView getWebView() {
+		return null;
 	}
 
 }
