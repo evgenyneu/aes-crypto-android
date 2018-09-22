@@ -40,6 +40,10 @@ public class MainActivityEncryptUnitTest extends ActivityInstrumentationTestCase
 									public void onResult(String result) {
 										myResult.add(result);
 									}
+
+									@Override
+									public void onError(String errorMessage) {
+									}
 								});
 			}
 		});
@@ -66,6 +70,10 @@ public class MainActivityEncryptUnitTest extends ActivityInstrumentationTestCase
 					@Override
 					public void onResult(String result) {
 						myResult.add(result);
+					}
+
+					@Override
+					public void onError(String errorMessage) {
 					}
 				});
 			}
@@ -97,7 +105,15 @@ public class MainActivityEncryptUnitTest extends ActivityInstrumentationTestCase
 							public void onResult(String resultDecrypt) {
 								myResult.add(resultDecrypt);
 							}
+
+							@Override
+							public void onError(String errorMessage) {
+							}
 						});
+					}
+
+					@Override
+					public void onError(String errorMessage) {
 					}
 				});
 			}

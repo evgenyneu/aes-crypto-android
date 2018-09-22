@@ -28,6 +28,12 @@ public class Decrypt {
 							mActivity.setMessage(decryptedTextFromJs);
 						}
 					}
+
+					@Override
+					public void onError(String errorMessage) {
+						// Process JavaScript error here.
+						// This method is called in the UI thread.
+					}
 				});
 	}
 

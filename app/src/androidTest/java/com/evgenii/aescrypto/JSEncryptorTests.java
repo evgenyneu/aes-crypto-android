@@ -34,6 +34,10 @@ public class JSEncryptorTests extends AndroidTestCase {
 			@Override
 			public void onResult(final String resultValue) {
 			}
+
+			@Override
+			public void onError(String errorMessage) {
+			}
 		};
 
 		mJsEncryptor.decrypt("decrypted text", "test password", callback);
@@ -53,6 +57,10 @@ public class JSEncryptorTests extends AndroidTestCase {
 		final JsCallback callback = new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
+			}
+
+			@Override
+			public void onError(String errorMessage) {
 			}
 		};
 
