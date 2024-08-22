@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace "com.evgenii.aescrypto"
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.evgenii.aescrypto"

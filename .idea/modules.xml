@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AESCrypto.iml" filepath="$PROJECT_DIR$/AESCrypto.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/aes-crypto-android.iml" filepath="$PROJECT_DIR$/.idea/modules/aes-crypto-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aes-crypto-android.app.unitTest.iml" />
     </modules>
   </component>
 </project>
