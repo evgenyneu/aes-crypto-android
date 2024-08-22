@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     namespace "com.evgenii.aescrypto"
-    compileSdkVersion 28
+    compileSdk 34
     defaultConfig {
         applicationId "com.evgenii.aescrypto"
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdk 34
         versionCode 8
         versionName "1.7"
     }

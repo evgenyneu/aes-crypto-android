@@ -46,9 +46,9 @@ public class HelpActivity extends Activity {
 		case android.R.id.home:
 			finish();
 			return true;
-		case R.id.action_view_drawing:
-			showDrawing();
-			return true;
+//		case R.id.action_view_drawing:
+//			showDrawing();
+//			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

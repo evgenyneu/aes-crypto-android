@@ -7,6 +7,6 @@
         android:id="@+id/action_view_drawing"
         android:title="@string/view_drawing_menu_title"
         android:orderInCategory="100"
-        android:showAsAction="always"  />
+        app:showAsAction="always"  />
 
 </menu>
