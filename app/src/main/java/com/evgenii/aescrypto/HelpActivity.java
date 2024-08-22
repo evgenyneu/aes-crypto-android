@@ -42,13 +42,12 @@ public class HelpActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
+		if (item.getItemId() == android.R.id.home) {
 			finish();
 			return true;
-//		case R.id.action_view_drawing:
-//			showDrawing();
-//			return true;
+		} else if (item.getItemId() == R.id.action_view_drawing) {
+			showDrawing();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
